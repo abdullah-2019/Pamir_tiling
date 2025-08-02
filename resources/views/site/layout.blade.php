@@ -58,7 +58,7 @@
                 <ul>
                     <li><a href="index.html" class="active">Home</a></li>
                     <li><a href="{{route('about.page')}}">About</a></li>
-                    <li><a href="services.html">Services</a></li>
+                    <li><a href="{{route('services.page')}}">Services</a></li>
                     <li><a href="{{route('contact.page')}}">Contact</a></li>
                 </ul>
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
@@ -100,7 +100,7 @@
                     <ul>
                         <li><a href="#">Home</a></li>
                         <li><a href="{{route('about.page')}}">About us</a></li>
-                        <li><a href="#">Services</a></li>
+                        <li><a href="{{route('services.page')}}">Services</a></li>
                         <li><a href="{{route('contact.page')}}">Contact Us</a></li>
                     </ul>
                 </div>
