@@ -2,41 +2,43 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Pamir Tiling Services</title>
-  <meta name="description" content="">
-  <meta name="keywords" content="">
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Pamir Tiling Services</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
 
-  <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <!-- Favicons -->
+    <link href="assets/img/favicon.png" rel="icon">
+    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com" rel="preconnect">
-  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
 
-  <!-- Vendor CSS Files -->
-  <link href="{{asset('/assets/site/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
-  <link href="{{asset('/assets/site/vendor/bootstrap-icons/bootstrap-icons.css')}}" rel="stylesheet">
-  <link href="{{asset('/assets/site/vendor/aos/aos.css')}}" rel="stylesheet')}}">
-  <link href="{{asset('/assets/site/vendor/swiper/swiper-bundle.min.css')}}" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="{{ asset('/assets/site/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('/assets/site/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
+    <link href="{{ asset('/assets/site/vendor/aos/aos.css') }}" rel="stylesheet')}}">
+    <link href="{{ asset('/assets/site/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
 
-  <!-- Main CSS File -->
-  <link href="{{asset('/assets/site/css/main.css')}}" rel="stylesheet">
+    <!-- Main CSS File -->
+    <link href="{{ asset('/assets/site/css/main.css') }}" rel="stylesheet">
 
 </head>
 
 <body class="index-page">
 
-  <header id="header" class="header d-flex align-items-center sticky-top">
-    <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+    <header id="header" class="header d-flex align-items-center sticky-top">
+        <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
-      <a href="index.html" class="logo d-flex align-items-center">
-        <!-- Uncomment the line below if you also wish to use an image logo -->
-        <!-- <img src="assets/img/logo.webp" alt=""> -->
-        <svg class="my-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <a href="index.html" class="logo d-flex align-items-center">
+                <!-- Uncomment the line below if you also wish to use an image logo -->
+                <img src="{{ asset('/assets/site/img/logo.webp') }}" alt="logo"> -->
+                {{-- <svg class="my-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <g id="bgCarrier" stroke-width="0"></g>
           <g id="tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
           <g id="iconCarrier">
@@ -48,140 +50,110 @@
             <path d="M15 22V17C15 15.5858 15 14.8787 14.5607 14.4393C14.1213 14 13.4142 14 12 14C10.5858 14 9.87868 14 9.43934 14.4393M9 22V17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
             <path d="M14 9.5C14 10.6046 13.1046 11.5 12 11.5C10.8954 11.5 10 10.6046 10 9.5C10 8.39543 10.8954 7.5 12 7.5C13.1046 7.5 14 8.39543 14 9.5Z" stroke="currentColor" stroke-width="1.5"></path>
           </g>
-        </svg>
-        <h1 class="sitename">HomeSpace</h1>
-      </a>
+        </svg> --}}
+                <h1 class="sitename">Pamir Tiling Services</h1>
+            </a>
 
-      <nav id="navmenu" class="navmenu">
-        <ul>
-          <li><a href="index.html" class="active">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="properties.html">Properties</a></li>
-          <li><a href="services.html">Services</a></li>
-          <li><a href="agents.html">Agents</a></li>
-          <li><a href="blog.html">Blog</a></li>
-          <li class="dropdown"><a href="#"><span>More Pages</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-            <ul>
-              <li><a href="property-details.html">Property Details</a></li>
-              <li><a href="service-details.html">Service Details</a></li>
-              <li><a href="agent-profile.html">Agent Profile</a></li>
-              <li><a href="blog-details.html">Blog Details</a></li>
-              <li><a href="terms.html">Terms</a></li>
-              <li><a href="privacy.html">Privacy</a></li>
-              <li><a href="404.html">404</a></li>
-            </ul>
-          </li>
-
-          <li class="dropdown"><a href="#"><span>Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-            <ul>
-              <li><a href="#">Dropdown 1</a></li>
-              <li class="dropdown"><a href="#"><span>Deep Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+            <nav id="navmenu" class="navmenu">
                 <ul>
-                  <li><a href="#">Deep Dropdown 1</a></li>
-                  <li><a href="#">Deep Dropdown 2</a></li>
-                  <li><a href="#">Deep Dropdown 3</a></li>
-                  <li><a href="#">Deep Dropdown 4</a></li>
-                  <li><a href="#">Deep Dropdown 5</a></li>
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="contact.html">Contact</a></li>
                 </ul>
-              </li>
-              <li><a href="#">Dropdown 2</a></li>
-              <li><a href="#">Dropdown 3</a></li>
-              <li><a href="#">Dropdown 4</a></li>
-            </ul>
-          </li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-      </nav>
+                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+            </nav>
 
-    </div>
-  </header>
+        </div>
+    </header>
 
-  <main class="main">
+    <main class="main">
 
-    @yield('content')
+        @yield('content')
 
-  </main>
+    </main>
 
-  <footer id="footer" class="footer accent-background">
+    <footer id="footer" class="footer accent-background">
 
-    <div class="container footer-top">
-      <div class="row gy-4">
-        <div class="col-lg-5 col-md-12 footer-about">
-          <a href="index.html" class="logo d-flex align-items-center">
-            <span class="sitename">HomeSpace</span>
-          </a>
-          <p>Cras fermentum odio eu feugiat lide par naso tierra. Justo eget nada terra videa magna derita valies darta donna mare fermentum iaculis eu non diam phasellus.</p>
-          <div class="social-links d-flex mt-4">
-            <a href=""><i class="bi bi-twitter-x"></i></a>
-            <a href=""><i class="bi bi-facebook"></i></a>
-            <a href=""><i class="bi bi-instagram"></i></a>
-            <a href=""><i class="bi bi-linkedin"></i></a>
-          </div>
+        <div class="container footer-top">
+            <div class="row gy-4">
+                <div class="col-lg-5 col-md-12 footer-about">
+                    <a href="index.html" class="logo d-flex align-items-center">
+                        <span class="sitename">Pamir Tiling Services</span>
+                    </a>
+                    <p>
+                        Pamir Tiling offers a wide range of commercial project tiling solutions using high performance
+                        materials to builders and project developers.
+                        We have a team of dedicated and skilled workers who are capable of undertaking medium to large
+                        projects to ensure that your project is delivered on time and without any hassle.
+                    </p>
+                    <div class="social-links d-flex mt-4">
+                        <a href=""><i class="bi bi-twitter-x"></i></a>
+                        <a href=""><i class="bi bi-facebook"></i></a>
+                        <a href=""><i class="bi bi-instagram"></i></a>
+                        <a href=""><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-6 footer-links">
+                    <h4>Useful Links</h4>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About us</a></li>
+                        <li><a href="#">Services</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-2 col-6 footer-links">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><a href="#">Wall and Floor Tiling</a></li>
+                        <li><a href="#">Waterproofing</a></li>
+                        <li><a href="#">Stone Paving</a></li>
+                        <li><a href="#">Planning</a></li>
+                        <li><a href="#">Seal and Polish</a></li>
+                        <li><a href="#">Swimming Pools</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
+                    <h4>Contact Us</h4>
+                    <p>9 Oreilly Cres, Springfield Lakes, QLD 4300</p>
+                    <p>Australia</p>
+                    <p class="mt-4"><strong>Phone:</strong> <span>+61 470 252 501</span></p>
+                    <p><strong>Email:</strong> <span>info@pamirtiling.com.au</span></p>
+                </div>
+
+            </div>
         </div>
 
-        <div class="col-lg-2 col-6 footer-links">
-          <h4>Useful Links</h4>
-          <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About us</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Terms of service</a></li>
-            <li><a href="#">Privacy policy</a></li>
-          </ul>
+        <div class="container copyright text-center mt-4">
+            <p>© <span>Copyright</span> <strong class="px-1 sitename">Pamir Tiling Services</strong> <span>All Rights
+                    Reserved</span></p>
+            <div class="credits">
+                Designed by <a href="https://glidesoft.net/">Glidesoft</a>
+            </div>
         </div>
 
-        <div class="col-lg-2 col-6 footer-links">
-          <h4>Our Services</h4>
-          <ul>
-            <li><a href="#">Web Design</a></li>
-            <li><a href="#">Web Development</a></li>
-            <li><a href="#">Product Management</a></li>
-            <li><a href="#">Marketing</a></li>
-            <li><a href="#">Graphic Design</a></li>
-          </ul>
-        </div>
+    </footer>
 
-        <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
-          <h4>Contact Us</h4>
-          <p>A108 Adam Street</p>
-          <p>New York, NY 535022</p>
-          <p>United States</p>
-          <p class="mt-4"><strong>Phone:</strong> <span>+1 5589 55488 55</span></p>
-          <p><strong>Email:</strong> <span>info@example.com</span></p>
-        </div>
+    <!-- Scroll Top -->
+    <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
+            class="bi bi-arrow-up-short"></i></a>
 
-      </div>
-    </div>
+    <!-- Preloader -->
+    <div id="preloader"></div>
 
-    <div class="container copyright text-center mt-4">
-      <p>© <span>Copyright</span> <strong class="px-1 sitename">HomeSpace</strong> <span>All Rights Reserved</span></p>
-      <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you've purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-      </div>
-    </div>
+    <!-- Vendor JS Files -->
+    <script src="{{ asset('/assets/site/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('/assets/site/vendor/php-email-form/validate.js') }}"></script>
+    <script src="{{ asset('/assets/site/vendor/aos/aos.js') }}"></script>
+    <script src="{{ asset('/assets/site/vendor/purecounter/purecounter_vanilla.js') }}"></script>
+    <script src="{{ asset('/assets/site/vendor/swiper/swiper-bundle.min.js') }}"></script>
 
-  </footer>
-
-  <!-- Scroll Top -->
-  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
-  <!-- Preloader -->
-  <div id="preloader"></div>
-
-  <!-- Vendor JS Files -->
-  <script src="{{asset('/assets/site/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-  <script src="{{asset('/assets/site/vendor/php-email-form/validate.js')}}"></script>
-  <script src="{{asset('/assets/site/vendor/aos/aos.js')}}"></script>
-  <script src="{{asset('/assets/site/vendor/purecounter/purecounter_vanilla.js')}}"></script>
-  <script src="{{asset('/assets/site/vendor/swiper/swiper-bundle.min.js')}}"></script>
-
-  <!-- Main JS File -->
-  <script src="{{asset('/assets/site/js/main.js')}}"></script>
+    <!-- Main JS File -->
+    <script src="{{ asset('/assets/site/js/main.js') }}"></script>
 
 </body>
 
