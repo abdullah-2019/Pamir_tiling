@@ -59,7 +59,7 @@
                     <li><a href="index.html" class="active">Home</a></li>
                     <li><a href="about.html">About</a></li>
                     <li><a href="services.html">Services</a></li>
-                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="{{route('contact.page')}}">Contact</a></li>
                 </ul>
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>
@@ -101,7 +101,7 @@
                         <li><a href="#">Home</a></li>
                         <li><a href="#">About us</a></li>
                         <li><a href="#">Services</a></li>
-                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="{{route('contact.page')}}">Contact Us</a></li>
                     </ul>
                 </div>
 
