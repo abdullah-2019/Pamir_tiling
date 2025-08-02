@@ -57,7 +57,7 @@
             <nav id="navmenu" class="navmenu">
                 <ul>
                     <li><a href="index.html" class="active">Home</a></li>
-                    <li><a href="about.html">About</a></li>
+                    <li><a href="{{route('about.page')}}">About</a></li>
                     <li><a href="services.html">Services</a></li>
                     <li><a href="{{route('contact.page')}}">Contact</a></li>
                 </ul>
@@ -99,7 +99,7 @@
                     <h4>Useful Links</h4>
                     <ul>
                         <li><a href="#">Home</a></li>
-                        <li><a href="#">About us</a></li>
+                        <li><a href="{{route('about.page')}}">About us</a></li>
                         <li><a href="#">Services</a></li>
                         <li><a href="{{route('contact.page')}}">Contact Us</a></li>
                     </ul>
