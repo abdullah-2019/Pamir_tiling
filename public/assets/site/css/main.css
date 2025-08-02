@@ -851,7 +851,7 @@ section,
   margin-bottom: 8px;
 }
 
-.hero .hero-content .search-container .property-search-form .search-field input,
+.hero .hero-content .search-container .property-search-form .search-field input, textarea,
 .hero .hero-content .search-container .property-search-form .search-field select {
   width: 100%;
   padding: 14px 16px 14px 44px;
@@ -866,7 +866,7 @@ section,
   appearance: none;
 }
 
-.hero .hero-content .search-container .property-search-form .search-field input:focus,
+.hero .hero-content .search-container .property-search-form .search-field input:focus, textarea:focus,
 .hero .hero-content .search-container .property-search-form .search-field select:focus {
   border-color: var(--accent-color);
   outline: none;
