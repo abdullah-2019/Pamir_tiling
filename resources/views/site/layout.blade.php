@@ -181,7 +181,7 @@
   <script src="{{asset('/assets/site/vendor/swiper/swiper-bundle.min.js')}}"></script>
 
   <!-- Main JS File -->
-  <script src="{{asset('../assets/site/js/main.js')}}"></script>
+  <script src="{{asset('/assets/site/js/main.js')}}"></script>
 
 </body>
 

@@ -17,8 +17,10 @@
                     <i class="bi bi-house-heart"></i>
                     Dream Homes Await
                   </span>
-                  <h1>Find Your Ideal Property with Expert Guidance</h1>
-                  <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Connect with verified real estate professionals.</p>
+                  <h1>Expert Tiling Solutions You Can Trust</h1>
+                    <p>
+                        Count on our skilled team to deliver precise, reliable tiling services for any space. We combine craftsmanship and attention to detail to create beautiful, lasting results for your home or business.
+                    </p>
                 </div>
 
                 <div class="search-container" data-aos="fade-up" data-aos-delay="300">
@@ -109,7 +111,7 @@
               <div class="hero-visual" data-aos="fade-left" data-aos-delay="400">
                 <div class="visual-container">
                   <div class="featured-property">
-                    <img src="{{asset('/assets/site/img/real-estate/property-exterior-8.webp')}}" alt="home" class="img-fluid">
+                    <img src="{{asset('/assets/site/img/house.webp')}}" alt="house" class="img-fluid">
                     <div class="property-info">
                       <div class="property-price">$925,000</div>
                       <div class="property-details">
@@ -124,7 +126,7 @@
                       <img src="{{asset('/assets/site/img/shutterstock.webp')}}" alt="Interior View" class="img-fluid">
                     </div>
                     <div class="overlay-img overlay-2">
-                      <img src="assets/img/real-estate/property-exterior-2.webp" alt="Exterior View" class="img-fluid">
+                      <img src="{{asset('/assets/site/img/tile-1.webp')}}" alt="View" class="img-fluid">
                     </div>
                   </div>
 
