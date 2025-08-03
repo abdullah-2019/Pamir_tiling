@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ServicesController;
+use App\Http\Controllers\ProjectsController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -20,3 +21,7 @@ Route::get('/about', [AboutController::class, 'page'])->name('about.page');
 // Services
 Route::resource('services', ServicesController::class);
 Route::get('/services', [ServicesController::class, 'page'])->name('services.page');
+
+// Projects
+Route::resource('projects', ProjectsController::class);
+Route::get('/projects', [ProjectsController::class, 'page'])->name('projects.page');
