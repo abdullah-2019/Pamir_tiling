@@ -9,4 +9,16 @@ class Services extends Model
 {
     /** @use HasFactory<\Database\Factories\ServicesFactory> */
     use HasFactory;
+
+    protected $fillable = [
+        'title',
+        'desc',
+        'features',
+        'image',
+    ];
+
+    protected $casts = [
+        'features' => 'array',
+    ];
+    
 }

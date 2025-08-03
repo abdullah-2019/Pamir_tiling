@@ -180,7 +180,7 @@
                             </div>
                         </div>
                         <div class="secondary-image">
-                            <img src="{{asset('assets/site/img/wholesale.webp')}}" alt="about us sec"
+                            <img src="{{ asset('assets/site/img/wholesale.webp') }}" alt="about us sec"
                                 class="img-fluid">
                         </div>
                     </div>
@@ -196,7 +196,8 @@
                         </div>
 
                         <p>
-                            Pamir Tiling provides reliable commercial tiling solutions for medium to large projects, using high-quality materials and skilled professionals to ensure timely, hassle-free delivery.
+                            Pamir Tiling provides reliable commercial tiling solutions for medium to large projects, using
+                            high-quality materials and skilled professionals to ensure timely, hassle-free delivery.
                         </p>
 
                         <div class="achievements-list">
@@ -438,7 +439,7 @@
 
         <!-- Section Title -->
         <div class="container section-title" data-aos="fade-up">
-            <h2>Featured Services</h2>
+            <h2>Our Services</h2>
             <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
         </div><!-- End Section Title -->
 
@@ -446,118 +447,40 @@
 
             <div class="row g-4">
 
-                <div class="col-lg-6" data-aos="fade-right" data-aos-delay="200">
-                    <div class="service-card">
-                        {{-- <div class="service-icon">
-                            <i class="bi bi-grid-3x3-gap"></i>
-                        </div> --}}
-                        <div class="service-info">
-                            <h3><a href="service-details.html">Wall and Floor Tiling</a></h3>
-                            <p>
-                                All kinds ceramic tiling service from ceramic, porcelain, and mosaic tiles
-                            </p>
-                            <ul class="service-highlights">
-                                <li><i class="bi bi-check-circle-fill"></i> Installation of ceramic, porcelain, and mosaic
-                                    tiles</li>
-                                <li><i class="bi bi-check-circle-fill"></i> Kitchen splashbacks and bathroom walls</li>
-                                <li><i class="bi bi-check-circle-fill"></i> Flooring for living rooms, hallways, and
-                                    commercial spaces</li>
-                                <li><i class="bi bi-check-circle-fill"></i> Feature walls and decorative tiling</li>
-                                <li><i class="bi bi-check-circle-fill"></i> Surface preparation and waterproofing</li>
-                            </ul>
-                            <a href="service-details.html" class="service-link">
-                                <span>Explore Now</span>
-                                <i class="bi bi-arrow-up-right"></i>
-                            </a>
-                        </div>
-                        <div class="service-visual">
-                            <img src="{{ asset('assets/site/img/house.webp') }}" class="img-fluid" alt="Property Search"
-                                loading="lazy">
-                        </div>
-                    </div>
-                </div><!-- End Service Item -->
+                @foreach ($services as $service)
+                    <div class="col-lg-6" data-aos="fade-right" data-aos-delay="200">
+                        <div class="service-card">
+                            <div class="service-info">
+                                <h3><a href="service-details.html">{{ $service->title }}</a></h3>
+                                <p>{{ $service->desc }}</p>
+                                <ul class="service-highlights">
+                                    @php
+                                        $features = is_string($service->features)
+                                            ? json_decode($service->features, true)
+                                            : $service->features;
+                                    @endphp
 
-                <div class="col-lg-6" data-aos="fade-left" data-aos-delay="300">
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="bi bi-calculator"></i>
-                        </div>
-                        <div class="service-info">
-                            <h3><a href="service-details.html">Property Valuation</a></h3>
-                            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-                                laudantium totam rem aperiam</p>
-                            <ul class="service-highlights">
-                                <li><i class="bi bi-check-circle-fill"></i> Market Analysis</li>
-                                <li><i class="bi bi-check-circle-fill"></i> Comparative Reports</li>
-                                <li><i class="bi bi-check-circle-fill"></i> Investment Insights</li>
-                            </ul>
-                            <a href="service-details.html" class="service-link">
-                                <span>Get Valuation</span>
-                                <i class="bi bi-arrow-up-right"></i>
-                            </a>
-                        </div>
-                        <div class="service-visual">
-                            <img src="assets/img/real-estate/property-exterior-1.webp" class="img-fluid"
-                                alt="Property Valuation" loading="lazy">
-                        </div>
-                    </div>
-                </div><!-- End Service Item -->
+                                    @if (is_array($features))
+                                        @foreach ($features as $feature)
+                                        <li><i class="bi bi-check-circle-fill"></i> {{ $feature }}</li>
+                                        @endforeach
+                                    @else
+                                        <li>{{ $service->features }}</li>
+                                    @endif
 
-            </div>
-
-            <div class="row g-4 mt-4">
-
-                <div class="col-lg-6" data-aos="fade-right" data-aos-delay="400">
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="bi bi-key"></i>
+                                </ul>
+                                <a href="service-details.html" class="service-link">
+                                    <span>Read More</span>
+                                    <i class="bi bi-arrow-up-right"></i>
+                                </a>
+                            </div>
+                            <div class="service-visual">
+                                <img src="{{ asset('assets/site/img/house.webp') }}" class="img-fluid"
+                                    alt="Property Search" loading="lazy">
+                            </div>
                         </div>
-                        <div class="service-info">
-                            <h3><a href="service-details.html">Property Rental</a></h3>
-                            <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium
-                                voluptatum deleniti atque</p>
-                            <ul class="service-highlights">
-                                <li><i class="bi bi-check-circle-fill"></i> Tenant Matching</li>
-                                <li><i class="bi bi-check-circle-fill"></i> Lease Management</li>
-                                <li><i class="bi bi-check-circle-fill"></i> Property Maintenance</li>
-                            </ul>
-                            <a href="service-details.html" class="service-link">
-                                <span>Start Renting</span>
-                                <i class="bi bi-arrow-up-right"></i>
-                            </a>
-                        </div>
-                        <div class="service-visual">
-                            <img src="assets/img/real-estate/property-interior-8.webp" class="img-fluid"
-                                alt="Property Rental" loading="lazy">
-                        </div>
-                    </div>
-                </div><!-- End Service Item -->
-
-                <div class="col-lg-6" data-aos="fade-left" data-aos-delay="500">
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="bi bi-shield-check"></i>
-                        </div>
-                        <div class="service-info">
-                            <h3><a href="service-details.html">Investment Advisory</a></h3>
-                            <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit sed quia
-                                consequuntur magni dolores eos</p>
-                            <ul class="service-highlights">
-                                <li><i class="bi bi-check-circle-fill"></i> Portfolio Planning</li>
-                                <li><i class="bi bi-check-circle-fill"></i> Risk Assessment</li>
-                                <li><i class="bi bi-check-circle-fill"></i> Market Forecasting</li>
-                            </ul>
-                            <a href="service-details.html" class="service-link">
-                                <span>Learn More</span>
-                                <i class="bi bi-arrow-up-right"></i>
-                            </a>
-                        </div>
-                        <div class="service-visual">
-                            <img src="assets/img/real-estate/property-exterior-4.webp" class="img-fluid"
-                                alt="Investment Advisory" loading="lazy">
-                        </div>
-                    </div>
-                </div><!-- End Service Item -->
+                    </div><!-- End Service Item -->
+                @endforeach
 
             </div>
 
