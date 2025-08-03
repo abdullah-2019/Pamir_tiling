@@ -8,7 +8,7 @@ use App\Http\Controllers\ProjectsController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
 Route::resource('contact', ContactController::class);
 Route::get('/contact', [ContactController::class, 'page'])->name('contact.page');

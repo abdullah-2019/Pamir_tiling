@@ -9,8 +9,8 @@
     <meta name="keywords" content="">
 
     <!-- Favicons -->
-    <link href="assets/img/favicon.png" rel="icon">
-    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="{{asset('assets/site/img/favicon.png')}}" rel="icon">
+    <link href="{{asset('assets/site/img/apple-touch-icon.png')}}" rel="apple-touch-icon">
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -35,7 +35,7 @@
     <header id="header" class="header d-flex align-items-center sticky-top">
         <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
-            <a href="index.html" class="logo d-flex align-items-center">
+            <a href="{{route('home')}}" class="logo d-flex align-items-center">
                 <!-- Uncomment the line below if you also wish to use an image logo -->
                 <img src="{{ asset('/assets/site/img/logo.webp') }}" alt="logo"> -->
                 {{-- <svg class="my-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -56,7 +56,7 @@
 
             <nav id="navmenu" class="navmenu">
                 <ul>
-                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="{{route('home')}}" class="active">Home</a></li>
                     <li><a href="{{route('about.page')}}">About</a></li>
                     <li><a href="{{route('services.page')}}">Services</a></li>
                     <li><a href="{{route('projects.page')}}">Projects</a></li>
@@ -79,7 +79,7 @@
         <div class="container footer-top">
             <div class="row gy-4">
                 <div class="col-lg-5 col-md-12 footer-about">
-                    <a href="index.html" class="logo d-flex align-items-center">
+                    <a href="{{route('home')}}" class="logo d-flex align-items-center">
                         <span class="sitename">Pamir Tiling Services</span>
                     </a>
                     <p>
@@ -99,7 +99,7 @@
                 <div class="col-lg-2 col-6 footer-links">
                     <h4>Useful Links</h4>
                     <ul>
-                        <li><a href="#">Home</a></li>
+                        <li><a href="{{route('home')}}">Home</a></li>
                         <li><a href="{{route('about.page')}}">About us</a></li>
                         <li><a href="{{route('services.page')}}">Services</a></li>
                         <li><a href="{{route('projects.page')}}">Projects</a></li>

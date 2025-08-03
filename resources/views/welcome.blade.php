@@ -63,11 +63,10 @@
 
                                         <div class="search-field">
                                             <label for="help" class="field-label">How can we help?</label>
-                                            <textarea id="help" name="help" width='100'
-                                                placeholder="How we can help you?" required=""></textarea>
+                                            <textarea id="help" name="help" width='100' placeholder="How we can help you?" required=""></textarea>
                                             <i class="bi bi-geo-alt field-icon"></i>
                                         </div>
-                                        
+
                                     </div>
 
                                     <button type="submit" class="search-btn">
@@ -106,8 +105,7 @@
                         <div class="hero-visual" data-aos="fade-left" data-aos-delay="400">
                             <div class="visual-container">
                                 <div class="featured-property">
-                                    <img src="{{ asset('/assets/site/img/house.webp') }}" alt="house"
-                                        class="img-fluid">
+                                    <img src="{{ asset('/assets/site/img/house.webp') }}" alt="house" class="img-fluid">
                                     <div class="property-info">
                                         <div class="property-price">$925,000</div>
                                         <div class="property-details">
@@ -172,8 +170,7 @@
                 <div class="col-lg-5" data-aos="zoom-in" data-aos-delay="200">
                     <div class="image-gallery">
                         <div class="primary-image">
-                            <img src="assets/img/real-estate/property-exterior-1.webp" alt="Modern Property"
-                                class="img-fluid">
+                            <img src="{{ asset('assets/site/img/house.webp') }}" alt="about us" class="img-fluid">
                             <div class="experience-badge">
                                 <div class="badge-content">
                                     <div class="number"><span data-purecounter-start="0" data-purecounter-end="15"
@@ -183,7 +180,7 @@
                             </div>
                         </div>
                         <div class="secondary-image">
-                            <img src="assets/img/real-estate/property-interior-4.webp" alt="Luxury Interior"
+                            <img src="{{asset('assets/site/img/wholesale.webp')}}" alt="about us sec"
                                 class="img-fluid">
                         </div>
                     </div>
@@ -193,21 +190,23 @@
                     <div class="content">
                         <div class="section-header">
                             <span class="section-label">About Our Company</span>
-                            <h2>Building Dreams, Creating Homes Since 2008</h2>
+                            <h2>
+                                We deliver reliable commercial tiling for medium to large projects.
+                            </h2>
                         </div>
 
-                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
-                            totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
-                            dicta sunt explicabo.</p>
+                        <p>
+                            Pamir Tiling provides reliable commercial tiling solutions for medium to large projects, using high-quality materials and skilled professionals to ensure timely, hassle-free delivery.
+                        </p>
 
                         <div class="achievements-list">
                             <div class="achievement-item">
                                 <div class="achievement-icon">
-                                    <i class="bi bi-house-door"></i>
+                                    <i class="bi bi-bricks"></i>
                                 </div>
                                 <div class="achievement-content">
                                     <h4><span data-purecounter-start="0" data-purecounter-end="3200"
-                                            data-purecounter-duration="2" class="purecounter"></span>+ Properties Sold
+                                            data-purecounter-duration="2" class="purecounter"></span>+ Projects are done
                                     </h4>
                                     <p>Successfully completed transactions</p>
                                 </div>
@@ -449,17 +448,22 @@
 
                 <div class="col-lg-6" data-aos="fade-right" data-aos-delay="200">
                     <div class="service-card">
-                        <div class="service-icon">
-                            <i class="bi bi-search"></i>
-                        </div>
+                        {{-- <div class="service-icon">
+                            <i class="bi bi-grid-3x3-gap"></i>
+                        </div> --}}
                         <div class="service-info">
-                            <h3><a href="service-details.html">Property Search</a></h3>
-                            <p>Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim
-                                id est laborum</p>
+                            <h3><a href="service-details.html">Wall and Floor Tiling</a></h3>
+                            <p>
+                                All kinds ceramic tiling service from ceramic, porcelain, and mosaic tiles
+                            </p>
                             <ul class="service-highlights">
-                                <li><i class="bi bi-check-circle-fill"></i> Comprehensive Listings</li>
-                                <li><i class="bi bi-check-circle-fill"></i> Advanced Filtering</li>
-                                <li><i class="bi bi-check-circle-fill"></i> Virtual Tours</li>
+                                <li><i class="bi bi-check-circle-fill"></i> Installation of ceramic, porcelain, and mosaic
+                                    tiles</li>
+                                <li><i class="bi bi-check-circle-fill"></i> Kitchen splashbacks and bathroom walls</li>
+                                <li><i class="bi bi-check-circle-fill"></i> Flooring for living rooms, hallways, and
+                                    commercial spaces</li>
+                                <li><i class="bi bi-check-circle-fill"></i> Feature walls and decorative tiling</li>
+                                <li><i class="bi bi-check-circle-fill"></i> Surface preparation and waterproofing</li>
                             </ul>
                             <a href="service-details.html" class="service-link">
                                 <span>Explore Now</span>
@@ -467,8 +471,8 @@
                             </a>
                         </div>
                         <div class="service-visual">
-                            <img src="assets/img/real-estate/property-interior-2.webp" class="img-fluid"
-                                alt="Property Search" loading="lazy">
+                            <img src="{{ asset('assets/site/img/house.webp') }}" class="img-fluid" alt="Property Search"
+                                loading="lazy">
                         </div>
                     </div>
                 </div><!-- End Service Item -->
