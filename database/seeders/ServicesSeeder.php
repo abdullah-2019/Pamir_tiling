@@ -17,6 +17,7 @@ class ServicesSeeder extends Seeder
         $services = [
             [
                 'title' => 'Wall and Floor Tiling',
+                'slug' => 'wall-and-floor-tiling',
                 'desc' => 'All kinds ceramic tiling service from ceramic, porcelain, and mosaic tiles',
                 'features' => json_encode(
                     [
@@ -32,6 +33,7 @@ class ServicesSeeder extends Seeder
             ],
             [
                 'title' => 'Waterproofing',
+                'slug' => 'waterproofing',
                 'desc' => 'Fully licensed commercial waterproofing sub contractor to satisfy your commercial project waterproofing requirements with a wide range of waterproofing products.',
                 'features' => json_encode(['Push Notifications', 'Offline Mode', 'In-App Purchases', 'Analytics']),
                 'image' => 'wholesale.webp',
@@ -40,6 +42,7 @@ class ServicesSeeder extends Seeder
             ],
             [
                 'title' => 'Stone Paving',
+                'slug' => 'stone-paving',
                 'desc' => 'We provide all kinds of stone cladding services from natural stone tiles, terrazzo, to dry stone cladding.',
                 'features' => json_encode(['Wireframing', 'Prototyping', 'User Testing', 'Visual Design']),
                 'image' => 'wholesale.webp',
@@ -48,6 +51,7 @@ class ServicesSeeder extends Seeder
             ],
             [
                 'title' => 'Planning',
+                'slug' => 'planning',
                 'desc' => 'We project manage your job efficiently and effectively for a fast turnaround.',
                 'features' => json_encode(['SEO', 'Social Media', 'Content Marketing', 'Analytics']),
                 'image' => 'wholesale.webp',
@@ -56,6 +60,7 @@ class ServicesSeeder extends Seeder
             ],
             [
                 'title' => 'Seal and Polish',
+                'slug' => 'seal-and-polish',
                 'desc' => 'Professional natural stone sealing and polishing service',
                 'features' => json_encode(['AWS', 'Azure', 'Google Cloud', 'DevOps']),
                 'image' => 'wholesale.webp',
@@ -64,6 +69,7 @@ class ServicesSeeder extends Seeder
             ],
             [
                 'title' => 'Swimming Pools',
+                'slug' => 'swimming-pools',
                 'desc' => 'Not only have we installed countless water features, but we also have experience in installing pool tiles of all shapes and sizes.',
                 'features' => json_encode(['Threat Detection', 'Vulnerability Assessment', 'Security Training', 'Compliance']),
                 'image' => 'wholesale.webp',

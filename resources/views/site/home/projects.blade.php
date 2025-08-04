@@ -1,10 +1,8 @@
-//TODO: work on services details, project, project detials
-
 <section id="featured-properties" class="featured-properties section">
 
     <!-- Section Title -->
     <div class="container section-title" data-aos="fade-up">
-        <h2>Featured Properties</h2>
+        <h2>Our Projects</h2>
         <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
     </div><!-- End Section Title -->
 

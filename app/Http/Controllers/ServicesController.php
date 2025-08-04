@@ -65,6 +65,14 @@ class ServicesController extends Controller
     }
 
     public function page() {
-        return view('site.services');
+        return view('site.services.index');
+    }
+
+    public function serviceDetail($slug) {
+        dd('Testing route for slug: ' . $slug); // This should show a debug dump with the slug
+    }
+    
+    public function t() {
+        dd('asfd');
     }
 }

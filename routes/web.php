@@ -20,6 +20,7 @@ Route::get('/about', [AboutController::class, 'page'])->name('about.page');
 // Services
 Route::resource('services', ServicesController::class);
 Route::get('/services', [ServicesController::class, 'page'])->name('services.page');
+Route::get('/services/t', [ServicesController::class, 't'])->name('t');
 
 // Projects
 Route::resource('projects', ProjectsController::class);
