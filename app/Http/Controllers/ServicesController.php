@@ -72,7 +72,4 @@ class ServicesController extends Controller
         dd('Testing route for slug: ' . $slug); // This should show a debug dump with the slug
     }
     
-    public function t() {
-        dd('asfd');
-    }
 }

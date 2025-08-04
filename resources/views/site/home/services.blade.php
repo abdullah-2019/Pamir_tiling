@@ -32,7 +32,7 @@
                                 @endif
 
                             </ul>
-                            <a href="{{ route('t') }}" class="service-link">
+                            <a href="" class="service-link">
                                 <span>Read More</span>
                                 <i class="bi bi-arrow-up-right"></i>
                             </a>
