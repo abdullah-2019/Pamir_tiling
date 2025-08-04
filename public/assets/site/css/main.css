@@ -825,6 +825,11 @@ section,
   font-size: 15px;
 }
 
+.hero .hero-content .search-container .property-search-form .search-field:has(#help) {
+  grid-column: 1 / -1; 
+}
+
+
 .hero .hero-content .search-container .property-search-form .search-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
