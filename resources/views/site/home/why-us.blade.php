@@ -139,8 +139,11 @@
                                 <div class="stat-icon mb-3">
                                     <i class="bi bi-trophy"></i>
                                 </div>
+                                @php
+                                    $years_of_experience  = (now()->year) - 2010;
+                                @endphp
                                 <div class="stat-number">
-                                    <span data-purecounter-start="0" data-purecounter-end="15"
+                                    <span data-purecounter-start="0" data-purecounter-end="{{$years_of_experience}}"
                                         data-purecounter-duration="2" class="purecounter"></span>+
                                 </div>
                                 <div class="stat-label">Years Experience</div>

@@ -110,12 +110,9 @@
                 <div class="col-lg-2 col-6 footer-links">
                     <h4>Our Services</h4>
                     <ul>
-                        <li><a href="#">Wall and Floor Tiling</a></li>
-                        <li><a href="#">Waterproofing</a></li>
-                        <li><a href="#">Stone Paving</a></li>
-                        <li><a href="#">Planning</a></li>
-                        <li><a href="#">Seal and Polish</a></li>
-                        <li><a href="#">Swimming Pools</a></li>
+                        @foreach($services as $service)
+                        <li><a href="{{route('service-detail', $service->slug)}}">{{$service->title}}</a></li>
+                        @endforeach
                     </ul>
                 </div>
 

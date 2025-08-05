@@ -12,7 +12,16 @@
                             <div class="col-lg-3 col-md-6 mb-4">
                                 <div class="stat-item">
                                     <div class="stat-icon">
-                                        <i class="bi bi-building"></i>
+                                        @php
+                                            $initials = '';
+                                            $words = explode(' ', 'Kane Construction');
+                                            foreach ($words as $word) {
+                                                if (!empty($word)) {
+                                                    $initials .= strtoupper(substr($word, 0, 1));
+                                                }
+                                            }
+                                        @endphp
+                                        <div class="initials-badge" style="width: 60px; height: 60px; background-color: #077f46; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; margin: 0 auto;">{{ $initials }}</div>
                                     </div>
                                     <div class="stat-label">Kane Construction</div>
                                 </div>
@@ -20,7 +29,16 @@
                             <div class="col-lg-3 col-md-6 mb-4">
                                 <div class="stat-item">
                                     <div class="stat-icon">
-                                        <i class="bi bi-buildings"></i>
+                                        @php
+                                            $initials = '';
+                                            $words = explode(' ', 'Broad Construction');
+                                            foreach ($words as $word) {
+                                                if (!empty($word)) {
+                                                    $initials .= strtoupper(substr($word, 0, 1));
+                                                }
+                                            }
+                                        @endphp
+                                        <div class="initials-badge" style="width: 60px; height: 60px; background-color: #077f46; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; margin: 0 auto;">{{ $initials }}</div>
                                     </div>
                                     <div class="stat-label">Broad Construction</div>
                                 </div>
@@ -28,7 +46,16 @@
                             <div class="col-lg-3 col-md-6 mb-4">
                                 <div class="stat-item">
                                     <div class="stat-icon">
-                                        <i class="bi bi-building-gear"></i>
+                                        @php
+                                            $initials = '';
+                                            $words = explode(' ', 'Woollam Construction');
+                                            foreach ($words as $word) {
+                                                if (!empty($word)) {
+                                                    $initials .= strtoupper(substr($word, 0, 1));
+                                                }
+                                            }
+                                        @endphp
+                                        <div class="initials-badge" style="width: 60px; height: 60px; background-color: #077f46; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; margin: 0 auto;">{{ $initials }}</div>
                                     </div>
                                     <div class="stat-label">Woollam Construction</div>
                                 </div>
@@ -36,7 +63,16 @@
                             <div class="col-lg-3 col-md-6 mb-4">
                                 <div class="stat-item">
                                     <div class="stat-icon">
-                                        <i class="bi bi-building-check"></i>
+                                        @php
+                                            $initials = '';
+                                            $words = explode(' ', 'Aizer Group');
+                                            foreach ($words as $word) {
+                                                if (!empty($word)) {
+                                                    $initials .= strtoupper(substr($word, 0, 1));
+                                                }
+                                            }
+                                        @endphp
+                                        <div class="initials-badge" style="width: 60px; height: 60px; background-color: #077f46; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; margin: 0 auto;">{{ $initials }}</div>
                                     </div>
                                     <div class="stat-label">Aizer Group</div>
                                 </div>
@@ -50,7 +86,16 @@
                             <div class="col-lg-3 col-md-6 mb-4">
                                 <div class="stat-item">
                                     <div class="stat-icon">
-                                        <i class="bi bi-building-fill-check"></i>
+                                        @php
+                                            $initials = '';
+                                            $words = explode(' ', 'Better Build');
+                                            foreach ($words as $word) {
+                                                if (!empty($word)) {
+                                                    $initials .= strtoupper(substr($word, 0, 1));
+                                                }
+                                            }
+                                        @endphp
+                                        <div class="initials-badge" style="width: 60px; height: 60px; background-color: #077f46; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; margin: 0 auto;">{{ $initials }}</div>
                                     </div>
                                     <div class="stat-label">Better Build Construction</div>
                                 </div>
@@ -60,7 +105,6 @@
                    
                 </div>
                 
-                <!-- Enhanced Carousel Navigation Arrows with Accent Color -->
                 <button class="carousel-control-prev" type="button" data-bs-target="#clientCarousel" data-bs-slide="prev" style="width: 5%; opacity: 1;">
                     <span class="carousel-control-prev-icon" aria-hidden="true" style="background-color: #077f46; border-radius: 50%; padding: 10px; width: 25px; height: 25px; background-size: 15px;"></span>
                     <span class="visually-hidden">Previous</span>
@@ -70,7 +114,6 @@
                     <span class="visually-hidden">Next</span>
                 </button>
                 
-                <!-- Enhanced Carousel Indicators (Dots) with Accent Color -->
                 <div class="carousel-indicators position-relative mt-3">
                     <button type="button" data-bs-target="#clientCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1" style="background-color: #077f46;"></button>
                     <button type="button" data-bs-target="#clientCarousel" data-bs-slide-to="1" aria-label="Slide 2" style="background-color: #077f46;"></button>
