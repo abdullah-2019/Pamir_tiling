@@ -822,6 +822,10 @@ section,
   grid-column: 1 / -1; 
 }
 
+.hero .hero-content .search-container .property-search-form .search-field:has(#subject) {
+  grid-column: 1 / -1; 
+}
+
 
 .hero .hero-content .search-container .property-search-form .search-grid {
   display: grid;

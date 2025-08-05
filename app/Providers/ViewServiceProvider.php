@@ -4,7 +4,9 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
-use App\Models\Services; 
+use Illuminate\Support\Facades\Cache;
+use App\Models\Services;
+use App\Models\About;
 
 class ViewServiceProvider extends ServiceProvider
 {
@@ -21,13 +23,19 @@ class ViewServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        \Illuminate\Support\Facades\View::composer('*', function ($view) {
-            $services = \Illuminate\Support\Facades\Cache::remember('services', 3600, function () {
-                return \App\Models\Services::all();
+        View::composer('*', function ($view) {
+            $services = Cache::remember('services', 3600, function () {
+                return Services::all();
             });
             
-            $view->with('services', $services);
+            $about = Cache::remember('about', 3600, function () {
+                return About::first();
+            });
+            
+            $view->with([
+                'services' => $services,
+                'about' => $about
+            ]);
         });
-
     }
 }

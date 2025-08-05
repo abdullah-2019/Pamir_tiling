@@ -70,11 +70,23 @@
                                             required="">
                                     </div>
                                 </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="lastname" placeholder="Your Last Name"
+                                            required="">
+                                    </div>
+                                </div>
 
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <input type="email" class="form-control" name="email"
                                             placeholder="Email Address" required="">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="phone" class="form-control" name="phone"
+                                            placeholder="Phone Number" required="">
                                     </div>
                                 </div>
 

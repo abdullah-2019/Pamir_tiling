@@ -120,8 +120,18 @@
                     <h4>Contact Us</h4>
                     <p>9 Oreilly Cres, Springfield Lakes, QLD 4300</p>
                     <p>Australia</p>
-                    <p class="mt-4"><strong>Phone:</strong> <span>+61 470 252 501</span></p>
-                    <p><strong>Email:</strong> <span>info@pamirtiling.com.au</span></p>
+                    <p class="mt-4"><strong>Phone:</strong> 
+                        <span>
+                           +{{ $about->phones[0] ? preg_replace('/^(\d{2})(\d{4})(\d+)$/', '$1 $2 $3', preg_replace('/[^0-9]/', '', $about->phones[0])) : '' }}
+                        </span>
+                    </p>
+                    {{-- @if(is_array($about->phones))
+                        @foreach($about->phones as $phone)
+                            <p>{{ $phone ? preg_replace('/^(\d{2})(\d{4})(\d+)$/', '$1 $2 $3', preg_replace('/[^0-9]/', '', $phone)) : '' }}</p>
+                        @endforeach
+                    @endif --}}
+
+                    <p><strong>Email:</strong> <span>{{$about->emails[1]}}</span></p>
                 </div>
 
             </div>
