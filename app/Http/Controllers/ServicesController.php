@@ -69,7 +69,8 @@ class ServicesController extends Controller
     }
 
     public function serviceDetail($slug) {
-        dd('Testing route for slug: ' . $slug); // This should show a debug dump with the slug
+        $service = Services::where('slug', $slug)->firstOrFail();
+        return view('site.services.detail', compact('service'));
     }
-    
+
 }

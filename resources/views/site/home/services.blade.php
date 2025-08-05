@@ -32,7 +32,7 @@
                                 @endif
 
                             </ul>
-                            <a href="" class="service-link">
+                            <a href="{{ route('service-detail', $service->slug) }}" class="service-link">
                                 <span>Read More</span>
                                 <i class="bi bi-arrow-up-right"></i>
                             </a>
@@ -48,7 +48,7 @@
         </div>
 
         <div class="text-center" data-aos="zoom-in" data-aos-delay="600">
-            <a href="services.html" class="btn-view-all">
+            <a href="{{route('services.page')}}" class="btn-view-all">
                 <span>View All Services</span>
                 <i class="bi bi-arrow-right"></i>
             </a>
