@@ -65,7 +65,8 @@ class ServicesController extends Controller
     }
 
     public function page() {
-        return view('site.services.index');
+        $services = Services::all();
+        return view('site.services.index', compact('services'));
     }
 
     public function serviceDetail($slug) {

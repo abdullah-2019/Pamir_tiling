@@ -6327,7 +6327,7 @@ section,
 }
 
 .services .service-image {
-  width: 280px;
+  width: 100%;
   height: 200px;
   border-radius: 20px;
   overflow: hidden;
