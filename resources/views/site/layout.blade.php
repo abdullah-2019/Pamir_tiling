@@ -22,11 +22,13 @@
     <!-- Vendor CSS Files -->
     <link href="{{ asset('/assets/site/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('/assets/site/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
-    <link href="{{ asset('/assets/site/vendor/aos/aos.css') }}" rel="stylesheet')}}">
+    <link href="{{ asset('/assets/site/vendor/aos/aos.css') }}" rel="stylesheet">
     <link href="{{ asset('/assets/site/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
 
     <!-- Main CSS File -->
     <link href="{{ asset('/assets/site/css/main.css') }}" rel="stylesheet">
+
+    @yield('css')
 
 </head>
 
@@ -167,6 +169,9 @@
 
     <!-- Main JS File -->
     <script src="{{ asset('/assets/site/js/main.js') }}"></script>
+
+    @yield('js')
+
 
 </body>
 
