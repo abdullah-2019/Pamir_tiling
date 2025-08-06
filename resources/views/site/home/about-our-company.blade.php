@@ -7,10 +7,10 @@
                 <div class="col-lg-5" data-aos="zoom-in" data-aos-delay="200">
                     <div class="image-gallery">
                         <div class="primary-image">
-                            <img src="{{ asset('assets/site/img/house.webp') }}" alt="about us" class="img-fluid">
+                            <img src="{{ asset('assets/site/img/house-1.webp') }}" alt="about us" class="img-fluid">
                             <div class="experience-badge">
                                 <div class="badge-content">
-                                    <div class="number"><span data-purecounter-start="0" data-purecounter-end="15"
+                                    <div class="number"><span data-purecounter-start="0" data-purecounter-end="{{now()->year - $about->company_creation_date}}"
                                             data-purecounter-duration="1" class="purecounter"></span>+</div>
                                     <div class="text">Years<br>Experience</div>
                                 </div>
@@ -73,7 +73,11 @@
                                 </div>
                                 <div class="contact-details">
                                     <span>Call us today</span>
-                                    <strong>+1 (555) 123-4567</strong>
+                                    @if($about && !empty($about->phones) && !empty($about->phones[0]))
+                                        <span>
+                                            +{{ preg_replace('/^(\d{2})(\d{4})(\d+)$/', '$1 $2 $3', preg_replace('/[^0-9]/', '', $about->phones[0])) }}
+                                        </span>
+                                    @endif
                                 </div>
                             </div>
                         </div>
