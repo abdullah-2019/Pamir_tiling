@@ -65,6 +65,7 @@ class ProjectsController extends Controller
     }
 
     public function page() {
-        return view('site.projects');
+        $projects = Projects::all();
+        return view('site.projects', compact('projects'));
     }
 }
