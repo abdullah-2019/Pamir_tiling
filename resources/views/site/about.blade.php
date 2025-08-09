@@ -7,7 +7,7 @@
             <h1 class="mb-2 mb-lg-0">About</h1>
             <nav class="breadcrumbs">
                 <ol>
-                    <li><a href="{{route('home')}}">Home</a></li>
+                    <li><a href="{{ route('home') }}">Home</a></li>
                     <li class="current">About</li>
                 </ol>
             </nav>
@@ -23,35 +23,36 @@
                 <div class="col-lg-10">
 
                     <div class="hero-content text-center" data-aos="zoom-in" data-aos-delay="200">
-                        <h2>Premium Real Estate Excellence Since 2008</h2>
-                        <p class="hero-description">Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere
-                            cubilia curae; Mauris viverra veniam ut aliquam lorem dapibus gravida. Sed efficitur mauris vel
-                            magna consectetur tempor.</p>
+                        <h2>Premium Tiling Excellence Since 2010</h2>
+                        <p class="hero-description">
+                            {{ $about->our_history }}
+                        </p>
                     </div>
 
-                    <div class="dual-image-layout" data-aos="fade-up" data-aos-delay="300">
-                        <div class="row g-4 align-items-center">
-                            <div class="col-lg-6">
-                                <div class="primary-image-wrap">
-                                    <img src="assets/img/real-estate/property-exterior-4.webp" alt="Luxury Property"
-                                        class="img-fluid">
-                                    <div class="floating-badge" data-aos="zoom-in" data-aos-delay="400">
-                                        <div class="badge-content">
-                                            <i class="bi bi-award"></i>
-                                            <span>Top Rated Agency</span>
+                    @if ($projects->count() != 0)
+                        <div class="dual-image-layout" data-aos="fade-up" data-aos-delay="300">
+                            <div class="row g-4 align-items-center">
+                                <div class="col-lg-6">
+                                    <div class="primary-image-wrap">
+                                        <img src="{{ asset('/assets/site/img/projects/' . $projects->image[0]) }}"
+                                            alt="{{ $projects->title[0] }}" class="img-fluid">
+                                        <div class="floating-badge" data-aos="zoom-in" data-aos-delay="400">
+                                            <div class="badge-content">
+                                                <i class="bi bi-award"></i>
+                                                <span>Top Rated Agency</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="secondary-image-wrap">
-                                    <img src="assets/img/real-estate/agent-3.webp" alt="Professional Agent"
-                                        class="img-fluid">
+                                <div class="col-lg-6">
+                                    <div class="secondary-image-wrap">
+                                        <img src="{{ asset('/assets/site/img/projects/' . $projects->image[1]) }}"
+                                            alt="{{ $projects->title[1] }}" class="img-fluid">
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-
+                    @endif
                 </div>
             </div>
 
@@ -60,53 +61,62 @@
                     <div class="col-lg-3 col-md-6">
                         <div class="feature-box" data-aos="flip-up" data-aos-delay="400">
                             <div class="feature-icon">
-                                <i class="bi bi-house-door"></i>
+                                <i class="bi bi-grid-3x3-gap"></i>
                             </div>
                             <div class="feature-content">
-                                <h4>Residential Sales</h4>
-                                <p>Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit
-                                    anim.</p>
+                                <h4>High-Quality Tiles</h4>
+                                <p>
+                                    From classic ceramic and porcelain tiles to large-format panels, natural stone pavers,
+                                    Terrazzo, and mosaic tiles, we deliver exceptional quality for every project.
+                                </p>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6">
                         <div class="feature-box" data-aos="flip-up" data-aos-delay="450">
                             <div class="feature-icon">
-                                <i class="bi bi-building"></i>
+                                <i class="bi bi-calculator"></i>
                             </div>
                             <div class="feature-content">
-                                <h4>Commercial Properties</h4>
-                                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-                                    laudantium.</p>
+                                <h4>Experienced Estimating Team</h4>
+                                <p>
+                                    Our professional team provides comprehensive and accurate quotes, helping you save time
+                                    and minimize unexpected costs.
+                                </p>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6">
                         <div class="feature-box" data-aos="flip-up" data-aos-delay="500">
                             <div class="feature-icon">
-                                <i class="bi bi-graph-up-arrow"></i>
+                                <i class="bi bi-patch-check"></i>
                             </div>
                             <div class="feature-content">
-                                <h4>Investment Guidance</h4>
-                                <p>Totam rem aperiam eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae
-                                    vitae.</p>
+                                <h4>Fully Licensed & Insured</h4>
+                                <p>
+                                    Pamir Tiling Services is fully licensed and insured, and we are proud members of Master
+                                    Builders and CFMEU.
+                                </p>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6">
                         <div class="feature-box" data-aos="flip-up" data-aos-delay="550">
                             <div class="feature-icon">
-                                <i class="bi bi-shield-check"></i>
+                                <i class="bi bi-people-fill"></i>
                             </div>
                             <div class="feature-content">
-                                <h4>Legal Support</h4>
-                                <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium
-                                    voluptatum.</p>
+                                <h4>Adequate Labour On Hand</h4>
+                                <p>
+                                    With 50–80 highly skilled, fully compliant labourers, we can efficiently handle multiple
+                                    projects and meet tight deadlines.
+                                </p>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div><!-- End Features Showcase -->
+            </div>
+            <!-- End Features Showcase -->
 
             <div class="metrics-section" data-aos="fade-up" data-aos-delay="400">
                 <div class="row justify-content-center">
@@ -122,7 +132,7 @@
                                             <span data-purecounter-start="0" data-purecounter-end="1250"
                                                 data-purecounter-duration="2" class="purecounter"></span>+
                                         </div>
-                                        <div class="metric-label">Successful Sales</div>
+                                        <div class="metric-label">Successful Projects</div>
                                     </div>
                                 </div>
                                 <div class="col-lg-3 col-6">
@@ -143,7 +153,8 @@
                                             <i class="bi bi-calendar-check"></i>
                                         </div>
                                         <div class="metric-value">
-                                            <span data-purecounter-start="0" data-purecounter-end="16"
+                                            <span data-purecounter-start="0"
+                                                data-purecounter-end="{{ now()->year - $about->company_creation_date }}"
                                                 data-purecounter-duration="2" class="purecounter"></span>
                                         </div>
                                         <div class="metric-label">Years in Business</div>
@@ -164,41 +175,19 @@
                 </div>
             </div><!-- End Metrics Section -->
 
-            <div class="testimonial-highlight" data-aos="fade-up" data-aos-delay="450">
-                <div class="row justify-content-center">
-                    <div class="col-lg-8">
-                        <div class="testimonial-card">
-                            <div class="quote-icon">
-                                <i class="bi bi-chat-quote"></i>
-                            </div>
-                            <blockquote>
-                                "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet consectetur adipisci velit
-                                sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat
-                                voluptatem."
-                            </blockquote>
-                            <div class="testimonial-author">
-                                <div class="author-image">
-                                    <img src="assets/img/person/person-f-8.webp" alt="Client" class="img-fluid">
-                                </div>
-                                <div class="author-info">
-                                    <h5>Jennifer Rodriguez</h5>
-                                    <span>Property Investor</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div><!-- End Testimonial Highlight -->
-
             <div class="cta-section" data-aos="fade-up" data-aos-delay="500">
                 <div class="row justify-content-center text-center">
                     <div class="col-lg-8">
-                        <h3>Ready to Find Your Dream Property?</h3>
-                        <p>Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae
-                            consequatur vel illum qui dolorem eum fugiat quo voluptas nulla pariatur.</p>
+                        <h3>Ready to Start Your Project?</h3>
+                        <p>
+                            Transform your space with Pamir Tiling Services—Queensland’s trusted experts in residential and
+                            commercial tiling since 2010. From kitchens and bathrooms to pools, paving, and waterproofing,
+                            our skilled team delivers quality craftsmanship and lasting results. Let us help you create the
+                            perfect finish for your home or business.
+                        </p>
                         <div class="action-buttons">
-                            <a href="contact.html" class="btn btn-primary">Get Started Today</a>
-                            <a href="properties.html" class="btn btn-secondary">Browse Properties</a>
+                            <a href="{{ route('contact.page') }}" class="btn btn-primary">Get Started Today</a>
+                            <a href="{{ route('projects.page') }}" class="btn btn-secondary">See Projects</a>
                         </div>
                     </div>
                 </div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\About;
 use App\Http\Requests\StoreAboutRequest;
 use App\Http\Requests\UpdateAboutRequest;
+use App\Models\Projects;
 
 class AboutController extends Controller
 {
@@ -65,6 +66,8 @@ class AboutController extends Controller
     }
 
     public function page() {
-        return view('site.about');
+        $about = About::all();
+        $projects = Projects::inRandomOrder()->take(2)->get();
+        return view('site.about', compact('about', 'projects'));
     }
 }

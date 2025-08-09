@@ -9,8 +9,8 @@
                     <div class="hero-content" data-aos="zoom-in" data-aos-delay="200">
                         <div class="content-header">
                             <span class="hero-label">
-                                <i class="bi bi-house-heart"></i>
-                                Dream Homes Await
+                                <i class="bi bi-bricks"></i>
+                                Perfect Tiles, Lasting Impressions
                             </span>
                             <h1>Expert Tiling Solutions You Can Trust</h1>
                             <p>
@@ -72,7 +72,7 @@
 
                             <div class="overlay-images">
                                 <div class="overlay-img overlay-1">
-                                    <img src="{{ asset('/assets/site/img/shutterstock.webp') }}" alt="Interior View"
+                                    <img src="{{ asset('/assets/site/img/shutterstock.webp') }}" alt="hero"
                                         class="img-fluid">
                                 </div>
                                 <div class="overlay-img overlay-2">
@@ -81,9 +81,9 @@
                                 </div>
                             </div>
 
-                            <div class="agent-card">
+                            {{-- <div class="agent-card">
                                 <div class="agent-profile">
-                                    <img src="assets/img/real-estate/agent-7.webp" alt="Agent Profile"
+                                    <img src="{{ asset('/assets/site/img/tile-1.webp') }}" alt=""
                                         class="agent-photo">
                                     <div class="agent-info">
                                         <h4>Michael Chen</h4>
@@ -103,7 +103,7 @@
                                 <button class="contact-agent-btn">
                                     <i class="bi bi-chat-dots"></i>
                                 </button>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div><!-- End Hero Visual -->
