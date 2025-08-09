@@ -34,20 +34,20 @@
                             <div class="row g-4 align-items-center">
                                 <div class="col-lg-6">
                                     <div class="primary-image-wrap">
-                                        <img src="{{ asset('/assets/site/img/projects/' . $projects->image[0]) }}"
-                                            alt="{{ $projects->title[0] }}" class="img-fluid">
-                                        <div class="floating-badge" data-aos="zoom-in" data-aos-delay="400">
+                                        <img src="{{ asset('/assets/site/img/projects/' . $projects[0]->image) }}"
+                                            alt="{{ $projects[0]->title }}" class="img-fluid">
+                                        {{-- <div class="floating-badge" data-aos="zoom-in" data-aos-delay="400">
                                             <div class="badge-content">
                                                 <i class="bi bi-award"></i>
                                                 <span>Top Rated Agency</span>
                                             </div>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="secondary-image-wrap">
-                                        <img src="{{ asset('/assets/site/img/projects/' . $projects->image[1]) }}"
-                                            alt="{{ $projects->title[1] }}" class="img-fluid">
+                                        <img src="{{ asset('/assets/site/img/projects/' . $projects[1]->image) }}"
+                                            alt="{{ $projects[1]->title }}" class="img-fluid">
                                     </div>
                                 </div>
                             </div>
