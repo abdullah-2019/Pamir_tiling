@@ -61,13 +61,13 @@
                         <div class="visual-container">
                             <div class="featured-property">
                                 <img src="{{ asset('/assets/site/img/house.webp') }}" alt="house" class="img-fluid">
-                                <div class="property-info">
+                                {{-- <div class="property-info">
                                     <div class="property-price">$925,000</div>
                                     <div class="property-details">
                                         <span><i class="bi bi-geo-alt"></i> Downtown District</span>
                                         <span><i class="bi bi-house"></i> 4 Bed, 3 Bath</span>
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
 
                             <div class="overlay-images">
