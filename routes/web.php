@@ -25,3 +25,4 @@ Route::get('service-detail/{slug}', [ServicesController::class, 'serviceDetail']
 // Projects
 Route::resource('projects', ProjectsController::class);
 Route::get('/projects', [ProjectsController::class, 'page'])->name('projects.page');
+Route::get('/project-detail/{id}', [ProjectsController::class, 'projectDetial'])->name('project-detail');

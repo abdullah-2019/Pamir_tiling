@@ -24,7 +24,7 @@
                         @foreach ($projects as $project)
                             <div class="col-lg-4 col-md-6">
                                 <div class="property-item">
-                                    <a href="property-details.html" class="property-link">
+                                    <a href="{{route('project-detail', $project->id)}}" class="property-link">
                                         <div class="property-image-wrapper">
                                             <img src="{{ asset('assets/site/img/projects/' . $project->image) }}"
                                                 alt="{{ $project->clinet_name }}" class="img-fluid">
@@ -37,11 +37,11 @@
                                             </div>
                                         </div>
                                     </a>
-                                    <div class="property-details"><a href="property-details.html" class="property-link">
+                                    <div class="property-details"><a href="{{route('project-detail', $project->id)}}" class="property-link">
                                             <h4 class="property-title">{{ $project->clinet_name }}</h4>
                                         </a>
                                     </div>
-
+                                    
                                 </div>
                             </div>
                             <!-- End project Item -->

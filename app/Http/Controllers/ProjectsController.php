@@ -66,6 +66,11 @@ class ProjectsController extends Controller
 
     public function page() {
         $projects = Projects::all();
-        return view('site.projects', compact('projects'));
+        return view('site.projects.index', compact('projects'));
+    }
+
+    function projectDetial($id) {
+        $project = Projects::where('id', $id);
+        return view('site.projects.detail', compact('project'));
     }
 }
