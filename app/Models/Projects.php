@@ -9,4 +9,8 @@ class Projects extends Model
 {
     /** @use HasFactory<\Database\Factories\ProjectsFactory> */
     use HasFactory;
+
+    protected $casts = [
+        'images' => 'array',
+    ];
 }

@@ -4,11 +4,11 @@
     <!-- Page Title -->
     <div class="page-title light-background">
         <div class="container d-lg-flex justify-content-between align-items-center">
-            <h1 class="mb-2 mb-lg-0">Property Details</h1>
+            <h1 class="mb-2 mb-lg-0">Project Details</h1>
             <nav class="breadcrumbs">
                 <ol>
                     <li><a href="index.html">Home</a></li>
-                    <li class="current">Property Details</li>
+                    <li class="current">Project Details</li>
                 </ol>
             </nav>
         </div>
@@ -27,24 +27,24 @@
                         <div class="hero-image-container">
                             <div class="property-gallery-slider swiper init-swiper">
                                 <script type="application/json" class="swiper-config">
-                    {
-                      "loop": true,
-                      "speed": 600,
-                      "autoplay": {
-                        "delay": 5000
-                      },
-                      "navigation": {
-                        "nextEl": ".swiper-button-next",
-                        "prevEl": ".swiper-button-prev"
-                      },
-                      "thumbs": {
-                        "swiper": ".property-thumbnails-slider"
-                      }
-                    }
-                  </script>
+                                    {
+                                    "loop": true,
+                                    "speed": 600,
+                                    "autoplay": {
+                                        "delay": 5000
+                                    },
+                                    "navigation": {
+                                        "nextEl": ".swiper-button-next",
+                                        "prevEl": ".swiper-button-prev"
+                                    },
+                                    "thumbs": {
+                                        "swiper": ".property-thumbnails-slider"
+                                    }
+                                    }
+                                </script>
                                 <div class="swiper-wrapper">
                                     <div class="swiper-slide">
-                                        <img src="assets/img/real-estate/property-exterior-7.webp"
+                                        <img src="{{asset('assets/site/img/projects/'.$project->images[0])}}"
                                             class="img-fluid hero-image" alt="Property Main Image">
                                         <div class="hero-overlay">
                                             <div class="property-badge">
@@ -58,31 +58,31 @@
                                         </div>
                                     </div>
                                     <div class="swiper-slide">
-                                        <img src="assets/img/real-estate/property-interior-7.webp"
+                                        <img src="a{{asset('assets/site/img/projects/'.$project->images[1])}}"
                                             class="img-fluid hero-image" alt="Interior View">
                                     </div>
                                     <div class="swiper-slide">
-                                        <img src="assets/img/real-estate/property-exterior-9.webp"
+                                        <img src="{{asset('assets/site/img/projects/'.$project->images[2])}}"
                                             class="img-fluid hero-image" alt="Exterior View">
                                     </div>
                                     <div class="swiper-slide">
-                                        <img src="assets/img/real-estate/features-5.webp" class="img-fluid hero-image"
+                                        <img src="{{asset('assets/site/img/projects/'.$project->images[3])}}" class="img-fluid hero-image"
                                             alt="Features">
                                     </div>
                                     <div class="swiper-slide">
-                                        <img src="assets/img/real-estate/property-interior-8.webp"
+                                        <img src="{{asset('assets/site/img/projects/'.$project->images[4])}}"
                                             class="img-fluid hero-image" alt="More Photos">
                                     </div>
                                     <div class="swiper-slide">
-                                        <img src="assets/img/real-estate/property-exterior-3.webp"
+                                        <img src="{{asset('assets/site/img/projects/'.$project->images[5])}}"
                                             class="img-fluid hero-image" alt="Exterior Detail">
                                     </div>
                                     <div class="swiper-slide">
-                                        <img src="assets/img/real-estate/property-interior-4.webp"
+                                        <img src="{{asset('assets/site/img/projects/'.$project->images[6])}}"
                                             class="img-fluid hero-image" alt="Living Area">
                                     </div>
                                     <div class="swiper-slide">
-                                        <img src="assets/img/real-estate/features-2.webp" class="img-fluid hero-image"
+                                        <img src="{{asset('assets/site/img/projects/'.$project->images[7])}}" class="img-fluid hero-image"
                                             alt="Kitchen">
                                     </div>
                                     <div class="swiper-slide">
@@ -90,11 +90,11 @@
                                             class="img-fluid hero-image" alt="Bedroom">
                                     </div>
                                     <div class="swiper-slide">
-                                        <img src="assets/img/real-estate/property-exterior-1.webp"
+                                        <img src="{{asset('assets/site/img/projects/'.$project->images[9])}}"
                                             class="img-fluid hero-image" alt="Building View">
                                     </div>
                                     <div class="swiper-slide">
-                                        <img src="assets/img/real-estate/features-3.webp" class="img-fluid hero-image"
+                                        <img src="{{asset('assets/site/img/projects/'.$project->images[10])}}" class="img-fluid hero-image"
                                             alt="Bathroom">
                                     </div>
                                     <div class="swiper-slide">
@@ -102,11 +102,11 @@
                                             class="img-fluid hero-image" alt="Dining Area">
                                     </div>
                                     <div class="swiper-slide">
-                                        <img src="assets/img/real-estate/property-exterior-8.webp"
+                                        <img src="{{asset('assets/site/img/projects/'.$project->images[12])}}"
                                             class="img-fluid hero-image" alt="Balcony View">
                                     </div>
                                     <div class="swiper-slide">
-                                        <img src="assets/img/real-estate/features-1.webp" class="img-fluid hero-image"
+                                        <img src="{{asset('assets/site/img/projects/'.$project->images[0])}}" class="img-fluid hero-image"
                                             alt="Amenities">
                                     </div>
                                 </div>
@@ -118,53 +118,53 @@
                         <div class="thumbnail-gallery mt-3">
                             <div class="property-thumbnails-slider swiper init-swiper">
                                 <script type="application/json" class="swiper-config">
-                    {
-                      "loop": true,
-                      "spaceBetween": 10,
-                      "slidesPerView": 4,
-                      "freeMode": true,
-                      "watchSlidesProgress": true,
-                      "breakpoints": {
-                        "576": {
-                          "slidesPerView": 5
-                        },
-                        "768": {
-                          "slidesPerView": 6
-                        }
-                      }
-                    }
-                  </script>
+                                    {
+                                        "loop": true,
+                                        "spaceBetween": 10,
+                                        "slidesPerView": 4,
+                                        "freeMode": true,
+                                        "watchSlidesProgress": true,
+                                        "breakpoints": {
+                                            "576": {
+                                                "slidesPerView": 5
+                                            },
+                                            "768": {
+                                                "slidesPerView": 6
+                                            }
+                                        }
+                                    }
+                                </script>
                                 <div class="swiper-wrapper">
                                     <div class="swiper-slide">
-                                        <img src="assets/img/real-estate/property-exterior-7.webp"
+                                        <img src="{{asset('assets/site/img/projects/'.$project->images[0])}}"
                                             class="img-fluid thumbnail-img" alt="Property Main Image">
                                     </div>
                                     <div class="swiper-slide">
-                                        <img src="assets/img/real-estate/property-interior-7.webp"
+                                        <img src="a{{asset('assets/site/img/projects/'.$project->images[1])}}"
                                             class="img-fluid thumbnail-img" alt="Interior View">
                                     </div>
                                     <div class="swiper-slide">
-                                        <img src="assets/img/real-estate/property-exterior-9.webp"
+                                        <img src="{{asset('assets/site/img/projects/'.$project->images[2])}}"
                                             class="img-fluid thumbnail-img" alt="Exterior View">
                                     </div>
                                     <div class="swiper-slide">
-                                        <img src="assets/img/real-estate/features-5.webp" class="img-fluid thumbnail-img"
+                                        <img src="{{asset('assets/site/img/projects/'.$project->images[3])}}" class="img-fluid thumbnail-img"
                                             alt="Features">
                                     </div>
                                     <div class="swiper-slide">
-                                        <img src="assets/img/real-estate/property-interior-8.webp"
+                                        <img src="{{asset('assets/site/img/projects/'.$project->images[4])}}"
                                             class="img-fluid thumbnail-img" alt="More Photos">
                                     </div>
                                     <div class="swiper-slide">
-                                        <img src="assets/img/real-estate/property-exterior-3.webp"
+                                        <img src="{{asset('assets/site/img/projects/'.$project->images[5])}}"
                                             class="img-fluid thumbnail-img" alt="Exterior Detail">
                                     </div>
                                     <div class="swiper-slide">
-                                        <img src="assets/img/real-estate/property-interior-4.webp"
+                                        <img src="{{asset('assets/site/img/projects/'.$project->images[6])}}"
                                             class="img-fluid thumbnail-img" alt="Living Area">
                                     </div>
                                     <div class="swiper-slide">
-                                        <img src="assets/img/real-estate/features-2.webp" class="img-fluid thumbnail-img"
+                                        <img src="{{asset('assets/site/img/projects/'.$project->images[7])}}" class="img-fluid thumbnail-img"
                                             alt="Kitchen">
                                     </div>
                                     <div class="swiper-slide">
@@ -172,19 +172,19 @@
                                             class="img-fluid thumbnail-img" alt="Bedroom">
                                     </div>
                                     <div class="swiper-slide">
-                                        <img src="assets/img/real-estate/property-exterior-1.webp"
+                                        <img src="{{asset('assets/site/img/projects/'.$project->images[9])}}"
                                             class="img-fluid thumbnail-img" alt="Building View">
                                     </div>
                                     <div class="swiper-slide">
-                                        <img src="assets/img/real-estate/features-3.webp" class="img-fluid thumbnail-img"
+                                        <img src="{{asset('assets/site/img/projects/'.$project->images[10])}}" class="img-fluid thumbnail-img"
                                             alt="Bathroom">
                                     </div>
                                     <div class="swiper-slide">
-                                        <img src="assets/img/real-estate/property-interior-2.webp"
+                                        <img src="{{asset('assets/site/img/projects/'.$project->images[11])}}"
                                             class="img-fluid thumbnail-img" alt="Dining Area">
                                     </div>
                                     <div class="swiper-slide">
-                                        <img src="assets/img/real-estate/property-exterior-8.webp"
+                                        <img src="{{asset('assets/site/img/projects/'.$project->images[12])}}"
                                             class="img-fluid thumbnail-img" alt="Balcony View">
                                     </div>
                                     <div class="swiper-slide">
@@ -322,77 +322,6 @@
                 <!-- Sidebar -->
                 <div class="col-lg-5">
                     <div class="sticky-sidebar">
-
-                        <!-- Quick Actions -->
-                        <div class="actions-card mb-4" data-aos="fade-up" data-aos-delay="250">
-                            <div class="action-buttons">
-                                <button class="btn btn-primary btn-lg w-100 mb-3">
-                                    <i class="bi bi-calendar-check"></i>
-                                    Schedule Viewing
-                                </button>
-                                <div class="row g-2">
-                                    <div class="col-6">
-                                        <button class="btn btn-outline-primary w-100">
-                                            <i class="bi bi-heart"></i>
-                                            Save
-                                        </button>
-                                    </div>
-                                    <div class="col-6">
-                                        <button class="btn btn-outline-primary w-100">
-                                            <i class="bi bi-share"></i>
-                                            Share
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div><!-- End Quick Actions -->
-
-                        <!-- Agent Card -->
-                        <div class="agent-card mb-4" data-aos="fade-up" data-aos-delay="350">
-                            <div class="agent-header">
-                                <div class="agent-avatar">
-                                    <img src="assets/img/person/person-f-12.webp" class="img-fluid" alt="Agent Photo">
-                                    <div class="online-status"></div>
-                                </div>
-                                <div class="agent-info">
-                                    <h4>Sarah Johnson</h4>
-                                    <p class="agent-role">Licensed Real Estate Agent</p>
-                                    <div class="agent-rating">
-                                        <div class="stars">
-                                            <i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star-fill"></i>
-                                        </div>
-                                        <span class="rating-text">5.0 (127 reviews)</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="agent-contact">
-                                <div class="contact-item">
-                                    <i class="bi bi-telephone"></i>
-                                    <span>+1 (555) 234-5678</span>
-                                </div>
-                                <div class="contact-item">
-                                    <i class="bi bi-envelope"></i>
-                                    <span>s.johnson@example.com</span>
-                                </div>
-                            </div>
-
-                            <div class="agent-actions mt-3">
-                                <button class="btn btn-success w-100 mb-2">
-                                    <i class="bi bi-telephone"></i>
-                                    Call Now
-                                </button>
-                                <button class="btn btn-outline w-100">
-                                    <i class="bi bi-chat-dots"></i>
-                                    Send Message
-                                </button>
-                            </div>
-                        </div><!-- End Agent Card -->
-
                         <!-- Contact Form -->
                         <div class="contact-form-card mb-4" data-aos="fade-up" data-aos-delay="450">
                             <h4>Request Information</h4>
@@ -432,32 +361,6 @@
                             </form>
                         </div><!-- End Contact Form -->
 
-                        <!-- Rental Calculator -->
-                        <div class="calculator-card mb-4" data-aos="fade-up" data-aos-delay="550">
-                            <h4>Monthly Cost Calculator</h4>
-                            <div class="calculator-content">
-                                <div class="cost-item">
-                                    <span class="cost-label">Monthly Rent</span>
-                                    <span class="cost-value">$4,850</span>
-                                </div>
-                                <div class="cost-item">
-                                    <span class="cost-label">Utilities (estimated)</span>
-                                    <span class="cost-value">$180</span>
-                                </div>
-                                <div class="cost-item">
-                                    <span class="cost-label">Parking</span>
-                                    <span class="cost-value">$250</span>
-                                </div>
-                                <div class="cost-item">
-                                    <span class="cost-label">Pet Fee</span>
-                                    <span class="cost-value">$50</span>
-                                </div>
-                                <div class="total-cost">
-                                    <span class="total-label">Total Monthly Cost</span>
-                                    <span class="total-value">$5,330</span>
-                                </div>
-                            </div>
-                        </div><!-- End Rental Calculator -->
 
                         <!-- Similar Properties -->
                         <div class="similar-properties" data-aos="fade-up" data-aos-delay="650">

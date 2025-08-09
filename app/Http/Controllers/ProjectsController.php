@@ -70,7 +70,7 @@ class ProjectsController extends Controller
     }
 
     function projectDetial($id) {
-        $project = Projects::where('id', $id);
+        $project = Projects::findOrFail($id);
         return view('site.projects.detail', compact('project'));
     }
 }
