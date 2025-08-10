@@ -109,6 +109,7 @@
                 <div class="col-lg-5">
                     <div class="sticky-sidebar">
                         @include('site.projects.contact-form')
+                        @include('site.projects.similar-projects')
                     </div>
                 </div>
             </div>

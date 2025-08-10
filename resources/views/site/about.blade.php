@@ -34,8 +34,8 @@
                             <div class="row g-4 align-items-center">
                                 <div class="col-lg-6">
                                     <div class="primary-image-wrap">
-                                        <img src="{{ asset('/assets/site/img/projects/' . $projects[0]->image) }}"
-                                            alt="{{ $projects[0]->title }}" class="img-fluid">
+                                        <img src="{{ asset('/assets/site/img/projects/' . $projects[0]->images[0]) }}"
+                                            alt="{{ $projects[0]->title }}" class="img-fluid" loading="lazy">
                                         {{-- <div class="floating-badge" data-aos="zoom-in" data-aos-delay="400">
                                             <div class="badge-content">
                                                 <i class="bi bi-award"></i>
@@ -46,8 +46,8 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="secondary-image-wrap">
-                                        <img src="{{ asset('/assets/site/img/projects/' . $projects[1]->image) }}"
-                                            alt="{{ $projects[1]->title }}" class="img-fluid">
+                                        <img src="{{ asset('/assets/site/img/projects/' . $projects[1]->images[0]) }}"
+                                            alt="{{ $projects[1]->title }}" class="img-fluid" loading="lazy">
                                     </div>
                                 </div>
                             </div>
@@ -117,6 +117,75 @@
                 </div>
             </div>
             <!-- End Features Showcase -->
+
+            <!-- Our Team Section -->
+            <section id="why-us" class="why-us section">
+
+                <!-- Section Title -->
+                <div class="container section-title" data-aos="fade-up">
+                    <h2>Meet Our Team</h2>
+                    <p>Each contract undertaken by Pamir Tiling cannot be accomplished without a team of enthusiastic
+                        individuals coming together to achieve the best service outcomes for its clients.</p>
+                </div><!-- End Section Title -->
+
+                <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+                    <div class="row gy-4">
+                        <div class="col-lg-2"></div>
+                        <div class="col-lg-8" data-aos="fade-right" data-aos-delay="200">
+                            <div class="content">
+
+                                <div class="features-list">
+                                    <div class="feature-item d-flex align-items-center mb-3">
+                                        <div class="icon-wrapper me-3">
+                                            <i class="bi bi-check-circle-fill"></i>
+                                        </div>
+                                        <div>
+                                            <h5>John Deogo, CEO</h5>
+                                            <p>info@pamirtilingservices.com.au</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="feature-item d-flex align-items-center mb-3">
+                                        <div class="icon-wrapper me-3">
+                                            <i class="bi bi-shield-check"></i>
+                                        </div>
+                                        <div>
+                                            <h5>Jaki John, CFO</h5>
+                                            <p>accounts@parmitilingservices.com.au</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="feature-item d-flex align-items-center mb-3">
+                                        <div class="icon-wrapper me-3">
+                                            <i class="bi bi-headset"></i>
+                                        </div>
+                                        <div>
+                                            <h5>John Cina, Estimator</h5>
+                                            <p>estimator@parmitilingservices.com.au</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="feature-item d-flex align-items-center mb-3">
+                                        <div class="icon-wrapper me-3">
+                                            <i class="bi bi-graph-up-arrow"></i>
+                                        </div>
+                                        <div>
+                                            <h5>Pari Jan</h5>
+                                            <p>example@parmitilingservices.com.au</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-lg-2"></div>
+                    </div>
+
+                </div>
+
+            </section>
+            <!-- /Our Team Section -->
 
             <div class="metrics-section" data-aos="fade-up" data-aos-delay="400">
                 <div class="row justify-content-center">

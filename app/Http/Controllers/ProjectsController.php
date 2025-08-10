@@ -71,6 +71,10 @@ class ProjectsController extends Controller
 
     function projectDetial($id) {
         $project = Projects::findOrFail($id);
-        return view('site.projects.detail', compact('project'));
+        $otherProjects = Projects::where('id', '<>', $id)
+            ->inRandomOrder()
+            ->take(3)
+            ->get();
+        return view('site.projects.detail', compact('project', 'otherProjects'));
     }
 }
