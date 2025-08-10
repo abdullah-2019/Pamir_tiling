@@ -120,8 +120,8 @@
 
                 <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
                     <h4>Contact Us</h4>
-                    <p>9 Oreilly Cres, Springfield Lakes, QLD 4300</p>
-                    <p>Australia</p>
+                    <p>{{$about->address}}</p>
+                    <p>{{$about->country}}</p>
                     @if($about && !empty($about->phones) && !empty($about->phones[0]))
                         <p class="mt-4">
                             <strong>Phone:</strong>

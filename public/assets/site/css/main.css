@@ -737,7 +737,7 @@ section,
   position: absolute;
   top: 0;
   right: 0;
-  width: 50%;
+  width: 44%;
   height: 100%;
   background: linear-gradient(135deg, color-mix(in srgb, var(--accent-color), transparent 95%) 0%, transparent 100%);
   z-index: 1;
