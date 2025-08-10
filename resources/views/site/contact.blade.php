@@ -37,7 +37,7 @@
                         </div>
                         <div class="info-content">
                             <h4>Location</h4>
-                            <p>482 Pine Street, Seattle, Washington 98101</p>
+                            <p>{{ $about->address . ', ' . $about->city . ', ' . $about->country }}</p>
                         </div>
                     </div>
                 </div>
@@ -49,8 +49,17 @@
                         </div>
                         <div class="info-content">
                             <h4>Phone &amp; Email</h4>
-                            <p>+1 (206) 555-0192</p>
-                            <p>connect@example.com</p>
+                            @if ($about && !empty($about->phones) && !empty($about->phones[0]))
+                                <p class="mt-4">
+                                    <span>Phone:</span>
+                                    <span>
+                                        +{{ preg_replace('/^(\d{2})(\d{4})(\d+)$/', '$1 $2 $3', preg_replace('/[^0-9]/', '', $about->phones[0])) }}
+                                    </span>
+                                </p>
+                            @endif
+                            @if ($about && !empty($about->emails) && !empty($about->emails[0]))
+                                <p>Email: <span>{{ $about->emails[1] }}</span></p>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -72,8 +81,8 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" name="lastname" placeholder="Your Last Name"
-                                            required="">
+                                        <input type="text" class="form-control" name="lastname"
+                                            placeholder="Your Last Name" required="">
                                     </div>
                                 </div>
 
@@ -85,8 +94,8 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <input type="phone" class="form-control" name="phone"
-                                            placeholder="Phone Number" required="">
+                                        <input type="phone" class="form-control" name="phone" placeholder="Phone Number"
+                                            required="">
                                     </div>
                                 </div>
 

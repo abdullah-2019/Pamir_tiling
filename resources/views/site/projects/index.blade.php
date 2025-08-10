@@ -14,7 +14,6 @@
         </div>
     </div><!-- End Page Title -->
 
-    <!-- Properties Section -->
     <section id="properties" class="properties section">
         <div class="container" data-aos="fade-up" data-aos-delay="100">
             <div class="properties-container">
@@ -22,26 +21,36 @@
                     <div class="row g-4">
 
                         @foreach ($projects as $project)
+                            @php
+                                $firstImage =
+                                    collect($project->images ?? [])
+                                        ->filter()
+                                        ->first() ?? 'placeholder.webp';
+                                $imgUrl = asset('assets/site/img/projects/' . $firstImage);
+                                $imgNum = count($project->images);
+                            @endphp
                             <div class="col-lg-4 col-md-6">
                                 <div class="property-item">
-                                    <a href="{{route('project-detail', $project->id)}}" class="property-link">
+                                    <a href="{{ route('project-detail', $project->id) }}" class="property-link">
                                         <div class="property-image-wrapper">
-                                            <img src="{{ asset('assets/site/img/projects/' . $project->image) }}"
+                                            <img src="{{ $imgUrl }}"
                                                 alt="{{ $project->clinet_name }}" class="img-fluid">
                                             <div class="property-actions">
                                                 <button class="action-btn gallery-btn" data-toggle="tooltip"
                                                     title="View Gallery">
                                                     <i class="bi bi-images"></i>
-                                                    <span class="gallery-count">14</span>
+                                                    <span class="gallery-count">{{$imgNum}}</span>
                                                 </button>
                                             </div>
                                         </div>
                                     </a>
-                                    <div class="property-details"><a href="{{route('project-detail', $project->id)}}" class="property-link">
+                                    <div class="property-details">
+                                        <a href="{{ route('project-detail', $project->id) }}"
+                                            class="property-link">
                                             <h4 class="property-title">{{ $project->clinet_name }}</h4>
                                         </a>
                                     </div>
-                                    
+
                                 </div>
                             </div>
                             <!-- End project Item -->

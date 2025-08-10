@@ -9,8 +9,8 @@
     <meta name="keywords" content="">
 
     <!-- Favicons -->
-    <link href="{{asset('assets/site/img/favicon.png')}}" rel="icon">
-    <link href="{{asset('assets/site/img/apple-touch-icon.png')}}" rel="apple-touch-icon">
+    <link href="{{ asset('assets/site/img/favicon.png') }}" rel="icon">
+    <link href="{{ asset('assets/site/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -37,7 +37,7 @@
     <header id="header" class="header d-flex align-items-center sticky-top">
         <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
-            <a href="{{route('home')}}" class="logo d-flex align-items-center">
+            <a href="{{ route('home') }}" class="logo d-flex align-items-center">
                 <!-- Uncomment the line below if you also wish to use an image logo -->
                 <img src="{{ asset('/assets/site/img/logo.webp') }}" alt="logo"> -->
                 {{-- <svg class="my-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -58,11 +58,11 @@
 
             <nav id="navmenu" class="navmenu">
                 <ul>
-                    <li><a href="{{route('home')}}" class="active">Home</a></li>
-                    <li><a href="{{route('about.page')}}">About</a></li>
-                    <li><a href="{{route('services.page')}}">Services</a></li>
-                    <li><a href="{{route('projects.page')}}">Projects</a></li>
-                    <li><a href="{{route('contact.page')}}">Contact</a></li>
+                    <li><a href="{{ route('home') }}" class="active">Home</a></li>
+                    <li><a href="{{ route('about.page') }}">About</a></li>
+                    <li><a href="{{ route('services.page') }}">Services</a></li>
+                    <li><a href="{{ route('projects.page') }}">Projects</a></li>
+                    <li><a href="{{ route('contact.page') }}">Contact</a></li>
                 </ul>
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>
@@ -81,7 +81,7 @@
         <div class="container footer-top">
             <div class="row gy-4">
                 <div class="col-lg-5 col-md-12 footer-about">
-                    <a href="{{route('home')}}" class="logo d-flex align-items-center">
+                    <a href="{{ route('home') }}" class="logo d-flex align-items-center">
                         <span class="sitename">Pamir Tiling Services</span>
                     </a>
                     <p>
@@ -101,28 +101,28 @@
                 <div class="col-lg-2 col-6 footer-links">
                     <h4>Useful Links</h4>
                     <ul>
-                        <li><a href="{{route('home')}}">Home</a></li>
-                        <li><a href="{{route('about.page')}}">About us</a></li>
-                        <li><a href="{{route('services.page')}}">Services</a></li>
-                        <li><a href="{{route('projects.page')}}">Projects</a></li>
-                        <li><a href="{{route('contact.page')}}">Contact Us</a></li>
+                        <li><a href="{{ route('home') }}">Home</a></li>
+                        <li><a href="{{ route('about.page') }}">About us</a></li>
+                        <li><a href="{{ route('services.page') }}">Services</a></li>
+                        <li><a href="{{ route('projects.page') }}">Projects</a></li>
+                        <li><a href="{{ route('contact.page') }}">Contact Us</a></li>
                     </ul>
                 </div>
 
                 <div class="col-lg-2 col-6 footer-links">
                     <h4>Our Services</h4>
                     <ul>
-                        @foreach($services as $service)
-                        <li><a href="{{route('service-detail', $service->slug)}}">{{$service->title}}</a></li>
+                        @foreach ($services as $service)
+                            <li><a href="{{ route('service-detail', $service->slug) }}">{{ $service->title }}</a></li>
                         @endforeach
                     </ul>
                 </div>
 
                 <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
                     <h4>Contact Us</h4>
-                    <p>{{$about->address}}</p>
-                    <p>{{$about->country}}</p>
-                    @if($about && !empty($about->phones) && !empty($about->phones[0]))
+                    <p>{{ $about->address }}</p>
+                    <p>{{ $about->country }}</p>
+                    @if ($about && !empty($about->phones) && !empty($about->phones[0]))
                         <p class="mt-4">
                             <strong>Phone:</strong>
                             <span>
@@ -130,13 +130,13 @@
                             </span>
                         </p>
                     @endif
-                    {{-- @if(is_array($about->phones))
-                        @foreach($about->phones as $phone)
+                    {{-- @if (is_array($about->phones))
+                        @foreach ($about->phones as $phone)
                             <p>{{ $phone ? preg_replace('/^(\d{2})(\d{4})(\d+)$/', '$1 $2 $3', preg_replace('/[^0-9]/', '', $phone)) : '' }}</p>
                         @endforeach
                     @endif --}}
-                    @if($about && !empty($about->emails) && !empty($about->emails[0]))
-                        <p><strong>Email:</strong> <span>{{$about->emails[1]}}</span></p>
+                    @if ($about && !empty($about->emails) && !empty($about->emails[0]))
+                        <p><strong>Email:</strong> <span>{{ $about->emails[1] }}</span></p>
                     @endif
                 </div>
 

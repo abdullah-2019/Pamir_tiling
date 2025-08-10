@@ -29,30 +29,60 @@
                         </p>
                     </div>
 
-                    @if ($projects->count() != 0)
+                    @if (!empty($projects) && $projects->isNotEmpty())
+                        @php
+                            $allImages = collect($projects)
+                                ->pluck('images') 
+                                ->flatten() 
+                                ->filter() 
+                                ->values();
+
+                            // Pick two random images or placeholders
+                            if ($allImages->count() >= 2) {
+                                $selectedImages = $allImages->random(2)->values();
+                            } elseif ($allImages->count() === 1) {
+                                $selectedImages = collect([$allImages->first(), 'placeholder.webp']);
+                            } else {
+                                $selectedImages = collect(['placeholder.webp', 'placeholder.webp']);
+                            }
+                        @endphp
+
                         <div class="dual-image-layout" data-aos="fade-up" data-aos-delay="300">
                             <div class="row g-4 align-items-center">
                                 <div class="col-lg-6">
                                     <div class="primary-image-wrap">
-                                        <img src="{{ asset('/assets/site/img/projects/' . $projects[0]->images[0]) }}"
-                                            alt="{{ $projects[0]->title }}" class="img-fluid" loading="lazy">
-                                        {{-- <div class="floating-badge" data-aos="zoom-in" data-aos-delay="400">
-                                            <div class="badge-content">
-                                                <i class="bi bi-award"></i>
-                                                <span>Top Rated Agency</span>
-                                            </div>
-                                        </div> --}}
+                                        <img src="{{ asset('assets/site/img/projects/' . $selectedImages[0]) }}"
+                                            alt="Primary Image" class="img-fluid" loading="lazy">
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="secondary-image-wrap">
-                                        <img src="{{ asset('/assets/site/img/projects/' . $projects[1]->images[0]) }}"
-                                            alt="{{ $projects[1]->title }}" class="img-fluid" loading="lazy">
+                                        <img src="{{ asset('assets/site/img/projects/' . $selectedImages[1]) }}"
+                                            alt="Secondary Image" class="img-fluid" loading="lazy">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @else
+                        {{-- If projects is empty --}}
+                        <div class="dual-image-layout" data-aos="fade-up" data-aos-delay="300">
+                            <div class="row g-4 align-items-center">
+                                <div class="col-lg-6">
+                                    <div class="primary-image-wrap">
+                                        <img src="{{ asset('assets/site/img/projects/placeholder.webp') }}"
+                                            alt="Placeholder" class="img-fluid" loading="lazy">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="secondary-image-wrap">
+                                        <img src="{{ asset('assets/site/img/projects/placeholder.webp') }}"
+                                            alt="Placeholder" class="img-fluid" loading="lazy">
                                     </div>
                                 </div>
                             </div>
                         </div>
                     @endif
+
                 </div>
             </div>
 
