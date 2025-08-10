@@ -4799,27 +4799,55 @@ section,
   text-transform: uppercase;
 }
 
+/* Circular, compact "Virtual Tour" button */
 .property-details .property-hero .hero-image-container .property-gallery-slider .hero-overlay .virtual-tour-btn {
   background: rgba(255, 255, 255, 0.95);
-  border: none;
   color: var(--accent-color);
-  padding: 12px 20px;
-  border-radius: 30px;
-  font-weight: 600;
-  display: flex;
+  border: none;
+  width: 40px;   /* button size */
+  height: 40px;
+  min-width: 40px;
+  min-height: 40px;
+  padding: 0;
+  border-radius: 50%;
+  display: inline-flex;
   align-items: center;
-  gap: 8px;
-  transition: all 0.3s ease;
+  justify-content: center;
+  gap: 0;
+  font-size: 0;  /* visually hide text */
+  line-height: 0;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
 }
 
 .property-details .property-hero .hero-image-container .property-gallery-slider .hero-overlay .virtual-tour-btn i {
-  font-size: 20px;
+  font-size: 14px; /* smaller icon */
+  line-height: 1;
 }
 
 .property-details .property-hero .hero-image-container .property-gallery-slider .hero-overlay .virtual-tour-btn:hover {
   background: var(--surface-color);
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.property-details .property-hero .hero-image-container .property-gallery-slider .hero-overlay .virtual-tour-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.08), 0 0 0 6px rgba(0, 123, 255, 0.25);
+}
+
+/* Make the fullscreen image scale nicely */
+.property-details .property-hero .hero-image:fullscreen {
+  width: 100vw;
+  height: 100vh;
+  object-fit: contain;   /* show the whole image */
+  background: #000;      /* in case of transparent images */
+}
+
+/* Backdrop behind the fullscreen element */
+.property-details .property-hero .hero-image::backdrop {
+  background: rgba(0, 0, 0, 0.98);
 }
 
 .property-details .property-hero .hero-image-container .property-gallery-slider .swiper-button-next,
@@ -4898,6 +4926,20 @@ section,
   font-weight: 600;
   font-size: 14px;
   z-index: 2;
+}
+
+/* Thumbnail sizing */
+.thumbnail-gallery .swiper-slide {
+  aspect-ratio: 1 / 1;     /* square */
+  height: auto;            /* let aspect-ratio control height */
+}
+
+.thumbnail-gallery .thumbnail-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;        /* crop to fill without distortion */
+  display: block;
+  border-radius: 6px;       /* optional */
 }
 
 .property-details .property-info .property-header .property-title {

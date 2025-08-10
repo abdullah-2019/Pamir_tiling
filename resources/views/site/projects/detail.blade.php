@@ -1,7 +1,6 @@
 @extends('site.layout')
 
 @section('content')
-    <!-- Page Title -->
     <div class="page-title light-background">
         <div class="container d-lg-flex justify-content-between align-items-center">
             <h1 class="mb-2 mb-lg-0">Project Details</h1>
@@ -12,104 +11,55 @@
                 </ol>
             </nav>
         </div>
-    </div><!-- End Page Title -->
+    </div>
 
-    <!-- Property Details Section -->
     <section id="property-details" class="property-details section">
-
         <div class="container" data-aos="fade-up" data-aos-delay="100">
-
             <div class="row">
                 <div class="col-lg-7">
-
-                    <!-- Property Hero Section -->
                     <div class="property-hero mb-5" data-aos="fade-up" data-aos-delay="200">
                         <div class="hero-image-container">
                             <div class="property-gallery-slider swiper init-swiper">
                                 <script type="application/json" class="swiper-config">
                                     {
-                                    "loop": true,
-                                    "speed": 600,
-                                    "autoplay": {
-                                        "delay": 5000
-                                    },
-                                    "navigation": {
-                                        "nextEl": ".swiper-button-next",
-                                        "prevEl": ".swiper-button-prev"
-                                    },
-                                    "thumbs": {
-                                        "swiper": ".property-thumbnails-slider"
-                                    }
+                                        "loop": true,
+                                        "speed": 600,
+                                        "autoplay": { "delay": 5000 },
+                                        "navigation": {
+                                            "nextEl": ".swiper-button-next",
+                                            "prevEl": ".swiper-button-prev"
+                                        },
+                                        "thumbs": {
+                                            "swiper": ".property-thumbnails-slider"
+                                        }
                                     }
                                 </script>
+
                                 <div class="swiper-wrapper">
-                                    <div class="swiper-slide">
-                                        <img src="{{asset('assets/site/img/projects/'.$project->images[0])}}"
-                                            class="img-fluid hero-image" alt="Property Main Image">
-                                        <div class="hero-overlay">
-                                            <div class="property-badge">
-                                                <span class="status-badge for-rent">For Rent</span>
-                                                <span class="featured-badge">Featured</span>
+                                    @php
+                                        $images = $project->images ?? [];
+                                    @endphp
+
+                                    @forelse ($images as $idx => $img)
+                                        <div class="swiper-slide">
+                                            <img src="{{ asset('assets/site/img/projects/' . ltrim($img, '/')) }}"
+                                                class="img-fluid hero-image"
+                                                alt="{{ $project->client_name ? $project->client_name . ' - Photo ' . ($idx + 1) : 'Project Photo ' . ($idx + 1) }}"
+                                                loading="lazy">
+                                            <div class="hero-overlay">
+                                                <button class="virtual-tour-btn" aria-label="Open image in fullscreen">
+                                                    <i class="bi bi-arrows-fullscreen"></i>
+                                                </button>
                                             </div>
-                                            <button class="virtual-tour-btn">
-                                                <i class="bi bi-play-circle"></i>
-                                                Virtual Tour
-                                            </button>
                                         </div>
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <img src="a{{asset('assets/site/img/projects/'.$project->images[1])}}"
-                                            class="img-fluid hero-image" alt="Interior View">
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <img src="{{asset('assets/site/img/projects/'.$project->images[2])}}"
-                                            class="img-fluid hero-image" alt="Exterior View">
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <img src="{{asset('assets/site/img/projects/'.$project->images[3])}}" class="img-fluid hero-image"
-                                            alt="Features">
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <img src="{{asset('assets/site/img/projects/'.$project->images[4])}}"
-                                            class="img-fluid hero-image" alt="More Photos">
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <img src="{{asset('assets/site/img/projects/'.$project->images[5])}}"
-                                            class="img-fluid hero-image" alt="Exterior Detail">
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <img src="{{asset('assets/site/img/projects/'.$project->images[6])}}"
-                                            class="img-fluid hero-image" alt="Living Area">
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <img src="{{asset('assets/site/img/projects/'.$project->images[7])}}" class="img-fluid hero-image"
-                                            alt="Kitchen">
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <img src="assets/img/real-estate/property-interior-5.webp"
-                                            class="img-fluid hero-image" alt="Bedroom">
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <img src="{{asset('assets/site/img/projects/'.$project->images[9])}}"
-                                            class="img-fluid hero-image" alt="Building View">
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <img src="{{asset('assets/site/img/projects/'.$project->images[10])}}" class="img-fluid hero-image"
-                                            alt="Bathroom">
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <img src="assets/img/real-estate/property-interior-2.webp"
-                                            class="img-fluid hero-image" alt="Dining Area">
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <img src="{{asset('assets/site/img/projects/'.$project->images[12])}}"
-                                            class="img-fluid hero-image" alt="Balcony View">
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <img src="{{asset('assets/site/img/projects/'.$project->images[0])}}" class="img-fluid hero-image"
-                                            alt="Amenities">
-                                    </div>
+                                    @empty
+                                        <div class="swiper-slide">
+                                            <img src="{{ asset('assets/site/img/placeholder.webp') }}"
+                                                class="img-fluid hero-image" alt="No images available" loading="lazy">
+                                        </div>
+                                    @endforelse
                                 </div>
+
                                 <div class="swiper-button-next"></div>
                                 <div class="swiper-button-prev"></div>
                             </div>
@@ -125,321 +75,86 @@
                                         "freeMode": true,
                                         "watchSlidesProgress": true,
                                         "breakpoints": {
-                                            "576": {
-                                                "slidesPerView": 5
-                                            },
-                                            "768": {
-                                                "slidesPerView": 6
-                                            }
+                                            "576": { "slidesPerView": 5 },
+                                            "768": { "slidesPerView": 6 }
                                         }
                                     }
                                 </script>
+
                                 <div class="swiper-wrapper">
-                                    <div class="swiper-slide">
-                                        <img src="{{asset('assets/site/img/projects/'.$project->images[0])}}"
-                                            class="img-fluid thumbnail-img" alt="Property Main Image">
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <img src="a{{asset('assets/site/img/projects/'.$project->images[1])}}"
-                                            class="img-fluid thumbnail-img" alt="Interior View">
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <img src="{{asset('assets/site/img/projects/'.$project->images[2])}}"
-                                            class="img-fluid thumbnail-img" alt="Exterior View">
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <img src="{{asset('assets/site/img/projects/'.$project->images[3])}}" class="img-fluid thumbnail-img"
-                                            alt="Features">
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <img src="{{asset('assets/site/img/projects/'.$project->images[4])}}"
-                                            class="img-fluid thumbnail-img" alt="More Photos">
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <img src="{{asset('assets/site/img/projects/'.$project->images[5])}}"
-                                            class="img-fluid thumbnail-img" alt="Exterior Detail">
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <img src="{{asset('assets/site/img/projects/'.$project->images[6])}}"
-                                            class="img-fluid thumbnail-img" alt="Living Area">
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <img src="{{asset('assets/site/img/projects/'.$project->images[7])}}" class="img-fluid thumbnail-img"
-                                            alt="Kitchen">
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <img src="assets/img/real-estate/property-interior-5.webp"
-                                            class="img-fluid thumbnail-img" alt="Bedroom">
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <img src="{{asset('assets/site/img/projects/'.$project->images[9])}}"
-                                            class="img-fluid thumbnail-img" alt="Building View">
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <img src="{{asset('assets/site/img/projects/'.$project->images[10])}}" class="img-fluid thumbnail-img"
-                                            alt="Bathroom">
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <img src="{{asset('assets/site/img/projects/'.$project->images[11])}}"
-                                            class="img-fluid thumbnail-img" alt="Dining Area">
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <img src="{{asset('assets/site/img/projects/'.$project->images[12])}}"
-                                            class="img-fluid thumbnail-img" alt="Balcony View">
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <img src="assets/img/real-estate/features-1.webp" class="img-fluid thumbnail-img"
-                                            alt="Amenities">
-                                    </div>
+                                    @forelse ($images as $idx => $img)
+                                        <div class="swiper-slide">
+                                            <img src="{{ asset('assets/site/img/projects/' . ltrim($img, '/')) }}"
+                                                class="img-fluid thumbnail-img"
+                                                alt="{{ $project->client_name ? $project->client_name . ' - Thumbnail ' . ($idx + 1) : 'Project Thumbnail ' . ($idx + 1) }}">
+                                        </div>
+                                    @empty
+                                        <div class="swiper-slide">
+                                            <img src="{{ asset('assets/site/img/placeholder.webp') }}"
+                                                class="img-fluid thumbnail-img" alt="No thumbnails">
+                                        </div>
+                                    @endforelse
                                 </div>
                             </div>
                         </div>
-                    </div><!-- End Property Hero -->
+                    </div>
 
-                    <!-- Property Information -->
                     <div class="property-info mb-5" data-aos="fade-up" data-aos-delay="300">
                         <div class="property-header">
-                            <h1 class="property-title">Executive Penthouse with City Views</h1>
-                            <div class="property-meta">
-                                <span class="address"><i class="bi bi-geo-alt"></i> 4751 Madison Avenue, New York, NY
-                                    10037</span>
-                                <span class="listing-id">ID: #PE-2024-0847</span>
-                            </div>
+                            <h6 class="property-title">{{ $project->clinet_name }}</h6>
                         </div>
-
-                        <div class="pricing-section">
-                            <div class="main-price">$4,850<span class="period">/month</span></div>
-                            <div class="price-breakdown">
-                                <span class="deposit">Security Deposit: $9,700</span>
-                                <span class="available">Available from March 15</span>
-                            </div>
-                        </div>
-
-                        <div class="quick-stats">
-                            <div class="stat-grid">
-                                <div class="stat-card">
-                                    <div class="stat-icon">
-                                        <i class="bi bi-house"></i>
-                                    </div>
-                                    <div class="stat-content">
-                                        <span class="stat-number">3</span>
-                                        <span class="stat-label">Bedrooms</span>
-                                    </div>
-                                </div>
-                                <div class="stat-card">
-                                    <div class="stat-icon">
-                                        <i class="bi bi-droplet"></i>
-                                    </div>
-                                    <div class="stat-content">
-                                        <span class="stat-number">2.5</span>
-                                        <span class="stat-label">Bathrooms</span>
-                                    </div>
-                                </div>
-                                <div class="stat-card">
-                                    <div class="stat-icon">
-                                        <i class="bi bi-arrows-angle-expand"></i>
-                                    </div>
-                                    <div class="stat-content">
-                                        <span class="stat-number">1,890</span>
-                                        <span class="stat-label">Sq Ft</span>
-                                    </div>
-                                </div>
-                                <div class="stat-card">
-                                    <div class="stat-icon">
-                                        <i class="bi bi-car-front"></i>
-                                    </div>
-                                    <div class="stat-content">
-                                        <span class="stat-number">2</span>
-                                        <span class="stat-label">Parking</span>
-                                    </div>
-                                </div>
-                                <div class="stat-card">
-                                    <div class="stat-icon">
-                                        <i class="bi bi-building"></i>
-                                    </div>
-                                    <div class="stat-content">
-                                        <span class="stat-number">15th</span>
-                                        <span class="stat-label">Floor</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div><!-- End Property Information -->
-
-                    <!-- Description & Features -->
-                    <div class="property-details mb-5" data-aos="fade-up" data-aos-delay="400">
-                        <h3>Property Description</h3>
-                        <p>Experience luxury living in this stunning penthouse apartment featuring panoramic city views and
-                            premium finishes throughout. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                            eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-
-                        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                            fugiat nulla pariatur.</p>
-
-                        <div class="features-grid mt-4">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <h5>Interior Features</h5>
-                                    <ul class="feature-list">
-                                        <li><i class="bi bi-check2"></i> Floor-to-ceiling windows</li>
-                                        <li><i class="bi bi-check2"></i> Hardwood flooring</li>
-                                        <li><i class="bi bi-check2"></i> Gourmet kitchen</li>
-                                        <li><i class="bi bi-check2"></i> In-unit washer/dryer</li>
-                                        <li><i class="bi bi-check2"></i> Walk-in closets</li>
-                                    </ul>
-                                </div>
-                                <div class="col-md-6">
-                                    <h5>Building Amenities</h5>
-                                    <ul class="feature-list">
-                                        <li><i class="bi bi-check2"></i> Rooftop terrace</li>
-                                        <li><i class="bi bi-check2"></i> Fitness center</li>
-                                        <li><i class="bi bi-check2"></i> 24/7 concierge</li>
-                                        <li><i class="bi bi-check2"></i> Indoor pool</li>
-                                        <li><i class="bi bi-check2"></i> Pet-friendly</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div><!-- End Description & Features -->
-
-                    <!-- Floor Plan -->
-                    <div class="floor-plan-section mb-5" data-aos="fade-up" data-aos-delay="500">
-                        <h3>Floor Plan</h3>
-                        <div class="floor-plan-card">
-                            <img src="assets/img/real-estate/property-interior-9.webp" class="img-fluid"
-                                alt="Floor Plan">
-                            <div class="plan-details">
-                                <h5>3 Bedroom Penthouse Layout</h5>
-                                <p>Open concept living and dining area with private balcony access. Master suite features
-                                    ensuite bathroom and city views.</p>
-                            </div>
-                        </div>
-                    </div><!-- End Floor Plan -->
-
+                    </div>
                 </div>
 
-                <!-- Sidebar -->
                 <div class="col-lg-5">
                     <div class="sticky-sidebar">
-                        <!-- Contact Form -->
-                        <div class="contact-form-card mb-4" data-aos="fade-up" data-aos-delay="450">
-                            <h4>Request Information</h4>
-                            <form action="forms/contact.php" method="post" class="php-email-form">
-                                <div class="row">
-                                    <div class="col-12 mb-3">
-                                        <input type="text" name="name" class="form-control"
-                                            placeholder="Full Name" required="">
-                                    </div>
-                                    <div class="col-12 mb-3">
-                                        <input type="email" name="email" class="form-control"
-                                            placeholder="Email Address" required="">
-                                    </div>
-                                    <div class="col-12 mb-3">
-                                        <input type="tel" name="phone" class="form-control"
-                                            placeholder="Phone Number">
-                                    </div>
-                                    <div class="col-12 mb-3">
-                                        <select name="subject" class="form-select" required="">
-                                            <option value="">I'm interested in...</option>
-                                            <option value="Scheduling a viewing">Scheduling a viewing</option>
-                                            <option value="Getting more information">Getting more information</option>
-                                            <option value="Submitting an application">Submitting an application</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-12 mb-3">
-                                        <textarea name="message" class="form-control" rows="4"
-                                            placeholder="Additional questions or preferred viewing times..."></textarea>
-                                    </div>
-                                </div>
-
-                                <div class="loading">Loading</div>
-                                <div class="error-message"></div>
-                                <div class="sent-message">Your request has been sent successfully!</div>
-
-                                <button type="submit" class="btn btn-primary w-100">Send Request</button>
-                            </form>
-                        </div><!-- End Contact Form -->
-
-
-                        <!-- Similar Properties -->
-                        <div class="similar-properties" data-aos="fade-up" data-aos-delay="650">
-                            <h4>Similar Properties</h4>
-                            <div class="similar-property-item">
-                                <img src="assets/img/real-estate/property-exterior-4.webp" class="img-fluid"
-                                    alt="Similar Property">
-                                <div class="similar-info">
-                                    <h6>Luxury Apartment Downtown</h6>
-                                    <p class="similar-price">$4,200/month</p>
-                                    <p class="similar-specs">2 bed • 2 bath • 1,650 sq ft</p>
-                                </div>
-                            </div>
-
-                            <div class="similar-property-item">
-                                <img src="assets/img/real-estate/property-interior-6.webp" class="img-fluid"
-                                    alt="Similar Property">
-                                <div class="similar-info">
-                                    <h6>Modern Penthouse Suite</h6>
-                                    <p class="similar-price">$5,100/month</p>
-                                    <p class="similar-specs">3 bed • 2.5 bath • 1,920 sq ft</p>
-                                </div>
-                            </div>
-                        </div><!-- End Similar Properties -->
-
-                    </div>
-                </div><!-- End Sidebar -->
-
-            </div>
-
-            <!-- Location Section -->
-            <div class="location-section mt-5" data-aos="fade-up" data-aos-delay="700">
-                <h3>Location &amp; Neighborhood</h3>
-                <div class="row">
-                    <div class="col-lg-8">
-                        <div class="map-wrapper">
-                            <iframe
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3021.5!2d-73.935!3d40.796!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDDCsDQ3JzQ1LjYiTiA3M8KwNTYnMDYuMCJX!5e0!3m2!1sen!2sus!4v1234567890"
-                                width="100%" height="350" style="border:0;" allowfullscreen=""
-                                loading="lazy"></iframe>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="neighborhood-info">
-                            <h5>Neighborhood Highlights</h5>
-                            <div class="poi-item">
-                                <i class="bi bi-mortarboard"></i>
-                                <div class="poi-content">
-                                    <span class="poi-name">Columbia University</span>
-                                    <span class="poi-distance">0.4 miles</span>
-                                </div>
-                            </div>
-                            <div class="poi-item">
-                                <i class="bi bi-cup-hot"></i>
-                                <div class="poi-content">
-                                    <span class="poi-name">Local Coffee Shops</span>
-                                    <span class="poi-distance">2 min walk</span>
-                                </div>
-                            </div>
-                            <div class="poi-item">
-                                <i class="bi bi-tree"></i>
-                                <div class="poi-content">
-                                    <span class="poi-name">Marcus Garvey Park</span>
-                                    <span class="poi-distance">0.3 miles</span>
-                                </div>
-                            </div>
-                            <div class="poi-item">
-                                <i class="bi bi-train-lightrail-front"></i>
-                                <div class="poi-content">
-                                    <span class="poi-name">125th St Station</span>
-                                    <span class="poi-distance">0.6 miles</span>
-                                </div>
-                            </div>
-                        </div>
+                        @include('site.projects.contact-form')
                     </div>
                 </div>
-            </div><!-- End Location Section -->
+            </div>
 
+            @include('site.projects.our-location')
         </div>
+    </section>
+@endsection
 
-    </section><!-- /Property Details Section -->
+@section('js')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.addEventListener('click', function(e) {
+                const btn = e.target.closest('.virtual-tour-btn');
+                if (!btn) return;
+
+                // Find the image in the same slide
+                const slide = btn.closest('.swiper-slide');
+                const img = slide ? slide.querySelector('.hero-image') : null;
+                if (!img) return;
+
+                // Request fullscreen (with vendor fallbacks)
+                const requestFS = img.requestFullscreen || img.webkitRequestFullscreen || img
+                    .msRequestFullscreen;
+                if (requestFS) {
+                    requestFS.call(img);
+                }
+            });
+
+            // Optional: clicking the fullscreen image exits fullscreen
+            function exitFS() {
+                const exit = document.exitFullscreen || document.webkitExitFullscreen || document.msExitFullscreen;
+                if (exit) exit.call(document);
+            }
+
+            document.addEventListener('fullscreenchange', function() {
+                const fsEl = document.fullscreenElement || document.webkitFullscreenElement || document
+                    .msFullscreenElement;
+                if (fsEl && fsEl.classList && fsEl.classList.contains('hero-image')) {
+                    const handleClickToExit = () => {
+                        exitFS();
+                        fsEl.removeEventListener('click', handleClickToExit);
+                    };
+                    fsEl.addEventListener('click', handleClickToExit);
+                }
+            });
+        });
+    </script>
 @endsection
