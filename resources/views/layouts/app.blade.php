@@ -3,7 +3,7 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>AdminLTE v4 | Dashboard</title>
+    <title>Pamir Tiling Services | @yield('title')</title>
     <!--begin::Accessibility Meta Tags-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
     <meta name="color-scheme" content="light dark" />
@@ -11,8 +11,8 @@
     <meta name="theme-color" content="#1a1a1a" media="(prefers-color-scheme: dark)" />
     <!--end::Accessibility Meta Tags-->
     <!--begin::Primary Meta Tags-->
-    <meta name="title" content="AdminLTE v4 | Dashboard" />
-    <meta name="author" content="ColorlibHQ" />
+    <meta name="title" content="Pamir Tiling Services | @yield('title')" />
+    <meta name="author" content="Abdullah Hussaini" />
     <meta name="description"
         content="AdminLTE is a Free Bootstrap 5 Admin Dashboard, 30 example pages using Vanilla JS. Fully accessible with WCAG 2.1 AA compliance." />
     <meta name="keywords"
@@ -21,7 +21,7 @@
     <!--begin::Accessibility Features-->
     <!-- Skip links will be dynamically added by accessibility.js -->
     <meta name="supported-color-schemes" content="light dark" />
-    <link rel="preload" href="./css/adminlte.css" as="style" />
+    <link rel="preload" href="{{ asset('assets/admin/css/adminlte.css') }}" as="style" />
     <!--end::Accessibility Features-->
     <!--begin::Fonts-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/source-sans-3@5.0.12/index.css"
@@ -37,7 +37,7 @@
         crossorigin="anonymous" />
     <!--end::Third Party Plugin(Bootstrap Icons)-->
     <!--begin::Required Plugin(AdminLTE)-->
-    <link rel="stylesheet" href="./css/adminlte.css" />
+    <link rel="stylesheet" href="{{ asset('assets/admin/css/adminlte.css') }}" />
     <!--end::Required Plugin(AdminLTE)-->
     <!-- apexcharts -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/apexcharts@3.37.1/dist/apexcharts.css"
@@ -51,10 +51,10 @@
 
 <body class="layout-fixed sidebar-expand-lg sidebar-open bg-body-tertiary">
     <div class="app-wrapper">
-        @include('admin.layouts.nav')
-        @include('admin.layouts.sidebar')
+        @include('layouts.nav')
+        @include('layouts.sidebar')
         @yield('content')
-        @include('admin.layouts.footer')
+        @include('layouts.footer')
     </div>
     <!--begin::Script-->
     <!--begin::Third Party Plugin(OverlayScrollbars)-->
@@ -66,7 +66,7 @@
     <!--end::Required Plugin(popperjs for Bootstrap 5)--><!--begin::Required Plugin(Bootstrap 5)-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
     <!--end::Required Plugin(Bootstrap 5)--><!--begin::Required Plugin(AdminLTE)-->
-    <script src="./js/adminlte.js"></script>
+    <script src="{{ asset('assets/admin/js/adminlte.js') }}"></script>
     <!--end::Required Plugin(AdminLTE)--><!--begin::OverlayScrollbars Configure-->
     <script>
         const SELECTOR_SIDEBAR_WRAPPER = '.sidebar-wrapper';
