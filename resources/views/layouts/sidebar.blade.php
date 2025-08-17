@@ -23,15 +23,15 @@
                     <a href="#" class="nav-link active">
                         <i class="nav-icon bi bi-speedometer"></i>
                         <p>
-                            Dashboard
+                            Contacts
                             <i class="nav-arrow bi bi-chevron-right"></i>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="./index.html" class="nav-link active">
+                            <a href="{{route('contact.index')}}" class="nav-link active">
                                 <i class="nav-icon bi bi-circle"></i>
-                                <p>Dashboard v1</p>
+                                <p>List</p>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -49,9 +49,9 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a href="./generate/theme.html" class="nav-link">
+                    <a href="" class="nav-link">
                         <i class="nav-icon bi bi-palette"></i>
-                        <p>Theme Generate</p>
+                        <p>Contact</p>
                     </a>
                 </li>
                 <li class="nav-item">

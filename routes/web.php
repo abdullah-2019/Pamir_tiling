@@ -10,8 +10,10 @@ use App\Http\Controllers\ProfileController;
 
 Route::get('/', [HomeController::class, 'siteHomePage'])->name('home');
 
+// Contact
 Route::resource('contact', ContactController::class);
-Route::get('/contact', [ContactController::class, 'page'])->name('contact.page');
+Route::get('/contact-page', [ContactController::class, 'page'])->name('contact.page');
+Route::get('/contact-data', [ContactController::class, 'data'])->name('contact.data');
 
 
 // About
