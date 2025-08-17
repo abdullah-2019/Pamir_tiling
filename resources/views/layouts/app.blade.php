@@ -14,13 +14,31 @@
     <meta name="title" content="Pamir Tiling Services | @yield('title')" />
     <meta name="author" content="Abdullah Hussaini" />
     <meta name="description"
-        content="AdminLTE is a Free Bootstrap 5 Admin Dashboard, 30 example pages using Vanilla JS. Fully accessible with WCAG 2.1 AA compliance." />
+        content="Pamir Tiling Services — Australian-owned tilers in Queensland since 2010. Premium residential and commercial tiling across Brisbane, Sunshine Coast, Gold Coast, and Toowoomba. Services include kitchen and bathroom tiling, wall and floor tiling, swimming pools, marbling, ceramic and stone, stone paving, and licensed commercial waterproofing. Call or WhatsApp +61 423 450 074." />
+
     <meta name="keywords"
-        content="bootstrap 5, bootstrap, bootstrap 5 admin dashboard, bootstrap 5 dashboard, bootstrap 5 charts, bootstrap 5 calendar, bootstrap 5 datepicker, bootstrap 5 tables, bootstrap 5 datatable, vanilla js datatable, colorlibhq, colorlibhq dashboard, colorlibhq admin dashboard, accessible admin panel, WCAG compliant" />
+        content="Pamir Tiling Services, tilers Queensland, Brisbane tiling, Sunshine Coast tiling, Gold Coast tiling, Toowoomba tiling, kitchen tiling, bathroom tiling, wall tiling, floor tiling, pool tiling, marbling, ceramic tiling, stone tiling, stone paving, waterproofing contractor, commercial waterproofing, licensed waterproofing, Australian tilers, Queensland tilers, Springfield Lakes tiling" />
+
+    <!-- Optional contact meta tags to help search and previews -->
+    <meta name="author" content="Pamir Tiling Services" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta property="og:title" content="Pamir Tiling Services — Tiling & Waterproofing in Southeast Queensland" />
+    <meta property="og:description"
+        content="Since 2010, delivering quality tiling and licensed waterproofing for homes and businesses across Brisbane, Sunshine Coast, Gold Coast, and Toowoomba. Call or WhatsApp +61 423 450 074." />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_AU" />
+    <meta property="og:url" content="https://pamirtilingservices.com.au/" />
+    <meta property="og:site_name" content="Pamir Tiling Services" />
     <!--end::Primary Meta Tags-->
     <!--begin::Accessibility Features-->
     <!-- Skip links will be dynamically added by accessibility.js -->
     <meta name="supported-color-schemes" content="light dark" />
+
+    <!-- Favicons -->
+    <link href="{{ asset('assets/site/img/favicon.png') }}" rel="icon">
+    <link href="{{ asset('assets/site/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
+
+
     <link rel="preload" href="{{ asset('assets/admin/css/adminlte.css') }}" as="style" />
     <!--end::Accessibility Features-->
     <!--begin::Fonts-->
@@ -45,6 +63,7 @@
     <!-- jsvectormap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jsvectormap@1.5.3/dist/css/jsvectormap.min.css"
         integrity="sha256-+uGLJmmTKOqBr+2E6KDYs/NRsHxSkONXFHUL0fy2O/4=" crossorigin="anonymous" />
+
 </head>
 <!--end::Head-->
 <!--begin::Body-->
