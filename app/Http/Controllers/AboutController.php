@@ -244,6 +244,21 @@ class AboutController extends Controller
         ]);
     }
 
+    function updateOtherInfo(Request $request, About $about) {
+        $validated = $request->validate([
+            'company_creation_date' => 'required|integer|min:1900|max:' . date('Y'),
+            'awards' => 'required|integer|min:0',
+        ]);
+        
+        $about->update($validated);
+        
+        cache()->flush();
+        
+        return response()->json([
+            'success' => true,
+            'message' => 'Information updated successfully'
+        ]);
+    }
 
 
 }

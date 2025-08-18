@@ -24,7 +24,7 @@ Route::delete('/about/{about}/emails', [AboutController::class, 'destroyEmail'])
 Route::post('/about/{about}/emails', [AboutController::class, 'addEmail'])->name('about.emails.create');
 Route::put('/about/{about}/phones', [AboutController::class, 'updatePhone'])->name('about.phones.update');
 Route::delete('/about/{about}/phones', [AboutController::class, 'destroyPhone'])->name('about.phones.destroy');
-
+Route::post('/about/{about}/other', [AboutController::class, 'updateOtherInfo'])->name('about.other-info.update');
 
 // Services
 Route::resource('services', ServicesController::class);
