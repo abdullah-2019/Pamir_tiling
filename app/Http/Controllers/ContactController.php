@@ -6,6 +6,7 @@ use App\Models\Contact;
 use App\Http\Requests\StoreContactRequest;
 use App\Http\Requests\UpdateContactRequest;
 use Yajra\DataTables\DataTables;
+use Illuminate\Http\Request;
 
 
 class ContactController extends Controller
@@ -31,9 +32,9 @@ class ContactController extends Controller
             })
 
             ->addColumn('actions', function ($row) {
-                $view = route('contacts.show', $row->id);
-                $edit = route('contacts.edit', $row->id);
-                $delete = route('contacts.destroy', $row->id);
+                $view = route('contact.show', $row->id);
+                $edit = route('contact.edit', $row->id);
+                $delete = route('contact.destroy', $row->id);
 
                 // Return HTML for action buttons
                 return view('admin-pages.contact.partials.actions', compact('view','edit','delete','row'))->render();

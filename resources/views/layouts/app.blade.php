@@ -64,6 +64,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jsvectormap@1.5.3/dist/css/jsvectormap.min.css"
         integrity="sha256-+uGLJmmTKOqBr+2E6KDYs/NRsHxSkONXFHUL0fy2O/4=" crossorigin="anonymous" />
 
+    @yield('css')
 </head>
 <!--end::Head-->
 <!--begin::Body-->
@@ -87,7 +88,7 @@
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-end">
-                                <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
+                                <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">@yield('title')</li>
                             </ol>
                         </div>
@@ -306,6 +307,8 @@
         sparkline3.render();
     </script>
     <!--end::Script-->
+
+    @yield('js')
 </body>
 <!--end::Body-->
 
