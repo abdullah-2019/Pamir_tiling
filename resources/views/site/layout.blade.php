@@ -3,10 +3,27 @@
 
 <head>
     <meta charset="utf-8">
+    <title>Pamir Tiling Services | @yield('title')</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Pamir Tiling Services</title>
-    <meta name="description" content="">
-    <meta name="keywords" content="">
+    <meta name="title" content="Pamir Tiling Services | @yield('title')" />
+    <meta name="author" content="Abdullah Hussaini" />
+    <meta name="description"
+        content="Pamir Tiling Services — Australian-owned tilers in Queensland since 2010. Premium residential and commercial tiling across Brisbane, Sunshine Coast, Gold Coast, and Toowoomba. Services include kitchen and bathroom tiling, wall and floor tiling, swimming pools, marbling, ceramic and stone, stone paving, and licensed commercial waterproofing. Call or WhatsApp +61 423 450 074." />
+
+    <meta name="keywords"
+        content="Pamir Tiling Services, tilers Queensland, Brisbane tiling, Sunshine Coast tiling, Gold Coast tiling, Toowoomba tiling, kitchen tiling, bathroom tiling, wall tiling, floor tiling, pool tiling, marbling, ceramic tiling, stone tiling, stone paving, waterproofing contractor, commercial waterproofing, licensed waterproofing, Australian tilers, Queensland tilers, Springfield Lakes tiling" />
+
+    <!-- Optional contact meta tags to help search and previews -->
+    <meta name="author" content="Pamir Tiling Services" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta property="og:title" content="Pamir Tiling Services — Tiling & Waterproofing in Southeast Queensland" />
+    <meta property="og:description"
+        content="Since 2010, delivering quality tiling and licensed waterproofing for homes and businesses across Brisbane, Sunshine Coast, Gold Coast, and Toowoomba. Call or WhatsApp +61 423 450 074." />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_AU" />
+    <meta property="og:url" content="https://pamirtilingservices.com.au/" />
+    <meta property="og:site_name" content="Pamir Tiling Services" />
+    <!--end::Primary Meta Tags-->
 
     <!-- Favicons -->
     <link href="{{ asset('assets/site/img/favicon.png') }}" rel="icon">
