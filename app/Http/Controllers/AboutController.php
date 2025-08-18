@@ -6,6 +6,7 @@ use App\Models\About;
 use App\Http\Requests\StoreAboutRequest;
 use App\Http\Requests\UpdateAboutRequest;
 use App\Models\Projects;
+use Illuminate\Http\Request;
 
 class AboutController extends Controller
 {
@@ -14,7 +15,8 @@ class AboutController extends Controller
      */
     public function index()
     {
-        //
+        $about = About::firstOrFail();
+        return view('admin-pages.about.index', compact('about'));
     }
 
     /**
@@ -70,4 +72,173 @@ class AboutController extends Controller
         $projects = Projects::inRandomOrder()->take(2)->get();
         return view('site.about', compact('about', 'projects'));
     }
+
+    public function updateEmail(Request $request, About $about)
+    {
+        $validated = $request->validate([
+            'index' => 'required|integer|min:0',
+            'email' => 'required|email',
+        ]);
+
+        $emails = is_array($about->emails) ? $about->emails : [];
+
+        if (!array_key_exists($validated['index'], $emails)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Invalid email index.'
+            ], 404);
+        }
+
+        $newEmail = $validated['email'];
+        $index = (int) $validated['index'];
+        $duplicateAt = array_search(strtolower($newEmail), array_map('strtolower', $emails));
+        if ($duplicateAt !== false && $duplicateAt !== $index) {
+            return response()->json([
+                'success' => false,
+                'message' => 'This email already exists.'
+            ], 422);
+        }
+
+        $emails[$index] = $newEmail;
+        $about->emails = array_values($emails);
+        $about->save();
+
+        return response()->json([
+            'success' => true,
+            'index' => $index,
+            'email' => $newEmail,
+        ]);
+    }
+
+    // Add email to db.
+    public function addEmail(Request $request, About $about) {
+        $validated = $request->validate([
+            'email' => 'required|email',
+        ]);
+        
+        // Get current emails - handle null or empty cases
+        $emails = [];
+        if (!empty($about->emails)) {
+            $emails = is_array($about->emails) ? $about->emails : json_decode($about->emails, true) ?? [];
+        }
+        
+        $newEmail = trim($validated['email']);
+        
+        // Check for duplicates (case-insensitive)
+        foreach ($emails as $email) {
+            if (strtolower(trim($email)) === strtolower($newEmail)) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'This email already exists.'
+                ], 422);
+            }
+        }
+        
+        // Add new email
+        $emails[] = $newEmail;
+        
+        // Save back to database
+        $about->emails = json_encode(array_values($emails));
+        $about->save();
+        
+        return response()->json([
+            'success' => true,
+            'email' => $newEmail,
+        ]);
+    }
+
+    public function destroyEmail(Request $request, About $about)
+    {
+        $validated = $request->validate([
+            'index' => 'required|integer|min:0',
+        ]);
+
+        $emails = is_array($about->emails) ? $about->emails : [];
+
+        $index = (int) $validated['index'];
+        if (!array_key_exists($index, $emails)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Invalid email index.'
+            ], 404);
+        }
+
+        array_splice($emails, $index, 1);
+
+        $about->emails = array_values($emails);
+        $about->save();
+
+        return response()->json([
+            'success' => true,
+            'index' => $index, 
+        ]);
+    }
+
+
+    public function updatePhone(Request $request, About $about)
+    {
+        $validated = $request->validate([
+            'index' => 'required|integer|min:0',
+            'phone' => 'required|max:20',
+        ]);
+
+        $phones = is_array($about->phones) ? $about->phones : [];
+
+        if (!array_key_exists($validated['index'], $phones)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Invalid phone index.'
+            ], 404);
+        }
+
+        $newPhone = $validated['phone'];
+        $index = (int) $validated['index'];
+        $duplicateAt = array_search(strtolower($newPhone), array_map('strtolower', $phones));
+        if ($duplicateAt !== false && $duplicateAt !== $index) {
+            return response()->json([
+                'success' => false,
+                'message' => 'This phone already exists.'
+            ], 422);
+        }
+
+        $phones[$index] = $newPhone;
+        $about->phones = array_values($phones);
+        $about->save();
+
+        return response()->json([
+            'success' => true,
+            'index' => $index,
+            'phone' => $newPhone,
+        ]);
+    }
+
+    public function destroyPhone(Request $request, About $about)
+    {
+        $validated = $request->validate([
+            'index' => 'required|integer|min:0',
+        ]);
+
+        $phones = is_array($about->phones) ? $about->phones : [];
+
+        $index = (int) $validated['index'];
+        if (!array_key_exists($index, $phones)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Invalid email index.'
+            ], 404);
+        }
+
+        array_splice($phones, $index, 1);
+
+        $about->phones = array_values($phones);
+        $about->save();
+
+        return response()->json([
+            'success' => true,
+            'index' => $index, 
+        ]);
+    }
+
+
+
 }

@@ -37,7 +37,11 @@
                         </div>
                         <div class="info-content">
                             <h4>Location</h4>
-                            <p>{{ $about->address . ', ' . $about->city . ', ' . $about->country }}</p>
+                            <p>
+                                {{ $about?->address ? $about->address . ', ' : '' }}
+                                {{ $about?->city ? $about->city . ', ' : '' }}
+                                {{ $about?->country ?? '' }}
+                            </p>
                         </div>
                     </div>
                 </div>

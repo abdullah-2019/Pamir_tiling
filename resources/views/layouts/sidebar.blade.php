@@ -2,7 +2,7 @@
     <!--begin::Sidebar Brand-->
     <div class="sidebar-brand">
         <!--begin::Brand Link-->
-        <a href="./index.html" class="brand-link">
+        <a href="{{route('dashboard')}}" class="brand-link">
             <!--begin::Brand Image-->
             <img src="{{asset('assets/site/img/logo.webp')}}" alt="Logo" class="brand-image opacity-75 shadow" loading="lazy"/>
             <!--end::Brand Image-->
@@ -49,9 +49,9 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a href="" class="nav-link">
+                    <a href="{{route('about.index')}}" class="nav-link">
                         <i class="nav-icon bi bi-palette"></i>
-                        <p>Contact</p>
+                        <p>About</p>
                     </a>
                 </li>
                 <li class="nav-item">

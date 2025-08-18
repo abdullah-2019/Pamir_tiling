@@ -25,17 +25,13 @@
                     <div class="hero-content text-center" data-aos="zoom-in" data-aos-delay="200">
                         <h2>Premium Tiling Excellence Since 2010</h2>
                         <p class="hero-description">
-                            {{ $about->our_history }}
+                            {{ $about->our_history ?? '' }}
                         </p>
                     </div>
 
                     @if (!empty($projects) && $projects->isNotEmpty())
                         @php
-                            $allImages = collect($projects)
-                                ->pluck('images') 
-                                ->flatten() 
-                                ->filter() 
-                                ->values();
+                            $allImages = collect($projects)->pluck('images')->flatten()->filter()->values();
 
                             // Pick two random images or placeholders
                             if ($allImages->count() >= 2) {
@@ -251,11 +247,10 @@
                                         <div class="metric-icon">
                                             <i class="bi bi-calendar-check"></i>
                                         </div>
-                                        <div class="metric-value">
-                                            <span data-purecounter-start="0"
-                                                data-purecounter-end="{{ now()->year - $about->company_creation_date }}"
-                                                data-purecounter-duration="2" class="purecounter"></span>
-                                        </div>
+                                        <span data-purecounter-start="0"
+                                            data-purecounter-end="{{ now()->year - ($about->company_creation_date ?? now()->year) }}"
+                                            data-purecounter-duration="2" class="purecounter">
+                                        </span>
                                         <div class="metric-label">Years in Business</div>
                                     </div>
                                 </div>

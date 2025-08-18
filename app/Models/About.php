@@ -12,7 +12,7 @@ class About extends Model
 
     protected $fillable = [
         'our_history',
-        'emails',
+        'emails', 
         'phones',
         'company_creation_date',
         'awards',

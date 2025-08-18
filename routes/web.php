@@ -17,8 +17,14 @@ Route::get('/contact-data', [ContactController::class, 'data'])->name('contact.d
 
 
 // About
-Route::resource('about', AboutController::class);
-Route::get('/about', [AboutController::class, 'page'])->name('about.page');
+Route::resource('/about', AboutController::class);
+Route::get('/about-page', [AboutController::class, 'page'])->name('about.page');
+Route::put('/about/{about}/emails', [AboutController::class, 'updateEmail'])->name('about.emails.update');
+Route::delete('/about/{about}/emails', [AboutController::class, 'destroyEmail'])->name('about.emails.destroy');
+Route::post('/about/{about}/emails', [AboutController::class, 'addEmail'])->name('about.emails.create');
+Route::put('/about/{about}/phones', [AboutController::class, 'updatePhone'])->name('about.phones.update');
+Route::delete('/about/{about}/phones', [AboutController::class, 'destroyPhone'])->name('about.phones.destroy');
+
 
 // Services
 Route::resource('services', ServicesController::class);

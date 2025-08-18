@@ -10,7 +10,7 @@
                             <img src="{{ asset('assets/site/img/house-1.webp') }}" alt="about us" class="img-fluid">
                             <div class="experience-badge">
                                 <div class="badge-content">
-                                    <div class="number"><span data-purecounter-start="0" data-purecounter-end="{{now()->year - $about->company_creation_date}}"
+                                    <div class="number"><span data-purecounter-start="0" data-purecounter-end="{{ now()->year - ($about?->company_creation_date ?? 2010) }}"
                                             data-purecounter-duration="1" class="purecounter"></span>+</div>
                                     <div class="text">Years<br>Experience</div>
                                 </div>
