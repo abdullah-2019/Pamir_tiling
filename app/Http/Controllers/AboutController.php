@@ -102,7 +102,8 @@ class AboutController extends Controller
         $emails[$index] = $newEmail;
         $about->emails = array_values($emails);
         $about->save();
-
+        \Artisan::call('cache:clear');
+        \Artisan::call('view:clear');
         return response()->json([
             'success' => true,
             'index' => $index,
@@ -115,12 +116,9 @@ class AboutController extends Controller
         $validated = $request->validate([
             'email' => 'required|email',
         ]);
-        
-        // Get current emails - handle null or empty cases
-        $emails = [];
-        if (!empty($about->emails)) {
-            $emails = is_array($about->emails) ? $about->emails : json_decode($about->emails, true) ?? [];
-        }
+    
+        // Get current emails - Laravel's array cast will auto-decode JSON to array
+        $emails = $about->emails ?? [];
         
         $newEmail = trim($validated['email']);
         
@@ -137,13 +135,17 @@ class AboutController extends Controller
         // Add new email
         $emails[] = $newEmail;
         
-        // Save back to database
-        $about->emails = json_encode(array_values($emails));
+        // Save back to database - Laravel will auto-encode to JSON
+        $about->emails = array_values($emails);
         $about->save();
+
+        \Artisan::call('cache:clear');
+        \Artisan::call('view:clear');
         
         return response()->json([
             'success' => true,
             'email' => $newEmail,
+            'all_emails' => $about->emails // Returns the array
         ]);
     }
 
@@ -167,7 +169,8 @@ class AboutController extends Controller
 
         $about->emails = array_values($emails);
         $about->save();
-
+        \Artisan::call('cache:clear');
+        \Artisan::call('view:clear');
         return response()->json([
             'success' => true,
             'index' => $index, 
@@ -204,7 +207,8 @@ class AboutController extends Controller
         $phones[$index] = $newPhone;
         $about->phones = array_values($phones);
         $about->save();
-
+        \Artisan::call('cache:clear');
+        \Artisan::call('view:clear');
         return response()->json([
             'success' => true,
             'index' => $index,
@@ -232,7 +236,8 @@ class AboutController extends Controller
 
         $about->phones = array_values($phones);
         $about->save();
-
+        \Artisan::call('cache:clear');
+        \Artisan::call('view:clear');
         return response()->json([
             'success' => true,
             'index' => $index, 
