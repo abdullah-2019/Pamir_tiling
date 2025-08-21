@@ -1,4 +1,3 @@
-
 <!-- Emails Card -->
 <div class="card">
     <div class="card-header">
@@ -44,7 +43,35 @@
     </div>
 </div>
 
-@include('admin-pages.about.partials.add-email-medal')
+<!-- Add Email Modal (ensure this partial either matches IDs or include it here) -->
+<div class="modal fade" id="addEmailModal" tabindex="-1" aria-labelledby="addEmailModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addEmailModalLabel">Add Email</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="addEmailForm">
+                    <div class="mb-3">
+                        <label for="addEmailInput" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="addEmailInput" name="email" required>
+                        <div class="invalid-feedback" id="addEmailError"></div>
+                    </div>
+                </form>
+                <div class="alert alert-danger d-none" id="addServerError"></div>
+                <div class="alert alert-success d-none" id="addServerSuccess"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-success" id="addEmailBtn">
+                    <span class="spinner-border spinner-border-sm me-2 d-none" id="addSaveSpinner"></span>
+                    Add
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- Edit Email Modal -->
 <div class="modal fade" id="editEmailModal" tabindex="-1" aria-labelledby="editEmailModalLabel" aria-hidden="true">
@@ -78,7 +105,8 @@
 </div>
 
 <!-- Confirm Delete Modal -->
-<div class="modal fade" id="deleteEmailModal" tabindex="-1" aria-labelledby="deleteEmailModalLabel" aria-hidden="true">
+<div class="modal fade" id="deleteEmailModal" tabindex="-1" aria-labelledby="deleteEmailModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -123,6 +151,7 @@
         });
 
         let editModal, deleteModal, addModal;
+
         document.addEventListener('DOMContentLoaded', function() {
             editModal = new bootstrap.Modal(document.getElementById('editEmailModal'));
             deleteModal = new bootstrap.Modal(document.getElementById('deleteEmailModal'));
@@ -131,13 +160,11 @@
             // Open Edit modal
             $(document).on('click', '.btn-edit-email', function() {
                 const index = $(this).data('index');
-                const email = $(this).data('email');
+                const email = $(this).data('email') ?? '';
                 $('#emailIndex').val(index);
                 $('#emailInput').val(email);
-                $('#emailInput').removeClass('is-invalid');
-                $('#emailError').text('').hide();
-                $('#serverError').addClass('d-none').text('');
-                $('#serverSuccess').addClass('d-none').text('');
+                resetField('#emailInput', '#emailError');
+                hideAlerts(['#serverError', '#serverSuccess']);
                 $('#saveSpinner').addClass('d-none');
                 editModal.show();
             });
@@ -148,12 +175,10 @@
                 const email = $('#emailInput').val().trim();
 
                 if (!email) {
-                    $('#emailInput').addClass('is-invalid');
-                    $('#emailError').text('Email is required.').show();
+                    invalidate('#emailInput', '#emailError', 'Email is required.');
                     return;
                 }
-                $('#emailInput').removeClass('is-invalid');
-                $('#emailError').text('').hide();
+                resetField('#emailInput', '#emailError');
                 $('#saveSpinner').removeClass('d-none');
 
                 $.ajax({
@@ -169,14 +194,16 @@
                         if (response && response.success) {
                             const row = $('#emailsTable tbody tr[data-index="' + response
                                 .index + '"]');
-                            row.find('.email-cell').text(response.email);
-                            row.find('.btn-edit-email').data('email', response.email);
-                            row.find('.btn-delete-email').data('email', response.email);
+                            if (row.length) {
+                                row.find('.email-cell').text(response.email);
+                                row.find('.btn-edit-email').data('email', response.email);
+                                row.find('.btn-delete-email').data('email', response.email);
+                            }
                             editModal.hide();
                             showToast('Email updated successfully.');
                         } else {
-                            $('#serverError').removeClass('d-none').text(
-                                'Unexpected response from server.');
+                            showServerError('#serverError', response && response.message ?
+                                response.message : 'Unexpected response from server.');
                         }
                     },
                     error: function(xhr) {
@@ -189,10 +216,10 @@
             // Open Delete modal
             $(document).on('click', '.btn-delete-email', function() {
                 const index = $(this).data('index');
-                const email = $(this).data('email');
+                const email = $(this).data('email') ?? '';
                 $('#deleteEmailIndex').val(index);
                 $('#deleteEmailText').text(email);
-                $('#deleteServerError').addClass('d-none').text('');
+                hideAlerts(['#deleteServerError']);
                 $('#deleteSpinner').addClass('d-none');
                 deleteModal.show();
             });
@@ -212,19 +239,15 @@
                         $('#deleteSpinner').addClass('d-none');
 
                         if (response && response.success) {
-                            // Remove row
                             const row = $('#emailsTable tbody tr[data-index="' + response
                                 .index + '"]');
                             row.remove();
-
-                            // Re-index remaining rows' data-index and display numbers
                             reindexEmailRows();
-
                             deleteModal.hide();
                             showToast('Email deleted successfully.');
                         } else {
-                            $('#deleteServerError').removeClass('d-none').text(response
-                                .message || 'Unexpected response from server.');
+                            showServerError('#deleteServerError', response && response.message ?
+                                response.message : 'Unexpected response from server.');
                         }
                     },
                     error: function(xhr) {
@@ -232,19 +255,16 @@
                         const msg = xhr.responseJSON && xhr.responseJSON.message ?
                             xhr.responseJSON.message :
                             'An error occurred. Please try again.';
-                        $('#deleteServerError').removeClass('d-none').text(msg);
+                        showServerError('#deleteServerError', msg);
                     }
                 });
             });
-            
+
             // Open Add Email modal
             $(document).on('click', '.btn-add-new-email', function() {
-                const email = $(this).data('email');
-                $('#addEmailInput').val(email);
-                $('#addEmailInput').removeClass('is-invalid');
-                $('#addEmailError').text('').hide();
-                $('#addServerError').addClass('d-none').text('');
-                $('#addServerSuccess').addClass('d-none').text('');
+                $('#addEmailInput').val('');
+                resetField('#addEmailInput', '#addEmailError');
+                hideAlerts(['#addServerError', '#addServerSuccess']);
                 $('#addSaveSpinner').addClass('d-none');
                 addModal.show();
             });
@@ -254,43 +274,84 @@
                 const email = $('#addEmailInput').val().trim();
 
                 if (!email) {
-                    $('#addEmailInput').addClass('is-invalid');
-                    $('#addEmailError').text('Email is required.').show();
+                    invalidate('#addEmailInput', '#addEmailError', 'Email is required.');
                     return;
                 }
-                $('#addEmailInput').removeClass('is-invalid');
-                $('#addEmailError').text('').hide();
+                resetField('#addEmailInput', '#addEmailError');
                 $('#addSaveSpinner').removeClass('d-none');
+
                 $.ajax({
                     url: '{{ route('about.emails.create', $about->id) }}',
                     type: 'POST',
                     data: {
                         email,
-                        id: "{{$about->id}}"
+                        id: "{{ $about->id }}"
                     },
                     success: function(response) {
                         $('#addSaveSpinner').addClass('d-none');
 
                         if (response && response.success) {
+                            // If server returns the new index and email, append a new row
+                            // Fallback: compute index from current row count
+                            const newIndex = (typeof response.index !== 'undefined') ?
+                                response.index :
+                                $('#emailsTable tbody tr').length;
+
+                            const safeEmail = $('<div>').text(response.email)
+                        .html(); // ensure text
+                            const newRowHtml =
+                                '<tr data-index="' + newIndex + '">' +
+                                '<td class="row-number"></td>' +
+                                '<td class="email-cell">' + safeEmail + '</td>' +
+                                '<td class="text-end">' +
+                                '<button type="button" class="btn btn-primary btn-sm btn-edit-email me-1" data-index="' +
+                                newIndex + '" data-email="' + safeEmail + '">Edit</button>' +
+                                '<button type="button" class="btn btn-danger btn-sm btn-delete-email" data-index="' +
+                                newIndex + '" data-email="' + safeEmail + '">Delete</button>' +
+                                '</td>' +
+                                '</tr>';
+
+                            $('#emailsTable tbody').append(newRowHtml);
+                            reindexEmailRows(); // ensure proper numbering and indices
                             addModal.hide();
                             showToast('Email added successfully.');
                         } else {
-                            $('#addServerError').removeClass('d-none').text(
-                                'Unexpected response from server.');
+                            showServerError('#addServerError', response && response.message ?
+                                response.message : 'Unexpected response from server.');
                         }
                     },
                     error: function(xhr) {
                         $('#addSaveSpinner').addClass('d-none');
-                        handleAjaxError(xhr, '#addEmailInput', '#addEmailError', '#addServerError');
+                        handleAjaxError(xhr, '#addEmailInput', '#addEmailError',
+                            '#addServerError');
                     }
                 });
             });
+
+            // When modals hide, reset forms and alerts
+            $('#editEmailModal').on('hidden.bs.modal', function() {
+                resetField('#emailInput', '#emailError');
+                hideAlerts(['#serverError', '#serverSuccess']);
+                $('#saveSpinner').addClass('d-none');
+                $('#editEmailForm')[0].reset();
+            });
+            $('#addEmailModal').on('hidden.bs.modal', function() {
+                resetField('#addEmailInput', '#addEmailError');
+                hideAlerts(['#addServerError', '#addServerSuccess']);
+                $('#addSaveSpinner').addClass('d-none');
+                $('#addEmailForm')[0].reset();
+            });
+            $('#deleteEmailModal').on('hidden.bs.modal', function() {
+                hideAlerts(['#deleteServerError']);
+                $('#deleteSpinner').addClass('d-none');
+                $('#deleteEmailIndex').val('');
+                $('#deleteEmailText').text('');
+            });
+
             function reindexEmailRows() {
                 $('#emailsTable tbody tr').each(function(i) {
-                    // Update visible row number
-                    $(this).find('.row-number').text(i + 1);
-                    // Update data-index on row and buttons
                     $(this).attr('data-index', i);
+                    $(this).find('.row-number').text(i + 1);
                     $(this).find('.btn-edit-email').data('index', i);
                     $(this).find('.btn-delete-email').data('index', i);
                 });
@@ -306,16 +367,33 @@
                 if (xhr.status === 422 && xhr.responseJSON && xhr.responseJSON.errors) {
                     const errs = xhr.responseJSON.errors;
                     if (errs.email && errs.email[0]) {
-                        $(inputSelector).addClass('is-invalid');
-                        $(feedbackSelector).text(errs.email[0]).show();
+                        invalidate(inputSelector, feedbackSelector, errs.email[0]);
                         return;
                     }
                 }
                 if (xhr.responseJSON && xhr.responseJSON.message) {
-                    $(serverSelector).removeClass('d-none').text(xhr.responseJSON.message);
+                    showServerError(serverSelector, xhr.responseJSON.message);
                 } else {
-                    $(serverSelector).removeClass('d-none').text('An error occurred. Please try again.');
+                    showServerError(serverSelector, 'An error occurred. Please try again.');
                 }
+            }
+
+            function invalidate(inputSelector, feedbackSelector, message) {
+                $(inputSelector).addClass('is-invalid');
+                $(feedbackSelector).text(message).show();
+            }
+
+            function resetField(inputSelector, feedbackSelector) {
+                $(inputSelector).removeClass('is-invalid');
+                $(feedbackSelector).text('').hide();
+            }
+
+            function hideAlerts(selectors) {
+                selectors.forEach(sel => $(sel).addClass('d-none').text(''));
+            }
+
+            function showServerError(selector, message) {
+                $(selector).removeClass('d-none').text(message);
             }
         });
     </script>

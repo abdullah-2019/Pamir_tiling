@@ -73,6 +73,7 @@ class AboutController extends Controller
         return view('site.about', compact('about', 'projects'));
     }
 
+    // Update email
     public function updateEmail(Request $request, About $about)
     {
         $validated = $request->validate([
@@ -102,8 +103,7 @@ class AboutController extends Controller
         $emails[$index] = $newEmail;
         $about->emails = array_values($emails);
         $about->save();
-        \Artisan::call('cache:clear');
-        \Artisan::call('view:clear');
+        cache()->flush();
         return response()->json([
             'success' => true,
             'index' => $index,
@@ -139,8 +139,7 @@ class AboutController extends Controller
         $about->emails = array_values($emails);
         $about->save();
 
-        \Artisan::call('cache:clear');
-        \Artisan::call('view:clear');
+        cache()->flush();
         
         return response()->json([
             'success' => true,
@@ -149,6 +148,7 @@ class AboutController extends Controller
         ]);
     }
 
+    // Delete email from db.
     public function destroyEmail(Request $request, About $about)
     {
         $validated = $request->validate([
@@ -169,11 +169,47 @@ class AboutController extends Controller
 
         $about->emails = array_values($emails);
         $about->save();
-        \Artisan::call('cache:clear');
-        \Artisan::call('view:clear');
+        cache()->flush();
         return response()->json([
             'success' => true,
             'index' => $index, 
+        ]);
+    }
+
+    // Add phone to db.
+    public function addPhone(Request $request, About $about) {
+        $validated = $request->validate([
+            'phone' => 'required',
+        ]);
+
+        // Get current phones 
+        $phones = $about->phones ?? [];
+        
+        $newPhone = trim($validated['phone']);
+        
+        // Check for duplicates (case-insensitive)
+        foreach ($phones as $phone) {
+            if (strtolower(trim($phone)) === strtolower($newPhone)) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'This phone already exists.'
+                ], 422);
+            }
+        }
+        
+        // Add new phone
+        $phones[] = $newPhone;
+        
+        // Save back to database - Laravel will auto-encode to JSON
+        $about->phones = array_values($phones);
+        $about->save();
+
+        cache()->flush();
+        
+        return response()->json([
+            'success' => true,
+            'phone' => $newPhone,
+            'all_phones' => $about->phones
         ]);
     }
 
@@ -207,8 +243,7 @@ class AboutController extends Controller
         $phones[$index] = $newPhone;
         $about->phones = array_values($phones);
         $about->save();
-        \Artisan::call('cache:clear');
-        \Artisan::call('view:clear');
+        cache()->flush();
         return response()->json([
             'success' => true,
             'index' => $index,
@@ -236,8 +271,7 @@ class AboutController extends Controller
 
         $about->phones = array_values($phones);
         $about->save();
-        \Artisan::call('cache:clear');
-        \Artisan::call('view:clear');
+        cache()->flush();
         return response()->json([
             'success' => true,
             'index' => $index, 

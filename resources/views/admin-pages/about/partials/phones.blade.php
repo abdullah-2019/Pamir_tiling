@@ -1,11 +1,11 @@
-<!-- Phone Card -->
-<div class="card">
+<!-- Phones Card -->
+<div class="card mt-4">
     <div class="card-header">
         <h3 class="card-title">Phones</h3>
     </div>
     <div class="card-body p-0">
         <div class="table-responsive">
-            <table class="table m-0" role="table" id="phoneTable">
+            <table class="table m-0" role="table" id="phonesTable">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
@@ -36,6 +36,42 @@
             </table>
         </div>
     </div>
+    <div class="card-footer clearfix">
+        <a href="javascript:void(0)" class="btn btn-sm btn-success float-start btn-add-new-phone">
+            Add New Phone
+        </a>
+    </div>
+</div>
+
+<!-- Add Phone Modal -->
+<div class="modal fade" id="addPhoneModal" tabindex="-1" aria-labelledby="addPhoneModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addPhoneModalLabel">Add Phone</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="addPhoneForm">
+                    <div class="mb-3">
+                        <label for="addPhoneInput" class="form-label">Phone</label>
+                        <input type="tel" class="form-control" id="addPhoneInput" name="phone" required
+                            placeholder="+1 555-123-4567">
+                        <div class="invalid-feedback" id="addPhoneError"></div>
+                    </div>
+                </form>
+                <div class="alert alert-danger d-none" id="addPhoneServerError"></div>
+                <div class="alert alert-success d-none" id="addPhoneServerSuccess"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-success" id="addPhoneBtn">
+                    <span class="spinner-border spinner-border-sm me-2 d-none" id="addPhoneSaveSpinner"></span>
+                    Add
+                </button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- Edit Phone Modal -->
@@ -51,17 +87,18 @@
                     <input type="hidden" name="index" id="phoneIndex">
                     <div class="mb-3">
                         <label for="phoneInput" class="form-label">Phone</label>
-                        <input type="text" class="form-control" id="phoneInput" name="phone" required>
+                        <input type="tel" class="form-control" id="phoneInput" name="phone" required
+                            placeholder="+1 555-123-4567">
                         <div class="invalid-feedback" id="phoneError"></div>
                     </div>
                 </form>
-                <div class="alert alert-danger d-none" id="serverError"></div>
-                <div class="alert alert-success d-none" id="serverSuccess"></div>
+                <div class="alert alert-danger d-none" id="phoneServerError"></div>
+                <div class="alert alert-success d-none" id="phoneServerSuccess"></div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
                 <button type="button" class="btn btn-primary" id="savePhoneBtn">
-                    <span class="spinner-border spinner-border-sm me-2 d-none" id="saveSpinner"></span>
+                    <span class="spinner-border spinner-border-sm me-2 d-none" id="savePhoneSpinner"></span>
                     Save
                 </button>
             </div>
@@ -69,8 +106,9 @@
     </div>
 </div>
 
-<!-- Confirm Delete Modal -->
-<div class="modal fade" id="deletePhoneModal" tabindex="-1" aria-labelledby="deletePhoneModalLabel" aria-hidden="true">
+<!-- Confirm Delete Phone Modal -->
+<div class="modal fade" id="deletePhoneModal" tabindex="-1" aria-labelledby="deletePhoneModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -78,15 +116,15 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <input type="hidden" id="deletephoneIndex">
+                <input type="hidden" id="deletePhoneIndex">
                 <p class="mb-0">Are you sure you want to delete this phone?</p>
                 <p class="fw-semibold mt-2" id="deletePhoneText"></p>
-                <div class="alert alert-danger d-none" id="deleteServerError"></div>
+                <div class="alert alert-danger d-none" id="deletePhoneServerError"></div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-danger" id="confirmDeleteBtnPhone">
-                    <span class="spinner-border spinner-border-sm me-2 d-none" id="deleteSpinner"></span>
+                <button type="button" class="btn btn-danger" id="confirmDeletePhoneBtn">
+                    <span class="spinner-border spinner-border-sm me-2 d-none" id="deletePhoneSpinner"></span>
                     Delete
                 </button>
             </div>
@@ -94,12 +132,12 @@
     </div>
 </div>
 
-<!-- Toasts -->
+<!-- Phone Toast -->
 <div class="position-fixed top-0 end-0 p-3" style="z-index: 1080">
     <div id="phoneToast" class="toast align-items-center text-bg-success border-0" role="status" aria-live="polite"
         aria-atomic="true">
         <div class="d-flex">
-            <div class="toast-body" id="toastBody">Phone updated successfully.</div>
+            <div class="toast-body" id="phoneToastBody">Phone updated successfully.</div>
             <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
                 aria-label="Close"></button>
         </div>
@@ -108,28 +146,101 @@
 
 @push('scripts')
     <script>
+        // Reuse global AJAX CSRF setup from your page if already defined
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             }
         });
 
-        let editPhoneModal, deletePhoneModal;
+        let addPhoneModal, editPhoneModal, deletePhoneModal;
+
         document.addEventListener('DOMContentLoaded', function() {
+            addPhoneModal = new bootstrap.Modal(document.getElementById('addPhoneModal'));
             editPhoneModal = new bootstrap.Modal(document.getElementById('editPhoneModal'));
             deletePhoneModal = new bootstrap.Modal(document.getElementById('deletePhoneModal'));
 
-            // Open Edit modal
+            // Open Add Phone modal
+            $(document).on('click', '.btn-add-new-phone', function() {
+                $('#addPhoneInput').val('');
+                resetField('#addPhoneInput', '#addPhoneError');
+                hideAlerts(['#addPhoneServerError', '#addPhoneServerSuccess']);
+                $('#addPhoneSaveSpinner').addClass('d-none');
+                addPhoneModal.show();
+            });
+
+            // Save added phone
+            $('#addPhoneBtn').on('click', function() {
+                const phone = $('#addPhoneInput').val().trim();
+
+                if (!phone) {
+                    invalidate('#addPhoneInput', '#addPhoneError', 'Phone is required.');
+                    return;
+                }
+                if (!isValidPhone(phone)) {
+                    invalidate('#addPhoneInput', '#addPhoneError', 'Please enter a valid phone number.');
+                    return;
+                }
+
+                resetField('#addPhoneInput', '#addPhoneError');
+                $('#addPhoneSaveSpinner').removeClass('d-none');
+
+                $.ajax({
+                    url: '{{ route('about.phones.create', $about->id) }}',
+                    type: 'POST',
+                    data: {
+                        phone,
+                        id: "{{ $about->id }}"
+                    },
+                    success: function(response) {
+                        $('#addPhoneSaveSpinner').addClass('d-none');
+
+                        if (response && response.success) {
+                            const newIndex = (typeof response.index !== 'undefined') ?
+                                response.index :
+                                $('#phonesTable tbody tr').length;
+
+                            const safePhone = $('<div>').text(response.phone).html();
+
+                            const newRowHtml =
+                                '<tr data-index="' + newIndex + '">' +
+                                '<td class="row-number"></td>' +
+                                '<td class="phone-cell">' + safePhone + '</td>' +
+                                '<td class="text-end">' +
+                                '<button type="button" class="btn btn-primary btn-sm btn-edit-phone me-1" data-index="' +
+                                newIndex + '" data-phone="' + safePhone + '">Edit</button>' +
+                                '<button type="button" class="btn btn-danger btn-sm btn-delete-phone" data-index="' +
+                                newIndex + '" data-phone="' + safePhone + '">Delete</button>' +
+                                '</td>' +
+                                '</tr>';
+
+                            $('#phonesTable tbody').append(newRowHtml);
+                            reindexPhoneRows();
+                            addPhoneModal.hide();
+                            showPhoneToast('Phone added successfully.');
+                        } else {
+                            showServerError('#addPhoneServerError', response && response
+                                .message ? response.message :
+                                'Unexpected response from server.');
+                        }
+                    },
+                    error: function(xhr) {
+                        $('#addPhoneSaveSpinner').addClass('d-none');
+                        handleAjaxPhoneError(xhr, '#addPhoneInput', '#addPhoneError',
+                            '#addPhoneServerError');
+                    }
+                });
+            });
+
+            // Open Edit Phone modal
             $(document).on('click', '.btn-edit-phone', function() {
                 const index = $(this).data('index');
-                const phone = $(this).data('phone');
+                const phone = $(this).data('phone') ?? '';
                 $('#phoneIndex').val(index);
                 $('#phoneInput').val(phone);
-                $('#phoneInput').removeClass('is-invalid');
-                $('#phoneError').text('').hide();
-                $('#serverError').addClass('d-none').text('');
-                $('#serverSuccess').addClass('d-none').text('');
-                $('#saveSpinner').addClass('d-none');
+                resetField('#phoneInput', '#phoneError');
+                hideAlerts(['#phoneServerError', '#phoneServerSuccess']);
+                $('#savePhoneSpinner').addClass('d-none');
                 editPhoneModal.show();
             });
 
@@ -139,13 +250,16 @@
                 const phone = $('#phoneInput').val().trim();
 
                 if (!phone) {
-                    $('#phoneInput').addClass('is-invalid');
-                    $('#phoneError').text('Phone is required.').show();
+                    invalidate('#phoneInput', '#phoneError', 'Phone is required.');
                     return;
                 }
-                $('#phoneInput').removeClass('is-invalid');
-                $('#phoneError').text('').hide();
-                $('#saveSpinner').removeClass('d-none');
+                if (!isValidPhone(phone)) {
+                    invalidate('#phoneInput', '#phoneError', 'Please enter a valid phone number.');
+                    return;
+                }
+
+                resetField('#phoneInput', '#phoneError');
+                $('#savePhoneSpinner').removeClass('d-none');
 
                 $.ajax({
                     url: '{{ route('about.phones.update', $about->id) }}',
@@ -155,43 +269,46 @@
                         phone
                     },
                     success: function(response) {
-                        $('#saveSpinner').addClass('d-none');
+                        $('#savePhoneSpinner').addClass('d-none');
 
                         if (response && response.success) {
-                            const row = $('#phoneTable tbody tr[data-index="' + response
+                            const row = $('#phonesTable tbody tr[data-index="' + response
                                 .index + '"]');
-                            row.find('.phone-cell').text(response.phone);
-                            row.find('.btn-edit-phone').data('phone', response.phone);
-                            row.find('.btn-delete-phone').data('phone', response.phone);
+                            if (row.length) {
+                                row.find('.phone-cell').text(response.phone);
+                                row.find('.btn-edit-phone').data('phone', response.phone);
+                                row.find('.btn-delete-phone').data('phone', response.phone);
+                            }
                             editPhoneModal.hide();
-                            showToast('Phone updated successfully.');
+                            showPhoneToast('Phone updated successfully.');
                         } else {
-                            $('#serverError').removeClass('d-none').text(
-                                'Unexpected response from server.');
+                            showServerError('#phoneServerError', response && response.message ?
+                                response.message : 'Unexpected response from server.');
                         }
                     },
                     error: function(xhr) {
-                        $('#saveSpinner').addClass('d-none');
-                        handleAjaxError(xhr, '#phoneInput', '#phoneError', '#serverError');
+                        $('#savePhoneSpinner').addClass('d-none');
+                        handleAjaxPhoneError(xhr, '#phoneInput', '#phoneError',
+                            '#phoneServerError');
                     }
                 });
             });
 
-            // Open Delete modal
+            // Open Delete Phone modal
             $(document).on('click', '.btn-delete-phone', function() {
                 const index = $(this).data('index');
-                const phone = $(this).data('phone');
-                $('#deletephoneIndex').val(index);
+                const phone = $(this).data('phone') ?? '';
+                $('#deletePhoneIndex').val(index);
                 $('#deletePhoneText').text(phone);
-                $('#deleteServerError').addClass('d-none').text('');
-                $('#deleteSpinner').addClass('d-none');
+                hideAlerts(['#deletePhoneServerError']);
+                $('#deletePhoneSpinner').addClass('d-none');
                 deletePhoneModal.show();
             });
 
-            // Confirm delete
-            $('#confirmDeleteBtnPhone').on('click', function() {
-                const index = $('#deletephoneIndex').val();
-                $('#deleteSpinner').removeClass('d-none');
+            // Confirm delete phone
+            $('#confirmDeletePhoneBtn').on('click', function() {
+                const index = $('#deletePhoneIndex').val();
+                $('#deletePhoneSpinner').removeClass('d-none');
 
                 $.ajax({
                     url: '{{ route('about.phones.destroy', $about->id) }}',
@@ -200,65 +317,104 @@
                         index
                     },
                     success: function(response) {
-                        $('#deleteSpinner').addClass('d-none');
+                        $('#deletePhoneSpinner').addClass('d-none');
 
                         if (response && response.success) {
-                            // Remove row
-                            const row = $('#phoneTable tbody tr[data-index="' + response
+                            const row = $('#phonesTable tbody tr[data-index="' + response
                                 .index + '"]');
                             row.remove();
-
-                            // Re-index remaining rows' data-index and display numbers
                             reindexPhoneRows();
-
                             deletePhoneModal.hide();
-                            showToast('Phone deleted successfully.');
+                            showPhoneToast('Phone deleted successfully.');
                         } else {
-                            $('#deleteServerError').removeClass('d-none').text(response
-                                .message || 'Unexpected response from server.');
+                            showServerError('#deletePhoneServerError', response && response
+                                .message ? response.message :
+                                'Unexpected response from server.');
                         }
                     },
                     error: function(xhr) {
-                        $('#deleteSpinner').addClass('d-none');
+                        $('#deletePhoneSpinner').addClass('d-none');
                         const msg = xhr.responseJSON && xhr.responseJSON.message ?
                             xhr.responseJSON.message :
                             'An error occurred. Please try again.';
-                        $('#deleteServerError').removeClass('d-none').text(msg);
+                        showServerError('#deletePhoneServerError', msg);
                     }
                 });
             });
 
+            // Modal cleanup
+            $('#addPhoneModal').on('hidden.bs.modal', function() {
+                resetField('#addPhoneInput', '#addPhoneError');
+                hideAlerts(['#addPhoneServerError', '#addPhoneServerSuccess']);
+                $('#addPhoneSaveSpinner').addClass('d-none');
+                $('#addPhoneForm')[0].reset();
+            });
+            $('#editPhoneModal').on('hidden.bs.modal', function() {
+                resetField('#phoneInput', '#phoneError');
+                hideAlerts(['#phoneServerError', '#phoneServerSuccess']);
+                $('#savePhoneSpinner').addClass('d-none');
+                $('#editPhoneForm')[0].reset();
+            });
+            $('#deletePhoneModal').on('hidden.bs.modal', function() {
+                hideAlerts(['#deletePhoneServerError']);
+                $('#deletePhoneSpinner').addClass('d-none');
+                $('#deletePhoneIndex').val('');
+                $('#deletePhoneText').text('');
+            });
+
+            // Utilities
             function reindexPhoneRows() {
-                $('#phoneTable tbody tr').each(function(i) {
-                    // Update visible row number
-                    $(this).find('.row-number').text(i + 1);
-                    // Update data-index on row and buttons
+                $('#phonesTable tbody tr').each(function(i) {
                     $(this).attr('data-index', i);
+                    $(this).find('.row-number').text(i + 1);
                     $(this).find('.btn-edit-phone').data('index', i);
                     $(this).find('.btn-delete-phone').data('index', i);
                 });
             }
 
-            function showToast(message) {
+            function showPhoneToast(message) {
                 const toastEl = document.getElementById('phoneToast');
-                document.getElementById('toastBody').innerText = message;
+                document.getElementById('phoneToastBody').innerText = message;
                 new bootstrap.Toast(toastEl).show();
             }
 
-            function handleAjaxError(xhr, inputSelector, feedbackSelector, serverSelector) {
+            function handleAjaxPhoneError(xhr, inputSelector, feedbackSelector, serverSelector) {
                 if (xhr.status === 422 && xhr.responseJSON && xhr.responseJSON.errors) {
                     const errs = xhr.responseJSON.errors;
                     if (errs.phone && errs.phone[0]) {
-                        $(inputSelector).addClass('is-invalid');
-                        $(feedbackSelector).text(errs.phone[0]).show();
+                        invalidate(inputSelector, feedbackSelector, errs.phone[0]);
                         return;
                     }
                 }
                 if (xhr.responseJSON && xhr.responseJSON.message) {
-                    $(serverSelector).removeClass('d-none').text(xhr.responseJSON.message);
+                    showServerError(serverSelector, xhr.responseJSON.message);
                 } else {
-                    $(serverSelector).removeClass('d-none').text('An error occurred. Please try again.');
+                    showServerError(serverSelector, 'An error occurred. Please try again.');
                 }
+            }
+
+            function invalidate(inputSelector, feedbackSelector, message) {
+                $(inputSelector).addClass('is-invalid');
+                $(feedbackSelector).text(message).show();
+            }
+
+            function resetField(inputSelector, feedbackSelector) {
+                $(inputSelector).removeClass('is-invalid');
+                $(feedbackSelector).text('').hide();
+            }
+
+            function hideAlerts(selectors) {
+                selectors.forEach(sel => $(sel).addClass('d-none').text(''));
+            }
+
+            function showServerError(selector, message) {
+                $(selector).removeClass('d-none').text(message);
+            }
+
+            // Simple phone validator: digits, spaces, dashes, parentheses, leading +
+            function isValidPhone(value) {
+                const pattern = /^\+?[0-9()\-\s]{6,}$/;
+                return pattern.test(value);
             }
         });
     </script>
