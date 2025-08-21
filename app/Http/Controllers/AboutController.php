@@ -294,5 +294,29 @@ class AboutController extends Controller
         ]);
     }
 
+    public function updateLogo(Request $request)
+    {
+        $request->validate([
+            'logo' => 'required|image|mimes:png,jpg,jpeg,svg|max:2048',
+        ]);
+
+        $about = About::first();
+
+        // Delete old logo if exists
+        if ($about->logo && file_exists(public_path('assets/site/img/' . $about->logo))) {
+            unlink(public_path('assets/site/img/' . $about->logo));
+        }
+
+        // Store new logo
+        $file = $request->file('logo');
+        $fileName = time() . '.' . $file->getClientOriginalExtension();
+        $file->move(public_path('assets/site/img/'), $fileName);
+
+        $about->logo = $fileName;
+        $about->save();
+        cache()->flush();
+
+        return redirect()->back()->with('success', 'Logo updated successfully!');
+    }
 
 }

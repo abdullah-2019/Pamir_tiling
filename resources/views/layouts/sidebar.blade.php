@@ -4,7 +4,7 @@
         <!--begin::Brand Link-->
         <a href="{{route('dashboard')}}" class="brand-link">
             <!--begin::Brand Image-->
-            <img src="{{asset('assets/site/img/logo.webp')}}" alt="Logo" class="brand-image opacity-75 shadow" loading="lazy"/>
+            <img src="{{asset('assets/site/img/').'/'.$about->logo}}" alt="Logo" class="brand-image opacity-75 shadow" loading="lazy"/>
             <!--end::Brand Image-->
             <!--begin::Brand Text-->
             <span class="brand-text fw-light">Pamir Tiling</span>

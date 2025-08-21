@@ -33,6 +33,8 @@ Route::prefix('/about/{about}')->name('about.address.')->group(function () {
     Route::put('/city', [AboutAddressController::class, 'updateCity'])->name('updateCity');
     Route::put('/address', [AboutAddressController::class, 'updateAddress'])->name('updateAddress');
 });
+Route::post('/about/logo/update', [AboutController::class, 'updateLogo'])->name('about.logo.update');
+
 
 // Services
 Route::resource('services', ServicesController::class);

@@ -56,7 +56,7 @@
 
             <a href="{{ route('home') }}" class="logo d-flex align-items-center">
                 <!-- Uncomment the line below if you also wish to use an image logo -->
-                <img src="{{ asset('/assets/site/img/logo.webp') }}" alt="logo"> -->
+                <img src="{{ asset('/assets/site/img/').'/'.$about->logo }}" alt="logo"> -->
                 {{-- <svg class="my-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <g id="bgCarrier" stroke-width="0"></g>
           <g id="tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
