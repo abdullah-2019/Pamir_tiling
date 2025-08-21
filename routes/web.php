@@ -28,6 +28,7 @@ Route::put('/about/{about}/phones', [AboutController::class, 'updatePhone'])->na
 Route::delete('/about/{about}/phones', [AboutController::class, 'destroyPhone'])->name('about.phones.destroy');
 Route::post('/about/{about}/phones', [AboutController::class, 'addPhone'])->name('about.phones.create');
 Route::post('/about/{about}/other', [AboutController::class, 'updateOtherInfo'])->name('about.other-info.update');
+Route::post('/about/{about}/our-history', [AboutController::class, 'updateOurHistory'])->name('about.our-history.update');
 Route::prefix('/about/{about}')->name('about.address.')->group(function () {
     Route::put('/country', [AboutAddressController::class, 'updateCountry'])->name('updateCountry');
     Route::put('/city', [AboutAddressController::class, 'updateCity'])->name('updateCity');

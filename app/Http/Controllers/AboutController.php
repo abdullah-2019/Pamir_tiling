@@ -319,4 +319,21 @@ class AboutController extends Controller
         return redirect()->back()->with('success', 'Logo updated successfully!');
     }
 
+    // Update our history
+    function updateOurHistory(Request $request, About $about) {
+        $validated = $request->validate([
+            'our_history' => 'required'
+        ]);
+        
+        $about->update($validated);
+        
+        cache()->flush();
+        
+        return response()->json([
+            'success' => true,
+            'our_history' => $validated,
+            'message' => 'Information updated successfully'
+        ]);
+    }
+
 }
