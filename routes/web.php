@@ -7,6 +7,8 @@ use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\ProjectsController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\AboutAddressController;
+
 
 Route::get('/', [HomeController::class, 'siteHomePage'])->name('home');
 
@@ -26,6 +28,11 @@ Route::put('/about/{about}/phones', [AboutController::class, 'updatePhone'])->na
 Route::delete('/about/{about}/phones', [AboutController::class, 'destroyPhone'])->name('about.phones.destroy');
 Route::post('/about/{about}/phones', [AboutController::class, 'addPhone'])->name('about.phones.create');
 Route::post('/about/{about}/other', [AboutController::class, 'updateOtherInfo'])->name('about.other-info.update');
+Route::prefix('/about/{about}')->name('about.address.')->group(function () {
+    Route::put('/country', [AboutAddressController::class, 'updateCountry'])->name('updateCountry');
+    Route::put('/city', [AboutAddressController::class, 'updateCity'])->name('updateCity');
+    Route::put('/address', [AboutAddressController::class, 'updateAddress'])->name('updateAddress');
+});
 
 // Services
 Route::resource('services', ServicesController::class);
