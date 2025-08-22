@@ -71,7 +71,7 @@
 
                                 <div class="col-12">
                                     <label for="awards" class="form-label">Edit Awards</label>
-                                    <textarea class="form-control" id="awards" name="awards" rows="4">{{ old('awards', $about->awards) }}</textarea>
+                                    <input type="number" min="0" class="form-control" id="awards" name="awards" value="{{$about->awards ?? old('awards')}}">
                                     <div class="invalid-feedback" id="awards_error"></div>
                                 </div>
 
