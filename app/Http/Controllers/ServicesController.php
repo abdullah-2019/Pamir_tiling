@@ -96,4 +96,21 @@ class ServicesController extends Controller
         return view('site.services.detail', compact('service'));
     }
 
+    public function data(Request $request)
+    {
+        $query = Services::query()->select(['title', 'desc']);
+
+        return DataTables::of($query)
+             ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                $view = route('services.show', $row->id);
+                $edit = route('services.edit', $row->id);
+                $delete = route('services.destroy', $row->id);
+                return view('admin-pages.services.partials.actions', compact('view','edit','delete','row'))->render();
+            })
+            ->rawColumns(['actions'])
+            ->make(true);
+    }
+
+
 }
