@@ -37,6 +37,12 @@ Route::prefix('/about/{about}')->name('about.address.')->group(function () {
 Route::post('/about/logo/update', [AboutController::class, 'updateLogo'])->name('about.logo.update');
 
 
+//Route::get('/about/other', [AboutController::class, 'editOther'])->name('about.other.edit');
+
+// Separate endpoints for updating each field (simple and explicit)
+Route::patch('/about/other/company-creation-date', [AboutController::class, 'updateCompanyCreationDate'])->name('about.other.updateCompanyCreationDate');
+Route::patch('/about/other/awards', [AboutController::class, 'updateAwards'])->name('about.other.updateAwards');
+
 // Services
 Route::resource('services', ServicesController::class);
 Route::get('/services', [ServicesController::class, 'page'])->name('services.page');

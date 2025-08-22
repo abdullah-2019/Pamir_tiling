@@ -336,4 +336,46 @@ class AboutController extends Controller
         ]);
     }
 
+
+    // Update company_creation_date via AJAX
+    public function updateCompanyCreationDate(Request $request)
+    {
+        // Example validation: allow nullable date, or require a date format
+        $validated = $request->validate([
+            'company_creation_date' => ['required']
+        ]);
+
+        $about = About::firstOrFail();
+        $about->company_creation_date = $validated['company_creation_date'];
+        $about->save();
+        cache()->flush();
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Company creation date updated successfully.',
+            'data' => [
+                'company_creation_date' => $about->company_creation_date,
+            ],
+        ]);
+    }
+
+    // Update awards via AJAX
+    public function updateAwards(Request $request)
+    {
+        $validated = $request->validate([
+            'awards' => ['required', 'string', 'max:5000'], // adjust max as needed
+        ]);
+
+        $about = About::firstOrFail();
+        $about->awards = $validated['awards'];
+        $about->save();
+        cache()->flush();
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Awards updated successfully.',
+            'data' => [
+                'awards' => $about->awards,
+            ],
+        ]);
+    }
+
 }

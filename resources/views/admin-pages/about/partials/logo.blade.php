@@ -5,6 +5,7 @@
     <div class="card-body">
         @if (session('success'))
             <div class="alert alert-success">{{ session('success') }}</div>
+            <script>alert('lj')</script>
         @endif
 
         @if ($about && $about->logo)
