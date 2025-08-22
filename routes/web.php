@@ -44,7 +44,7 @@ Route::prefix('about/other')->name('about.other.')->group(function () {
 
 // Services
 Route::resource('services', ServicesController::class);
-Route::get('/services', [ServicesController::class, 'page'])->name('services.page');
+Route::get('/services/page', [ServicesController::class, 'page'])->name('services.page');
 Route::get('service-detail/{slug}', [ServicesController::class, 'serviceDetail'])->name('service-detail');
 
 // Projects
