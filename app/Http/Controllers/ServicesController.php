@@ -6,6 +6,8 @@ use App\Models\Services;
 use App\Http\Requests\StoreServicesRequest;
 use App\Http\Requests\UpdateServicesRequest;
 use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
+
 
 class ServicesController extends Controller
 {
@@ -57,33 +59,70 @@ class ServicesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Services $services)
+    public function show(Services $service)
     {
-        //
+        return view('admin-pages.services.show', compact('service'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Services $services)
+    public function edit(Services $service)
     {
-        //
+        return view('admin-pages.services.edit', compact('service'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateServicesRequest $request, Services $services)
+    public function update(Request $request, Services $service)
     {
-        //
+        $validated = $request->validate([
+            'title' => ['required','string','max:255', 'unique:services,title,'.$service->id],
+            'slug'  => ['required','string','max:255','lowercase', 'unique:services,slug,'.$service->id],
+            'desc'  => ['required','string'],
+            'features' => ['required','array'],
+            'features.*' => ['nullable','string','max:255'],
+            'image' => ['nullable','image','mimes:png,jpg,jpeg,svg','max:2048'],
+        ]);
+
+        $data = [
+            'title' => $validated['title'],
+            'slug' => $validated['slug'],
+            'desc' => $validated['desc'],
+            'features' => array_values(array_filter($validated['features'] ?? [])),
+        ];
+
+        if ($request->hasFile('image')) {
+            // Remove old image
+            if ($service->image && \Storage::disk('public')->exists($service->image)) {
+                \Storage::disk('public')->delete($service->image);
+            }
+            // Store new image
+            $data['image'] = $request->file('image')->store('services', 'public');
+        }
+
+        $service->update($data);
+
+        return redirect()->route('services.index')->with('success', 'Service updated successfully.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Services $services)
+    public function destroy(Services $service)
     {
-        //
+        if ($service->image && \Storage::disk('public')->exists($service->image)) {
+            if (\Storage::disk('public')->delete($service->image)) {
+                $service->delete();
+                return redirect()->route('services.index')->with('success', 'Service deleted successfully.');
+            } else {
+                return redirect()->route('services.index')->with('error', 'Error deleting service image.');
+            }
+        } else {
+            $service->delete();
+            return redirect()->route('services.index')->with('success', 'Service deleted successfully.');
+        }
     }
 
     public function page() {
@@ -98,7 +137,7 @@ class ServicesController extends Controller
 
     public function data(Request $request)
     {
-        $query = Services::query()->select(['title', 'desc']);
+        $query = Services::query()->select(['id', 'title'])->orderBy('title', 'asc');
 
         return DataTables::of($query)
              ->addIndexColumn()

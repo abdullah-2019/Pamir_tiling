@@ -7,22 +7,35 @@
 @endsection
 @section('content')
     <div class="app-content">
-        <div class="container-fluid">
 
-            @if (session('status'))
-                <div class="alert alert-success">{{ session('status') }}</div>
-            @endif
+        @if (session('success'))
+            <div class="alert alert-success">{{ session('success') }}</div>
+        @endif
 
-            <div class="table-responsive">
-                <table id="services-table" class="table table-striped table-bordered w-100">
-                    <thead>
-                        <tr>
-                            <th>Title</th>
-                            <th>Description</th>
-                            <th width="200">Actions</th>
-                        </tr>
-                    </thead>
-                </table>
+        @if (session('error'))
+            <div class="alert alert-danger">{{ session('error') }}</div>
+        @endif
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Services List</h3>
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool btn-sm btn-primary" data-card-widget="collapse"
+                        title="Collapse">
+                        <a href="{{route('services.create')}}">New</a>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="services-table" class="table table-striped table-bordered w-100">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th width="200">Actions</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
@@ -44,10 +57,6 @@
                 columns: [{
                         data: 'title',
                         name: 'title'
-                    },
-                    {
-                        data: 'desc',
-                        name: 'desc'
                     },
                     {
                         data: 'actions',
