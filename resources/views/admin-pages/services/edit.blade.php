@@ -50,7 +50,7 @@
                                     <div class="mb-3">
                                         @if (!empty($service->image))
                                             <img src="{{ asset('storage/' . $service->image) }}" alt="Service Image"
-                                                class="img-fluid mb-2" style="max-height: 200px;">
+                                                class="img-fluid mb-2" style="max-height: 200px;" loading="lazy">
                                         @endif
                                     </div>
                                     <div class="input-group mb-3">
