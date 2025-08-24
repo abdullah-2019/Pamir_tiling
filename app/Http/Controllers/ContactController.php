@@ -7,6 +7,7 @@ use App\Http\Requests\StoreContactRequest;
 use App\Http\Requests\UpdateContactRequest;
 use Yajra\DataTables\DataTables;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 
 class ContactController extends Controller
@@ -14,34 +15,56 @@ class ContactController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+     public function index()
     {
         return view('admin-pages.contact.index');
     }
 
     public function data(Request $request)
     {
-        $query = Contact::query()->select(['id', 'name', 'email', 'phone', 'created_at']);
+        $query = Contact::query()
+            ->select([
+                'id',
+                DB::raw("CONCAT(name, ' ', last_name) AS full_name"),
+                'email',
+                'phone',
+                'created_at',
+                'status'
+            ])
+            ->get();
+        // Apply status filter if provided: "" (all), "0" (unread), "1" (read)
+        if ($request->filled('status') && $request->status !== '') {
+            $query->where('status', (int) $request->status);
+        }
 
         return DataTables::of($query)
-            // Optional: add an index column if you want row numbers
-            // ->addIndexColumn()
-
             ->editColumn('created_at', function ($row) {
                 return optional($row->created_at)->format('Y-m-d');
             })
-
+            // Include status in the dataset so DataTables can use it for row styling
+            ->addColumn('status', function ($row) {
+                return (int) $row->status;
+            })
             ->addColumn('actions', function ($row) {
                 $view = route('contact.show', $row->id);
-                $edit = route('contact.edit', $row->id);
                 $delete = route('contact.destroy', $row->id);
+                $toggleStatus = route('contact.toggleStatus', $row->id);
 
-                // Return HTML for action buttons
-                return view('admin-pages.contact.partials.actions', compact('view','edit','delete','row'))->render();
+                return view('admin-pages.contact.partials.actions', compact('view', 'delete', 'toggleStatus', 'row'))->render();
             })
-
-            ->rawColumns(['actions']) // allow HTML in actions
+            ->rawColumns(['actions'])
             ->make(true);
+    }
+
+    public function toggleStatus(Request $request, Contact $contact)
+    {
+        $contact->status = $contact->status ? 0 : 1;
+        $contact->save();
+
+        return response()->json([
+            'message' => 'Status updated.',
+            'status' => (int) $contact->status,
+        ]);
     }
 
     
@@ -66,7 +89,9 @@ class ContactController extends Controller
      */
     public function show(Contact $contact)
     {
-        //
+        $contact->status = 1;
+        $contact->save();
+        return view('admin-pages.contact.show', compact('contact'));
     }
 
     /**
@@ -90,7 +115,13 @@ class ContactController extends Controller
      */
     public function destroy(Contact $contact)
     {
-        //
+        try {
+            $contact->delete();
+            return redirect()->route('contact.index')->with('success', 'Contact deleted successfully.');
+        } catch (\Exception $e) {
+            return redirect()->route('contact.index')
+                ->with('error', 'Failed to delete contact: ' . $e->getMessage());
+        }
     }
 
     public function page() {

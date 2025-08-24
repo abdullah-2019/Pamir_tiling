@@ -2,7 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
-    <meta name="csrf-token" content="[CSRF_TOKEN_VALUE]">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Pamir Tiling Services | @yield('title')</title>
     <!--begin::Accessibility Meta Tags-->

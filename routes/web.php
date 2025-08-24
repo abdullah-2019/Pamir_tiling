@@ -16,6 +16,7 @@ Route::get('/', [HomeController::class, 'siteHomePage'])->name('home');
 Route::resource('contact', ContactController::class);
 Route::get('/contact-page', [ContactController::class, 'page'])->name('contact.page');
 Route::get('/contact-data', [ContactController::class, 'data'])->name('contact.data');
+Route::post('/contacts/{contact}/toggle-status', [ContactController::class, 'toggleStatus'])->name('contact.toggleStatus');
 
 
 // About

@@ -75,38 +75,6 @@ class ServicesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    // public function update(Request $request, Services $service)
-    // {
-    //     $validated = $request->validate([
-    //         'title' => ['required','string','max:255', 'unique:services,title,'.$service->id],
-    //         'slug'  => ['required','string','max:255','lowercase', 'unique:services,slug,'.$service->id],
-    //         'desc'  => ['required','string'],
-    //         'features' => ['required','array'],
-    //         'features.*' => ['nullable','string','max:255'],
-    //         'image' => ['nullable','image','mimes:png,jpg,jpeg,svg','max:2048'],
-    //     ]);
-
-    //     $data = [
-    //         'title' => $validated['title'],
-    //         'slug' => $validated['slug'],
-    //         'desc' => $validated['desc'],
-    //         'features' => array_values(array_filter($validated['features'] ?? [])),
-    //     ];
-    //     if ($request->hasFile('image')) {
-    //         // Remove old image
-    //         if ($service->image && \Storage::disk('public')->exists($service->image)) {
-    //             \Storage::disk('public')->delete($service->image);
-    //         }
-    //         // Store new image
-    //         $data['image'] = $request->file('image')->store('services', 'public');
-    //     }
-
-    //     $service->update($data);
-
-    //     return redirect()->route('services.index')->with('success', 'Service updated successfully.');
-    // }
-
-
     public function update(Request $request, Services $service)
     {
         $validated = $request->validate([
