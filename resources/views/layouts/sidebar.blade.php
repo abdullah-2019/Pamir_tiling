@@ -2,9 +2,10 @@
     <!--begin::Sidebar Brand-->
     <div class="sidebar-brand">
         <!--begin::Brand Link-->
-        <a href="{{route('dashboard')}}" class="brand-link">
+        <a href="{{ route('dashboard') }}" class="brand-link">
             <!--begin::Brand Image-->
-            <img src="{{asset('assets/site/img/').'/'.$about->logo}}" alt="Logo" class="brand-image opacity-75 shadow" loading="lazy"/>
+            <img src="{{ asset('assets/site/img/') . '/' . $about->logo }}" alt="Logo"
+                class="brand-image opacity-75 shadow" loading="lazy" />
             <!--end::Brand Image-->
             <!--begin::Brand Text-->
             <span class="brand-text fw-light">Pamir Tiling</span>
@@ -19,6 +20,12 @@
             <!--begin::Sidebar Menu-->
             <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="navigation"
                 aria-label="Main navigation" data-accordion="false" id="navigation">
+                <li class="nav-item">
+                    <a href="{{ route('dashboard') }}" class="nav-link active">
+                        <i class="nav-icon bi bi-palette"></i>
+                        <p>Dashboard</p>
+                    </a>
+                </li>
                 <li class="nav-item menu-open">
                     <a href="#" class="nav-link active">
                         <i class="nav-icon bi bi-speedometer"></i>
@@ -29,30 +36,12 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{route('contact.index')}}" class="nav-link active">
+                            <a href="{{ route('contact.index') }}" class="nav-link active">
                                 <i class="nav-icon bi bi-circle"></i>
                                 <p>List</p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="./index2.html" class="nav-link">
-                                <i class="nav-icon bi bi-circle"></i>
-                                <p>Dashboard v2</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="./index3.html" class="nav-link">
-                                <i class="nav-icon bi bi-circle"></i>
-                                <p>Dashboard v3</p>
-                            </a>
-                        </li>
                     </ul>
-                </li>
-                <li class="nav-item">
-                    <a href="{{route('about.index')}}" class="nav-link">
-                        <i class="nav-icon bi bi-palette"></i>
-                        <p>About</p>
-                    </a>
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">
@@ -64,19 +53,43 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{route('services.index')}}" class="nav-link">
+                            <a href="{{ route('services.index') }}" class="nav-link">
                                 <i class="nav-icon bi bi-circle"></i>
                                 <p>List</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('services.create')}}" class="nav-link">
+                            <a href="{{ route('services.create') }}" class="nav-link">
                                 <i class="nav-icon bi bi-circle"></i>
                                 <p>Create Services</p>
                             </a>
                         </li>
                     </ul>
                 </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon bi bi-pencil-square"></i>
+                        <p>
+                            Projects
+                            <i class="nav-arrow bi bi-chevron-right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('projects.index') }}" class="nav-link">
+                                <i class="nav-icon bi bi-circle"></i>
+                                <p>List</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('about.index') }}" class="nav-link">
+                        <i class="nav-icon bi bi-palette"></i>
+                        <p>About</p>
+                    </a>
+                </li>
+
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon bi bi-clipboard-fill"></i>
@@ -149,23 +162,7 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon bi bi-pencil-square"></i>
-                        <p>
-                            Forms
-                            <i class="nav-arrow bi bi-chevron-right"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="./forms/general.html" class="nav-link">
-                                <i class="nav-icon bi bi-circle"></i>
-                                <p>General Elements</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon bi bi-table"></i>
@@ -184,7 +181,7 @@
                     </ul>
                 </li>
                 <li class="nav-header">EXAMPLES</li>
-                
+
                 <li class="nav-header">DOCUMENTATIONS</li>
                 <li class="nav-item">
                     <a href="./docs/introduction.html" class="nav-link">

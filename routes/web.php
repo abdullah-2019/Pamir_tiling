@@ -52,8 +52,9 @@ Route::get('/services-data', [ServicesController::class, 'data'])->name('service
 
 // Projects
 Route::resource('projects', ProjectsController::class);
-Route::get('/projects', [ProjectsController::class, 'page'])->name('projects.page');
+Route::get('/projects-page', [ProjectsController::class, 'page'])->name('projects.page');
 Route::get('/project-detail/{id}', [ProjectsController::class, 'projectDetial'])->name('project-detail');
+Route::get('/projects-data', [ProjectsController::class, 'data'])->name('projects.data');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

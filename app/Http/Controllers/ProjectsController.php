@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Projects;
 use App\Http\Requests\StoreProjectsRequest;
 use App\Http\Requests\UpdateProjectsRequest;
+use Yajra\DataTables\DataTables;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;  
 
 class ProjectsController extends Controller
 {
@@ -13,7 +16,62 @@ class ProjectsController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin-pages.projects.index');
+    }
+
+    public function data(Request $request)
+    {
+        $query = Projects::query()->select(['id', 'clinet_name', 'images']);
+
+        return DataTables::of($query)
+            ->addIndexColumn()
+            ->addColumn('images', function ($row) {
+                // Normalize images to an array
+                $images = [];
+
+                if (is_array($row->images)) {
+                    $images = $row->images;
+                } elseif (is_string($row->images) && $row->images !== '') {
+                    // If stored as JSON
+                    $decoded = json_decode($row->images, true);
+                    if (json_last_error() === JSON_ERROR_NONE && is_array($decoded)) {
+                        $images = $decoded;
+                    } else {
+                        // Fallback: comma-separated string
+                        $images = array_map('trim', explode(',', $row->images));
+                    }
+                }
+
+                // Limit number shown (e.g., max 4 like your template)
+                $images = array_slice($images, 0, 4);
+
+                // Build HTML
+                $html = '<ul class="list-inline mb-0">';
+                foreach ($images as $path) {
+                    // Resolve to full URL; adjust if you store absolute URLs
+                    $src = filter_var($path, FILTER_VALIDATE_URL) ? $path : asset($path);
+                    $html .= '<li class="list-inline-item">'
+                        . '<img alt="Project Image" class="table-avatar" src="' . e($src) . '">'
+                        . '</li>';
+                }
+
+                // Optional: placeholder if no images
+                if (empty($images)) {
+                    $html .= '<li class="list-inline-item text-muted small">No images</li>';
+                }
+
+                $html .= '</ul>';
+
+                return $html;
+            })
+            ->addColumn('actions', function ($row) {
+                $view = route('projects.show', $row->id);
+                $edit = route('projects.edit', $row->id);
+                $delete = route('projects.destroy', $row->id);
+                return view('admin-pages.projects.partials.actions', compact('view','edit','delete','row'))->render();
+            })
+            ->rawColumns(['images', 'actions'])
+            ->make(true);
     }
 
     /**
@@ -21,37 +79,69 @@ class ProjectsController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin-pages.projects.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreProjectsRequest $request)
+     public function store(Request $request)
     {
-        //
+        // Validate inputs
+        $validated = $request->validate([
+            'client_name'   => ['required', 'string', 'max:255'],
+            'images'        => ['nullable', 'array'],
+            'images.*'      => ['image', 'mimes:jpeg,png,jpg,gif,webp,avif', 'max:5120'], // max 5MB each
+        ]);
+
+        $imagePaths = [];
+
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $file) {
+                // Optional: create a unique filename while preserving extension
+                $filename = Str::uuid()->toString() . '.' . $file->getClientOriginalExtension();
+
+                // Store on the public disk under "projects" folder
+                // This creates storage/app/public/projects/xxx.ext
+                $path = $file->storeAs('projects', $filename, 'public');
+
+                // Save the public path (e.g., "storage/projects/xxx.ext") for easy use in views
+                $publicPath = 'storage/' . $path;
+
+                $imagePaths[] = $publicPath;
+            }
+        }
+
+        $project = Projects::create([
+            'client_name' => $validated['client_name'],
+            'images'      => $imagePaths, // will be stored as JSON because of cast
+        ]);
+
+        return redirect()
+            ->route('projects.show', $project)
+            ->with('success', 'Project created successfully.');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Projects $projects)
+    public function show(Projects $project)
     {
-        //
+        return view('admin-pages.projects.show', compact('project'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Projects $projects)
+    public function edit(Projects $project)
     {
-        //
+        return view('admin-pages.projects.edit', compact('project'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateProjectsRequest $request, Projects $projects)
+    public function update(UpdateProjectsRequest $request, Projects $project)
     {
         //
     }
@@ -59,7 +149,7 @@ class ProjectsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Projects $projects)
+    public function destroy(Projects $project)
     {
         //
     }

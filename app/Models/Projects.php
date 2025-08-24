@@ -10,6 +10,11 @@ class Projects extends Model
     /** @use HasFactory<\Database\Factories\ProjectsFactory> */
     use HasFactory;
 
+    protected $fillable = [
+        'client_name',
+        'images'
+    ];
+
     protected $casts = [
         'images' => 'array',
     ];

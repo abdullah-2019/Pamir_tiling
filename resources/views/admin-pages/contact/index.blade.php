@@ -60,7 +60,7 @@
                                 <th>Email</th>
                                 <th>Phone</th>
                                 <th width="140">Created</th>
-                                <th width="200">Actions</th>
+                                <th width="105">Actions</th>
                             </tr>
                         </thead>
                         <tbody></tbody>
