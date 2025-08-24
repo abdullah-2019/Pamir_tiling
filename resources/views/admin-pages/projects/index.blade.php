@@ -66,7 +66,7 @@
                 ajax: '{{ route('projects.data') }}',
                 order: [[0, 'desc']],
                 columns: [
-                    { data: 'clinet_name', name: 'clinet_name' },
+                    { data: 'client_name', name: 'client_name' },
                     { data: 'images', name: 'images', orderable: false, searchable: false },
                     { data: 'actions', name: 'actions', orderable: false, searchable: false }
                 ],

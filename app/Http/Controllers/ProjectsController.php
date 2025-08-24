@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Projects;
-use App\Http\Requests\StoreProjectsRequest;
-use App\Http\Requests\UpdateProjectsRequest;
 use Yajra\DataTables\DataTables;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;  
@@ -21,7 +19,7 @@ class ProjectsController extends Controller
 
     public function data(Request $request)
     {
-        $query = Projects::query()->select(['id', 'clinet_name', 'images']);
+        $query = Projects::query()->select(['id', 'client_name', 'images']);
 
         return DataTables::of($query)
             ->addIndexColumn()
@@ -141,9 +139,41 @@ class ProjectsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateProjectsRequest $request, Projects $project)
+    public function update(Request $request, Projects $project)
     {
-        //
+        $request->validate([
+            'client_name' => 'required|string|max:255',
+            'images'      => 'nullable|array',
+            'images.*'    => 'image|max:2048',
+        ]);
+
+        /* 1.  NEW UPLOADS ------------------------------------------------------- */
+        $paths = $project->images ?? [];                       // existing
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $file) {
+                $paths[] = 'storage/' . $file->store('projects', 'public');
+            }
+        }
+
+        /* 2.  ORDER & DELETE ---------------------------------------------------- */
+        $wanted = $request->input('image_order', []);          // what the form sent
+        $final  = [];
+
+        foreach ($wanted as $p) {
+            // keep only if the file actually exists
+            if (in_array($p, $paths)) {
+                $final[] = $p;
+            }
+        }
+
+        /* 3.  SAVE -------------------------------------------------------------- */
+        $project->update([
+            'client_name' => $request->client_name,
+            'images'      => $final,
+        ]);
+
+        return redirect()->route('projects.show', $project)
+                        ->with('success', 'Updated');
     }
 
     /**
