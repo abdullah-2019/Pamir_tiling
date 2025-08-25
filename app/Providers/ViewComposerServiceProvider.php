@@ -24,7 +24,12 @@ class ViewComposerServiceProvider extends ServiceProvider
     {
         View::composer('layouts.nav', function ($view) {
             $unreadMessagesCount = Contact::where('status', false)->count();
-            $view->with('unreadMessagesCount', $unreadMessagesCount);
+            $notificationCount = 1; // increase it based on variables/notifications
+            $view->with([
+                'unreadMessagesCount' => $unreadMessagesCount,
+                'notificationCount' => $notificationCount
+
+            ]);
         });
     }
 }

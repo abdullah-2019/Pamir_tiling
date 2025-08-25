@@ -16,9 +16,11 @@
             <li class="nav-item dropdown">
                 <a class="nav-link" data-bs-toggle="dropdown" href="#">
                     <i class="bi bi-bell-fill"></i>
-                    <span class="navbar-badge badge text-bg-warning">
-                        1
-                    </span>
+                    @if ($unreadMessagesCount > 0)
+                        <span class="navbar-badge badge text-bg-warning">
+                            {{ $notificationCount }}
+                        </span>
+                    @endif
                 </a>
                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
                     <span class="dropdown-item dropdown-header">Notifications</span>
@@ -54,7 +56,7 @@
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                     <img src="./assets/img/user2-160x160.jpg" class="user-image rounded-circle shadow"
                         alt="User Image" />
-                    <span class="d-none d-md-inline">{{Auth::user()->name}}</span>
+                    <span class="d-none d-md-inline">{{ Auth::user()->name }}</span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
                     <!--begin::User Image-->
