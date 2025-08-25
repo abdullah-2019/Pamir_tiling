@@ -4,45 +4,68 @@
 
 @section('content')
     <div class="container py-4">
-        <h2>{{ $project->client_name }}</h2>
 
-        <form method="POST" action="{{ route('projects.update', $project) }}" enctype="multipart/form-data">
-            @csrf @method('PUT')
+        @if (session('success'))
+            <div class="alert alert-success">{{ session('success') }}</div>
+        @endif
 
-            {{-- client name --}}
-            <div class="mb-3">
-                <label class="form-label">Client name</label>
-                <input type="text" name="client_name" class="form-control"
-                    value="{{ old('client_name', $project->client_name) }}" required>
-            </div>
+        @if (session('error'))
+            <div class="alert alert-danger">{{ session('error') }}</div>
+        @endif
 
-            {{-- current gallery --}}
-            <div class="mb-3">
-                <label class="form-label">Current images (drag to re-order)</label>
-                <div class="row g-2" id="sortable">
-                    @foreach ($project->images ?? [] as $path)
-                        <div class="col-6 col-md-3 col-xl-2">
-                            <div class="card">
-                                <img src="{{ asset($path) }}" class="card-img-top">
-                                <button type="button" class="btn btn-sm btn-danger remove-img">
-                                    &times;
-                                </button>
-                                <input type="hidden" name="image_order[]" value="{{ $path }}">
-                            </div>
-                        </div>
-                    @endforeach
+        @if (session('status'))
+            <div class="col-12">
+                <div class="callout callout-info">
+                    {{ session('status') }}
                 </div>
             </div>
+        @endif
 
-            {{-- add new images --}}
-            <div class="mb-3">
-                <label class="form-label">Add new images</label>
-                <input type="file" id="images" name="images[]" multiple>
+
+        <div class="card">
+            <div class="card-header">
+                <h2>{{ $project->client_name }}</h2>
             </div>
+            <div class="card-body">
+                <form method="POST" action="{{ route('projects.update', $project) }}" enctype="multipart/form-data">
+                    @csrf @method('PUT')
 
-            <button class="btn btn-primary">Save</button>
-            <a href="{{ route('projects.show', $project) }}" class="btn btn-outline-secondary">Cancel</a>
-        </form>
+                    {{-- client name --}}
+                    <div class="mb-3">
+                        <label class="form-label">Client name</label>
+                        <input type="text" name="client_name" class="form-control"
+                            value="{{ old('client_name', $project->client_name) }}" required>
+                    </div>
+
+                    {{-- current gallery --}}
+                    <div class="mb-3">
+                        <label class="form-label">Current images (drag to re-order)</label>
+                        <div class="row g-2" id="sortable">
+                            @foreach ($project->images ?? [] as $path)
+                                <div class="col-6 col-md-3 col-xl-2">
+                                    <div class="card">
+                                        <img src="{{ asset($path) }}" class="card-img-top">
+                                        <button type="button" class="btn btn-sm btn-danger remove-img">
+                                            &times;
+                                        </button>
+                                        <input type="hidden" name="image_order[]" value="{{ $path }}">
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+
+                    {{-- add new images --}}
+                    <div class="mb-3">
+                        <label class="form-label">Add new images</label>
+                        <input type="file" id="images" name="images[]" multiple>
+                    </div>
+
+                    <button class="btn btn-primary">Save</button>
+                    <a href="{{ route('projects.show', $project) }}" class="btn btn-outline-secondary">Cancel</a>
+                </form>
+            </div>
+        </div>
     </div>
 @endsection
 

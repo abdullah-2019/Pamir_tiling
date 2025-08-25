@@ -6,6 +6,7 @@ use App\Models\Projects;
 use Yajra\DataTables\DataTables;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;  
+use Illuminate\Support\Facades\Storage;
 
 class ProjectsController extends Controller
 {
@@ -141,39 +142,71 @@ class ProjectsController extends Controller
      */
     public function update(Request $request, Projects $project)
     {
-        $request->validate([
-            'client_name' => 'required|string|max:255',
-            'images'      => 'nullable|array',
-            'images.*'    => 'image|max:2048',
+        $validated = $request->validate([
+            'client_name'   => 'required|string|max:255',
+            'images'        => 'nullable|array',
+            'images.*'      => 'image|max:2048',
+            'image_order'   => 'nullable|array',
+            'image_order.*' => 'string',
         ]);
 
-        /* 1.  NEW UPLOADS ------------------------------------------------------- */
-        $paths = $project->images ?? [];                       // existing
+        // 0) Start with current images
+        $current = $project->images ?? [];
+
+        // 1) Handle new uploads
+        $newUploads = [];
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $file) {
-                $paths[] = 'storage/' . $file->store('projects', 'public');
+                // Optional: custom filename to avoid collisions
+                $filename = Str::uuid()->toString() . '.' . $file->getClientOriginalExtension();
+                $stored = $file->storeAs('projects', $filename, 'public'); // "projects/uuid.ext"
+                $publicPath = 'storage/' . $stored;
+                $newUploads[] = $publicPath;
+                $current[] = $publicPath; // Keep current in sync for consistency
             }
         }
 
-        /* 2.  ORDER & DELETE ---------------------------------------------------- */
-        $wanted = $request->input('image_order', []);          // what the form sent
-        $final  = [];
+        // 2) Build final list
+        $wanted = $validated['image_order'] ?? null;
+        $final = [];
 
-        foreach ($wanted as $p) {
-            // keep only if the file actually exists
-            if (in_array($p, $paths)) {
-                $final[] = $p;
+        if (is_array($wanted) && count($wanted)) {
+            // Keep only items that exist in $current (existing or newly uploaded)
+            foreach ($wanted as $path) {
+                if (in_array($path, $current, true)) {
+                    $final[] = $path;
+                }
+            }
+            // If the UI didn't include new uploads in image_order, append them at the end
+            // to ensure new files aren't lost.
+            foreach ($newUploads as $path) {
+                if (!in_array($path, $final, true)) {
+                    $final[] = $path;
+                }
+            }
+        } else {
+            // No order provided: keep all current (existing + new) in their natural order
+            $final = array_values(array_unique($current));
+        }
+
+        // 3) Delete removed files from disk
+        $removed = array_diff($project->images ?? [], $final);
+        foreach ($removed as $publicPath) {
+            if (str_starts_with($publicPath, 'storage/')) {
+                $diskPath = substr($publicPath, strlen('storage/')); 
+                Storage::disk('public')->delete($diskPath);
             }
         }
 
-        /* 3.  SAVE -------------------------------------------------------------- */
+        // 4) Save
         $project->update([
-            'client_name' => $request->client_name,
-            'images'      => $final,
+            'client_name' => $request->input('client_name'),
+            'images'      => array_values($final),
         ]);
 
-        return redirect()->route('projects.show', $project)
-                        ->with('success', 'Updated');
+        return redirect()
+            ->back()
+            ->with('success', 'Project Updated Successfully!');
     }
 
     /**
