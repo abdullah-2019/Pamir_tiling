@@ -54,14 +54,14 @@
             <!--begin::User Menu Dropdown-->
             <li class="nav-item dropdown user-menu">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                    <img src="{{ asset(Auth::user()->image) ?? asset('storage\/avatars\/default.webp') }}"
+                    <img src="{{ Storage::url(Auth::user()->image) ?? asset('storage\/avatars\/default.webp') }}"
                         class="user-image rounded-circle shadow" alt="User Image" loading="lazy" />
                     <span class="d-none d-md-inline">{{ Auth::user()->name ?? '' }}</span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
                     <!--begin::User Image-->
                     <li class="user-header text-bg-primary">
-                        <img src="{{ asset(Auth::user()->image) ?? asset('storage\/avatars\/default.webp') }}"
+                        <img src="{{ Storage::url(Auth::user()->image) ?? asset('storage\/avatars\/default.webp') }}"
                             class="rounded-circle shadow" alt="User Image" />
                         <p>
                             {{ Auth::user()->name ?? '' }}
@@ -70,8 +70,7 @@
                     <!--end::User Image-->
                     <!--begin::Menu Footer-->
                     <li class="user-footer">
-                        <a href="" class="btn btn-default btn-flat">Profile</a>
-
+                        <a href="{{route('profile.edit')}}" class="btn btn-default btn-flat">Profile</a>
                         <form method="POST" action="{{ route('logout') }}" class="float-end d-inline">
                             @csrf
                             <button type="submit" class="btn btn-default btn-flat">
