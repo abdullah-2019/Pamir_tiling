@@ -12,6 +12,8 @@ use App\Http\Controllers\AboutAddressController;
 
 Route::get('/', [HomeController::class, 'siteHomePage'])->name('home');
 
+Route::get('/profile', [ProfileController::class, ''])->name('profile');
+
 // Contact
 Route::resource('contact', ContactController::class);
 Route::get('/contact-page', [ContactController::class, 'page'])->name('contact.page');

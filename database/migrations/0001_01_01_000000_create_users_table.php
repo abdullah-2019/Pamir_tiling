@@ -18,6 +18,9 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
+            $table->string('image')->default('default.webp');
+            $table->enum('status', ['active', 'suspend', 'lock', 'in_active'])->default('active');
+            $table->timestamp('last_login')->nullable()->index();
             $table->timestamps();
         });
 
