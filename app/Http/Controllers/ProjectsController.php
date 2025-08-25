@@ -214,7 +214,37 @@ class ProjectsController extends Controller
      */
     public function destroy(Projects $project)
     {
-        //
+        $errors = [];
+
+        $images = $project->images ?? []; 
+        
+        if (is_array($images) && count($images)) {
+            foreach ($images as $publicPath) {
+                $diskPath = str_starts_with($publicPath, 'storage/')
+                    ? substr($publicPath, strlen('storage/')) 
+                    : $publicPath;
+
+                try {
+                    if (Storage::disk('public')->exists($diskPath)) {
+                        if (!Storage::disk('public')->delete($diskPath)) {
+                            $errors[] = $publicPath;
+                        }
+                    }
+                } catch (\Throwable $e) {
+                    $errors[] = $publicPath . ' (' . $e->getMessage() . ')';
+                }
+            }
+        }
+
+        // Delete the project record regardless of image deletion success,
+        // or choose to abort if you want strict behavior.
+        $project->delete();
+
+        if (!empty($errors)) {
+            return redirect()->back()->with('warning', 'Project deleted, but some images could not be removed: ' . implode(', ', $errors));
+        }
+
+        return redirect()->back()->with('success', 'Project and images deleted successfully.');
     }
 
     public function page() {

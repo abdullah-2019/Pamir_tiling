@@ -4,7 +4,7 @@
 <a href="{{ $edit }}" class="btn btn-sm btn-outline-primary">
     <i class="bi bi-pencil"></i>
 </a>
-<form action="{{ $delete }}" method="POST" class="d-inline" onsubmit="return confirm('Delete this contact?')">
+<form action="{{ $delete }}" method="POST" class="d-inline" onsubmit="return confirm('Delete this project?')">
     @csrf
     @method('DELETE')
     <button type="submit" class="btn btn-sm btn-outline-danger">
