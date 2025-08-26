@@ -47,6 +47,8 @@
 
     <!-- Pleaople who trust us. -->
     @include('site/home/people-trust')
+
+
 @endsection
 
 @section('js')
@@ -59,7 +61,7 @@
                     var modalImg = document.getElementById('fullscreenImage');
                     modalImg.src = imgSrc;
                     var modal = new bootstrap.Modal(document.getElementById(
-                    'fullscreenImageModal'));
+                        'fullscreenImageModal'));
                     modal.show();
                 });
             });
@@ -69,6 +71,15 @@
             modalEl.addEventListener('hidden.bs.modal', function() {
                 document.getElementById('fullscreenImage').src = '';
             });
+            
+            showToast();
         });
+
+        function showToast() {
+            const toastEl = document.getElementById('toast');
+            const toast = new bootstrap.Toast(toastEl);
+            toast.show();
+        }
+
     </script>
 @endsection

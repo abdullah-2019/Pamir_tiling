@@ -75,6 +75,7 @@
                     <div class="contact-form-wrapper">
                         <h2 class="text-center mb-4">Send a Message</h2>
 
+                        @include('site.home.contact-form')
                         <form action="forms/contact.php" method="post" class="php-email-form">
                             <div class="row g-3">
                                 <div class="col-md-6">

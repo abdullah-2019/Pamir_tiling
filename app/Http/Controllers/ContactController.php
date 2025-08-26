@@ -81,7 +81,18 @@ class ContactController extends Controller
      */
     public function store(StoreContactRequest $request)
     {
-        //
+        // 1) validation is already handled by StoreContactRequest
+        $data = $request->validated();
+
+        // 2) wrap the insert in a try/catch
+        try {
+            Contact::create($data);
+            return back()->with(['success' => 'Your message was sent successfully!']);
+        } catch (\Throwable $e) {
+            return back()
+                ->withInput()        // keep the form filled
+                ->with(['error' => 'Sorry, we could not save your message. Please try again later.']);
+        }
     }
 
     /**

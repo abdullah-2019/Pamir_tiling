@@ -56,7 +56,7 @@
 
             <a href="{{ route('home') }}" class="logo d-flex align-items-center">
                 <!-- Uncomment the line below if you also wish to use an image logo -->
-                <img src="{{ asset('/assets/site/img/').'/'.$about->logo }}" alt="logo"> -->
+                <img src="{{ asset('/assets/site/img/') . '/' . $about->logo }}" alt="logo"> -->
                 {{-- <svg class="my-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <g id="bgCarrier" stroke-width="0"></g>
           <g id="tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
@@ -90,8 +90,10 @@
     <main class="main">
 
         @yield('content')
-
+        
     </main>
+
+    @include('errors.toast')
 
     <footer id="footer" class="footer accent-background">
 
@@ -138,7 +140,7 @@
                 <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
                     <h4>Contact Us</h4>
                     <p>{{ $about->address ?? '' }}</p>
-                    <p>{{ $about->country ?? ''}}</p>
+                    <p>{{ $about->country ?? '' }}</p>
                     @if ($about && !empty($about->phones) && !empty($about->phones[0]))
                         <p class="mt-4">
                             <strong>Phone:</strong>
@@ -186,6 +188,19 @@
 
     <!-- Main JS File -->
     <script src="{{ asset('/assets/site/js/main.js') }}"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            showToast();
+        });
+
+        function showToast() {
+            const toastEl = document.getElementById('toast');
+            const toast = new bootstrap.Toast(toastEl);
+            toast.show();
+        }
+
+    </script>
 
     @yield('js')
 

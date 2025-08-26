@@ -13,7 +13,7 @@
         </div>
 
         <div class="form-floating mb-3">
-            <input id="email" name="email" type="text" class="form-control mt-1 block w-full {{$errors->get('email') ? 'is-invalid' : ''}}"
+            <input id="email" name="email" type="email" class="form-control mt-1 block w-full {{$errors->get('email') ? 'is-invalid' : ''}}"
                 value="{{ old('email', $user->email) }}" required autocomplete="username">
             <label for="email">Email Address</label>
             <small>
