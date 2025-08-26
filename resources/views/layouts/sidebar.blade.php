@@ -27,7 +27,7 @@
                 @endphp
                 <li class="nav-item {{ $contactsOpen ? 'menu-open' : '' }}">
                     <a href="#" class="nav-link {{ $contactsOpen ? 'active' : '' }}">
-                        <i class="nav-icon bi bi-speedometer"></i>
+                        <i class="nav-icon bi-envelope"></i>
                         <p>
                             Contacts
                             <span class="nav-badge badge text-bg-secondary me-3" id="ContactCountBadge"></span>
@@ -38,7 +38,7 @@
                         <li class="nav-item">
                             <a href="{{ route('contact.index') }}"
                                 class="nav-link {{ request()->routeIs('contact.index') ? 'active' : '' }}">
-                                <i class="nav-icon bi bi-circle"></i>
+                                <i class="nav-icon bi bi-list-task"></i>
                                 <p>List</p>
                             </a>
                         </li>
@@ -51,7 +51,7 @@
                 @endphp
                 <li class="nav-item {{ $servicesOpen ? 'menu-open' : '' }}">
                     <a href="#" class="nav-link {{ $servicesOpen ? 'active' : '' }}">
-                        <i class="nav-icon bi bi-box-seam-fill"></i>
+                        <i class="nav-icon bi bi-tools"></i>
                         <p>
                             Services
                             <span class="nav-badge badge text-bg-secondary me-3" id="ServiceCountBadge"></span>
@@ -62,14 +62,14 @@
                         <li class="nav-item">
                             <a href="{{ route('services.index') }}"
                                 class="nav-link {{ request()->routeIs('services.index') ? 'active' : '' }}">
-                                <i class="nav-icon bi bi-circle"></i>
+                                <i class="nav-icon bi bi-list-task"></i>
                                 <p>List</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('services.create') }}"
                                 class="nav-link {{ request()->routeIs('services.create') ? 'active' : '' }}">
-                                <i class="nav-icon bi bi-circle"></i>
+                                <i class="nav-icon bi bi-plus-circle"></i>
                                 <p>Create Services</p>
                             </a>
                         </li>
@@ -82,7 +82,7 @@
                 @endphp
                 <li class="nav-item {{ $projectsOpen ? 'menu-open' : '' }}">
                     <a href="#" class="nav-link {{ $projectsOpen ? 'active' : '' }}">
-                        <i class="nav-icon bi bi-pencil-square"></i>
+                        <i class="nav-icon bi bi-collection"></i>
                         <p>
                             Projects
                             <span class="nav-badge badge text-bg-secondary me-3" id="ProjectCountBadge"></span>
@@ -93,7 +93,7 @@
                         <li class="nav-item">
                             <a href="{{ route('projects.index') }}"
                                 class="nav-link {{ request()->routeIs('projects.index') ? 'active' : '' }}">
-                                <i class="nav-icon bi bi-circle"></i>
+                                <i class="nav-icon bi bi-list-task"></i>
                                 <p>List</p>
                             </a>
                         </li>
@@ -101,7 +101,7 @@
                             <li class="nav-item">
                                 <a href="{{ route('projects.create') }}"
                                     class="nav-link {{ request()->routeIs('projects.create') ? 'active' : '' }}">
-                                    <i class="nav-icon bi bi-circle"></i>
+                                    <i class="nav-icon bi-plus-circle"></i>
                                     <p>Create</p>
                                 </a>
                             </li>
@@ -113,7 +113,7 @@
                 <li class="nav-item">
                     <a href="{{ route('about.index') }}"
                         class="nav-link {{ request()->routeIs('about.index') ? 'active' : '' }}">
-                        <i class="nav-icon bi bi-palette"></i>
+                        <i class="nav-icon bi bi-info-circle"></i>
                         <p>About</p>
                     </a>
                 </li>
