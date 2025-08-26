@@ -82,7 +82,8 @@
         const input = document.getElementById('avatarInput');
         const preview = document.getElementById('avatarPreview');
         const upload = document.getElementById('uploadBtn');
-
+        const userImageNav = document.getElementById('user-image-nav');
+        const userImageProfile = document.getElementById('user-image-profile');
         input.addEventListener('change', () => {
             const file = input.files[0];
             if (file) {
@@ -114,8 +115,11 @@
                     image_url
                 } = await res.json();
                 preview.src = image_url;
+                userImageNav.src = image_url;
+                userImageProfile.src = image_url;
                 upload.style.display = 'none';
                 input.value = ''; // reset picker
+                alert("Image Changed Successfully.");
             } else {
                 alert('Upload failed');
             }

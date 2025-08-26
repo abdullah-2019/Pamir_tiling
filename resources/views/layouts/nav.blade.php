@@ -55,14 +55,14 @@
             <li class="nav-item dropdown user-menu">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                     <img src="{{ Storage::url(Auth::user()->image) ?? asset('storage\/avatars\/default.webp') }}"
-                        class="user-image rounded-circle shadow" alt="User Image" loading="lazy" />
+                        class="user-image rounded-circle shadow" alt="User Image" loading="lazy" id="user-image-nav"/>
                     <span class="d-none d-md-inline">{{ Auth::user()->name ?? '' }}</span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
                     <!--begin::User Image-->
                     <li class="user-header text-bg-primary">
                         <img src="{{ Storage::url(Auth::user()->image) ?? asset('storage\/avatars\/default.webp') }}"
-                            class="rounded-circle shadow" alt="User Image" />
+                            class="rounded-circle shadow" alt="User Image" id="user-image-profile" />
                         <p>
                             {{ Auth::user()->name ?? '' }}
                             <small>Member since {{ optional(Auth::user()->created_at)->format('M Y') ?? '' }}</small>
