@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Anhskohbo\NoCaptcha\Facades\NoCaptcha;
+
 
 class StoreContactRequest extends FormRequest
 {
@@ -28,6 +30,16 @@ class StoreContactRequest extends FormRequest
             'phone'     => ['required', 'string', 'max:255'],
             'subject'   => ['required', 'string', 'max:255'],
             'message'   => ['required', 'string', 'max:65500'],
+            'g-recaptcha-response' => 'required|captcha', 
         ];
     }
+
+    public function messages(): array
+    {
+        return [
+            'g-recaptcha-response.required' => 'Please verify the reCAPTCHA.',
+            'g-recaptcha-response.captcha' => 'reCAPTCHA verification failed. Please try again.',
+        ];
+    }
+
 }

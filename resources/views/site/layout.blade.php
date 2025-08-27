@@ -46,6 +46,8 @@
     <link href="{{ asset('/assets/site/css/main.css') }}" rel="stylesheet">
 
     @yield('css')
+    @stack('styles');
+    
 
 </head>
 
@@ -203,6 +205,8 @@
     </script>
 
     @yield('js')
+
+    @stack('scripts')
 
 
 </body>
