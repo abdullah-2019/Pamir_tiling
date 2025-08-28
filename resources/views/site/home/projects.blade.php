@@ -16,8 +16,9 @@
                     $firstImage =
                         collect($project->images ?? [])
                             ->filter()
-                            ->first() ?? 'placeholder.webp';
-                    $imgUrl = asset('assets/site/img/projects/' . $firstImage);
+                            ->first() ?? 'assets/site/img/placeholder.webp';
+
+                    $imgUrl = asset($firstImage);
                 @endphp
 
                 <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="100">

@@ -10,6 +10,10 @@ use Illuminate\Http\Request;
 
 class AboutController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      */
@@ -70,7 +74,8 @@ class AboutController extends Controller
     public function page() {
         $about = About::all();
         $projects = Projects::inRandomOrder()->take(2)->get();
-        return view('site.about', compact('about', 'projects'));
+        $projectCount = Projects::count();
+        return view('site.about', compact('about', 'projects', 'projectCount'));
     }
 
     // Update email
@@ -297,25 +302,49 @@ class AboutController extends Controller
     public function updateLogo(Request $request)
     {
         $request->validate([
-            'logo' => 'required|image|mimes:png,jpg,jpeg,svg|max:2048',
+            'logo' => 'required|image|mimes:png,jpg,jpeg,svg,webp|max:2048',
         ]);
+
+        // Add debugging
+        \Log::info('File received:', ['has_file' => $request->hasFile('logo')]);
+        
+        if ($request->hasFile('logo')) {
+            \Log::info('File details:', [
+                'name' => $request->file('logo')->getClientOriginalName(),
+                'size' => $request->file('logo')->getSize(),
+                'mime' => $request->file('logo')->getMimeType()
+            ]);
+        }
 
         $about = About::first();
 
-        // Delete old logo if exists
-        if ($about->logo && file_exists(public_path('assets/site/img/' . $about->logo))) {
-            unlink(public_path('assets/site/img/' . $about->logo));
+        if ($request->hasFile('logo')) {
+            // Delete old logo if exists
+            if ($about->logo && \Storage::disk('public')->exists($about->logo)) {
+                \Storage::disk('public')->delete($about->logo);
+                \Log::info('Old logo deleted');
+            }
+            
+            // Store new logo
+            try {
+                $logoPath = $request->file('logo')->store('logo', 'public');
+                \Log::info('New logo stored at: ' . $logoPath);
+                
+                $about->logo = $logoPath;
+                $about->save();
+                
+                // Verify the file exists
+                if (\Storage::disk('public')->exists($logoPath)) {
+                    \Log::info('File verified at: ' . storage_path('app/public/' . $logoPath));
+                }
+                
+            } catch (\Exception $e) {
+                \Log::error('File upload error: ' . $e->getMessage());
+                return redirect()->back()->with('error', 'Failed to upload logo: ' . $e->getMessage());
+            }
         }
 
-        // Store new logo
-        $file = $request->file('logo');
-        $fileName = time() . '.' . $file->getClientOriginalExtension();
-        $file->move(public_path('assets/site/img/'), $fileName);
-
-        $about->logo = $fileName;
-        $about->save();
         cache()->flush();
-
         return redirect()->back()->with('success', 'Logo updated successfully!');
     }
 

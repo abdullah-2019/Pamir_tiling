@@ -10,7 +10,12 @@
         @if ($about && $about->logo)
             <div class="mb-3">
                 <p>Current Logo:</p>
-                <img src="{{ asset('assets/site/img/' . $about->logo) }}" alt="logo" width="120">
+                @if ($about->logo && \Storage::disk('public')->exists($about->logo))
+                    <img src="{{ asset('storage/' . $about->logo) }}" alt="logo" width="120" loading="lazy">
+                @else
+                    {{-- fallback: no logo uploaded --}}
+                    <img src="{{ asset('images/default-logo.png') }}" alt="logo" width="120" loading="lazy">
+                @endif
             </div>
         @endif
 
@@ -18,7 +23,9 @@
             @csrf
             <div class="mb-3">
                 <label for="logo" class="form-label">Upload New Logo</label>
-                <input type="file" name="logo" class="form-control" required>
+                <input type="file" name="logo" class="form-control" required
+                    accept="image/png, image/jpeg, image/svg+xml, image/webp">
+                <small>png,jpg,jpeg,svg,webp</small>
                 @error('logo')
                     <small class="text-danger">{{ $message }}</small>
                 @enderror

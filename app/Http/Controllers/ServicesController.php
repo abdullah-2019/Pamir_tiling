@@ -11,7 +11,11 @@ use Yajra\DataTables\DataTables;
 
 class ServicesController extends Controller
 {
-    
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['page', 'serviceDetail']);
+    }
+        
     /**
      * Display a listing of the resource.
      */
@@ -167,7 +171,7 @@ class ServicesController extends Controller
     public function page() {
         $services = Services::all();
         return view('site.services.index', compact('services'));
-    }
+    } 
 
     public function serviceDetail($slug) {
         $service = Services::where('slug', $slug)->firstOrFail();

@@ -46,7 +46,7 @@
     <link href="{{ asset('/assets/site/css/main.css') }}" rel="stylesheet">
 
     @yield('css')
-    @stack('styles');
+    @stack('styles')
     
 
 </head>
@@ -58,7 +58,12 @@
 
             <a href="{{ route('home') }}" class="logo d-flex align-items-center">
                 <!-- Uncomment the line below if you also wish to use an image logo -->
-                <img src="{{ asset('/assets/site/img/') . '/' . $about->logo }}" alt="logo"> -->
+                @if ($about->logo && \Storage::disk('public')->exists($about->logo))
+                    <img src="{{ asset('storage/' . $about->logo) }}" alt="logo" loading="lazy">
+                @else
+                    {{-- fallback: no logo uploaded --}}
+                    <img src="{{ asset('images/default-logo.png') }}" alt="logo" width="120" loading="lazy">
+                @endif
                 {{-- <svg class="my-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <g id="bgCarrier" stroke-width="0"></g>
           <g id="tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>

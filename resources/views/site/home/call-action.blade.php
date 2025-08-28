@@ -21,10 +21,6 @@
                             <i class="bi bi-telephone-fill"></i>
                             <span>Free Consultation</span>
                         </div>
-                        <div class="feature-item" data-aos="fade-up" data-aos-delay="250">
-                            <i class="bi bi-clock-fill"></i>
-                            <span>24/7 Support</span>
-                        </div>
                         <div class="feature-item" data-aos="fade-up" data-aos-delay="300">
                             <i class="bi bi-shield-check-fill"></i>
                             <span>Trusted Experts</span>

@@ -63,7 +63,6 @@
     </form>
 
     <script>
-        alert('ffff');
         // Track captcha state
         let captchaOk = false;
 

@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\Storage;
 
 class ProjectsController extends Controller
 {
+
+    public function __construct() {
+        $this->middleware('auth')->except(['page']);
+    }
     /**
      * Display a listing of the resource.
      */

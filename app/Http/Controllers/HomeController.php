@@ -13,7 +13,8 @@ class HomeController extends Controller
     public function siteHomePage() {
         $services = Services::all();
         $projects = Projects::inRandomOrder()->take(4)->get();
-        return view('welcome', compact('services', 'projects'));
+        $projectsCount = Projects::count();
+        return view('welcome', compact('services', 'projects', 'projectsCount'));
     }
 
     public function __invoke()

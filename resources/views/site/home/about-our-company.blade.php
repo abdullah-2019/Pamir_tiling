@@ -43,7 +43,7 @@
                                     <i class="bi bi-bricks"></i>
                                 </div>
                                 <div class="achievement-content">
-                                    <h4><span data-purecounter-start="0" data-purecounter-end="3200"
+                                    <h4><span data-purecounter-start="0" data-purecounter-end="{{$projectsCount}}"
                                             data-purecounter-duration="2" class="purecounter"></span>+ Projects are done
                                     </h4>
                                     <p>Successfully completed transactions</p>

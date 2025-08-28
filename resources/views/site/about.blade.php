@@ -224,7 +224,7 @@
                                             <i class="bi bi-trophy"></i>
                                         </div>
                                         <div class="metric-value">
-                                            <span data-purecounter-start="0" data-purecounter-end="1250"
+                                            <span data-purecounter-start="0" data-purecounter-end="{{ $projectCount }}"
                                                 data-purecounter-duration="2" class="purecounter"></span>+
                                         </div>
                                         <div class="metric-label">Successful Projects</div>
@@ -242,18 +242,21 @@
                                         <div class="metric-label">Happy Clients</div>
                                     </div>
                                 </div>
+
                                 <div class="col-lg-3 col-6">
-                                    <div class="metric-item" data-aos="zoom-in" data-aos-delay="550">
+                                    <div class="metric-item aos-init aos-animate" data-aos="zoom-in"
+                                        data-aos-delay="{{ now()->year - ($about->company_creation_date ?? now()->year) }}">
                                         <div class="metric-icon">
                                             <i class="bi bi-calendar-check"></i>
                                         </div>
-                                        <span data-purecounter-start="0"
-                                            data-purecounter-end="{{ now()->year - ($about->company_creation_date ?? now()->year) }}"
-                                            data-purecounter-duration="2" class="purecounter">
-                                        </span>
+                                        <div class="metric-value">
+                                            <span data-purecounter-start="0" data-purecounter-end="16"
+                                                data-purecounter-duration="0" class="purecounter">16</span>
+                                        </div>
                                         <div class="metric-label">Years in Business</div>
                                     </div>
                                 </div>
+
                                 <div class="col-lg-3 col-6">
                                     <div class="metric-item" data-aos="zoom-in" data-aos-delay="600">
                                         <div class="metric-icon">

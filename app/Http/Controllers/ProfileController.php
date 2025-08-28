@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
+    function __constract() {
+        $this->middleware('auth');
+    }
     /**
      * Display the user's profile form.
      */

@@ -108,7 +108,7 @@
                                     <i class="bi bi-buildings"></i>
                                 </div>
                                 <div class="stat-number">
-                                    <span data-purecounter-start="0" data-purecounter-end="2500"
+                                    <span data-purecounter-start="0" data-purecounter-end="{{$projectsCount ?? 0}}"
                                         data-purecounter-duration="2" class="purecounter"></span>+
                                 </div>
                                 <div class="stat-label">Successful Projects</div>
@@ -159,7 +159,7 @@
                                     <i class="bi bi-award"></i>
                                 </div>
                                 <div class="stat-number">
-                                    <span data-purecounter-start="0" data-purecounter-end="45"
+                                    <span data-purecounter-start="0" data-purecounter-end="{{$about->awards ?? 0}}"
                                         data-purecounter-duration="2" class="purecounter"></span>+
                                 </div>
                                 <div class="stat-label">Industry Awards</div>

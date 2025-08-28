@@ -12,6 +12,11 @@ use Illuminate\Support\Facades\DB;
 
 class ContactController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['page']);
+    }
+
     /**
      * Display a listing of the resource.
      */
