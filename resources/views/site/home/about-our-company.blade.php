@@ -7,7 +7,7 @@
                 <div class="col-lg-5" data-aos="zoom-in" data-aos-delay="200">
                     <div class="image-gallery">
                         <div class="primary-image">
-                            <img src="{{ asset('assets/site/img/house-1.webp') }}" alt="about us" class="img-fluid">
+                            <img src="{{ asset('/assets/site/img/house-1.webp') }}" alt="about us" class="img-fluid">
                             <div class="experience-badge">
                                 <div class="badge-content">
                                     <div class="number"><span data-purecounter-start="0" data-purecounter-end="{{ now()->year - ($about?->company_creation_date ?? 2010) }}"
@@ -17,7 +17,7 @@
                             </div>
                         </div>
                         <div class="secondary-image">
-                            <img src="{{ asset('assets/site/img/wholesale.webp') }}" alt="about us sec"
+                            <img src="{{ asset('/assets/site/img/wholesale.webp') }}" alt="about us sec"
                                 class="img-fluid">
                         </div>
                     </div>

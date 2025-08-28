@@ -12,7 +12,8 @@
                 </ol>
             </nav>
         </div>
-    </div><!-- End Page Title -->
+    </div>
+    <!-- End Page Title -->
 
     <section id="properties" class="properties section">
         <div class="container" data-aos="fade-up" data-aos-delay="100">
@@ -26,7 +27,7 @@
                                     collect($project->images ?? [])
                                         ->filter()
                                         ->first() ?? 'placeholder.webp';
-                                $imgUrl = asset('assets/site/img/projects/' . $firstImage);
+                                $imgUrl = asset($firstImage);
                                 $imgNum = count($project->images);
                             @endphp
                             <div class="col-lg-4 col-md-6">
@@ -34,7 +35,7 @@
                                     <a href="{{ route('project-detail', $project->id) }}" class="property-link">
                                         <div class="property-image-wrapper">
                                             <img src="{{ $imgUrl }}"
-                                                alt="{{ $project->clinet_name }}" class="img-fluid">
+                                                alt="{{ $project->client_name }}" class="img-fluid">
                                             <div class="property-actions">
                                                 <button class="action-btn gallery-btn" data-toggle="tooltip"
                                                     title="View Gallery">
@@ -47,7 +48,7 @@
                                     <div class="property-details">
                                         <a href="{{ route('project-detail', $project->id) }}"
                                             class="property-link">
-                                            <h4 class="property-title">{{ $project->clinet_name }}</h4>
+                                            <h4 class="property-title">{{ $project->client_name }}</h4>
                                         </a>
                                     </div>
 

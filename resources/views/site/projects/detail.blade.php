@@ -42,7 +42,7 @@
 
                                     @forelse ($images as $idx => $img)
                                         <div class="swiper-slide">
-                                            <img src="{{ asset('assets/site/img/projects/' . ltrim($img, '/')) }}"
+                                            <img src="{{ asset(ltrim($img, '/')) }}"
                                                 class="img-fluid hero-image"
                                                 alt="{{ $project->client_name ? $project->client_name . ' - Photo ' . ($idx + 1) : 'Project Photo ' . ($idx + 1) }}"
                                                 loading="lazy">
@@ -84,7 +84,7 @@
                                 <div class="swiper-wrapper">
                                     @forelse ($images as $idx => $img)
                                         <div class="swiper-slide">
-                                            <img src="{{ asset('assets/site/img/projects/' . ltrim($img, '/')) }}"
+                                            <img src="{{ asset(ltrim($img, '/')) }}"
                                                 class="img-fluid thumbnail-img"
                                                 alt="{{ $project->client_name ? $project->client_name . ' - Thumbnail ' . ($idx + 1) : 'Project Thumbnail ' . ($idx + 1) }}">
                                         </div>
