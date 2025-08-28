@@ -7,6 +7,7 @@ use App\Http\Requests\StoreAboutRequest;
 use App\Http\Requests\UpdateAboutRequest;
 use App\Models\Projects;
 use Illuminate\Http\Request;
+use App\Models\OurTeam;
 
 class AboutController extends Controller
 {
@@ -76,7 +77,8 @@ class AboutController extends Controller
         $about = About::all();
         $projects = Projects::inRandomOrder()->take(2)->get();
         $projectCount = Projects::count();
-        return view('site.about', compact('about', 'projects', 'projectCount'));
+        $ourTeams = OurTeam::all();
+        return view('site.about', compact('about', 'projects', 'projectCount', 'ourTeams'));
     }
 
     // Update email

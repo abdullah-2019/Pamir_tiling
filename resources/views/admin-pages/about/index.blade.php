@@ -32,11 +32,11 @@
                                         type="button" role="tab" aria-controls="phones"
                                         aria-selected="false">Phones</button>
                                 </li>
-                                <li class="nav-item" role="presentation">
+                                {{-- <li class="nav-item" role="presentation">
                                     <button class="nav-link" id="social-medias-tab" data-bs-toggle="tab"
                                         data-bs-target="#social-medias" type="button" role="tab"
                                         aria-controls="social-medias" aria-selected="false">Social Medias</button>
-                                </li>
+                                </li> --}}
                                 <li class="nav-item" role="presentation">
                                     <button class="nav-link" id="address-tab" data-bs-toggle="tab" data-bs-target="#address"
                                         type="button" role="tab" aria-controls="address"
@@ -65,10 +65,10 @@
                                 <div class="tab-pane fade" id="phones" role="tabpanel" aria-labelledby="phones-tab">
                                     @include('admin-pages.about.partials.phones')
                                 </div>
-                                <div class="tab-pane fade" id="social-medias" role="tabpanel"
+                                {{-- <div class="tab-pane fade" id="social-medias" role="tabpanel"
                                     aria-labelledby="social-medias-tab">
                                     @include('admin-pages.about.partials.social-medias')
-                                </div>
+                                </div> --}}
                                 <div class="tab-pane fade" id="address" role="tabpanel" aria-labelledby="address-tab">
                                     @include('admin-pages.about.partials.address')
                                 </div>

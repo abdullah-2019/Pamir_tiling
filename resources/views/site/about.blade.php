@@ -23,7 +23,7 @@
                 <div class="col-lg-10">
 
                     <div class="hero-content text-center" data-aos="zoom-in" data-aos-delay="200">
-                        <h2>Premium Tiling Excellence Since {{$about->company_creation_date}}</h2>
+                        <h2>Premium Tiling Excellence Since {{ $about->company_creation_date }}</h2>
                         <p class="hero-description">
                             {{ $about->our_history ?? '' }}
                         </p>
@@ -47,14 +47,14 @@
                             <div class="row g-4 align-items-center">
                                 <div class="col-lg-6">
                                     <div class="primary-image-wrap">
-                                        <img src="{{ asset($selectedImages[0]) }}"
-                                            alt="Primary Image" class="img-fluid" loading="lazy">
+                                        <img src="{{ asset($selectedImages[0]) }}" alt="Primary Image" class="img-fluid"
+                                            loading="lazy">
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="secondary-image-wrap">
-                                        <img src="{{ asset($selectedImages[1]) }}"
-                                            alt="Secondary Image" class="img-fluid" loading="lazy">
+                                        <img src="{{ asset($selectedImages[1]) }}" alt="Secondary Image" class="img-fluid"
+                                            loading="lazy">
                                     </div>
                                 </div>
                             </div>
@@ -65,14 +65,14 @@
                             <div class="row g-4 align-items-center">
                                 <div class="col-lg-6">
                                     <div class="primary-image-wrap">
-                                        <img src="{{ asset('assets/site/img/placeholder.webp') }}"
-                                            alt="Placeholder" class="img-fluid" loading="lazy">
+                                        <img src="{{ asset('assets/site/img/placeholder.webp') }}" alt="Placeholder"
+                                            class="img-fluid" loading="lazy">
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="secondary-image-wrap">
-                                        <img src="{{ asset('assets/site/img/placeholder.webp') }}"
-                                            alt="Placeholder" class="img-fluid" loading="lazy">
+                                        <img src="{{ asset('assets/site/img/placeholder.webp') }}" alt="Placeholder"
+                                            class="img-fluid" loading="lazy">
                                     </div>
                                 </div>
                             </div>
@@ -162,45 +162,18 @@
                             <div class="content">
 
                                 <div class="features-list">
-                                    <div class="feature-item d-flex align-items-center mb-3">
-                                        <div class="icon-wrapper me-3">
-                                            <i class="bi bi-check-circle-fill"></i>
+                                    @foreach ($ourTeams as $ourTeam)
+                                        <div class="feature-item d-flex align-items-center mb-3">
+                                            <div class="icon-wrapper me-3">
+                                                <i class="bi bi-check-circle-fill"></i>
+                                            </div>
+                                            <div>
+                                                <h5>{{ $ourTeam->full_name . ', ' . $ourTeam->position }}</h5>
+                                                <p>{{ $ourTeam->email }}</p>
+                                            </div>
                                         </div>
-                                        <div>
-                                            <h5>John Deogo, CEO</h5>
-                                            <p>info@pamirtilingservices.com.au</p>
-                                        </div>
-                                    </div>
+                                    @endforeach
 
-                                    <div class="feature-item d-flex align-items-center mb-3">
-                                        <div class="icon-wrapper me-3">
-                                            <i class="bi bi-shield-check"></i>
-                                        </div>
-                                        <div>
-                                            <h5>Jaki John, CFO</h5>
-                                            <p>accounts@parmitilingservices.com.au</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="feature-item d-flex align-items-center mb-3">
-                                        <div class="icon-wrapper me-3">
-                                            <i class="bi bi-headset"></i>
-                                        </div>
-                                        <div>
-                                            <h5>John Cina, Estimator</h5>
-                                            <p>estimator@parmitilingservices.com.au</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="feature-item d-flex align-items-center mb-3">
-                                        <div class="icon-wrapper me-3">
-                                            <i class="bi bi-graph-up-arrow"></i>
-                                        </div>
-                                        <div>
-                                            <h5>Pari Jan</h5>
-                                            <p>example@parmitilingservices.com.au</p>
-                                        </div>
-                                    </div>
                                 </div>
 
                             </div>

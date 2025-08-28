@@ -8,6 +8,7 @@ use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\ProjectsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AboutAddressController;
+use App\Http\Controllers\OurTeamController;
 
 
 Route::get('/', [HomeController::class, 'siteHomePage'])->name('home');
@@ -66,6 +67,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::post('/profile/image', [ProfileController::class, 'updateImage'])->name('profile.image');
 });
+
+// Our team.
+Route::resource('/our-team', OurTeamController::class);
+Route::get('/our-team-data', [OurTeamController::class, 'data'])->name('our-team.data');
 
 
 require __DIR__.'/auth.php';
