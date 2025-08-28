@@ -14,7 +14,7 @@
                 <div class="col-lg-6" data-aos="fade-right" data-aos-delay="200">
                     <div class="service-card">
                         <div class="service-info">
-                            <h3><a href="service-details.html">{{ $service->title }}</a></h3>
+                            <h3><a>{{ $service->title }}</a></h3>
                             <p>{{ $service->desc }}</p>
                             <ul class="service-highlights">
                                 @php
@@ -25,7 +25,7 @@
 
                                 @if (is_array($features))
                                     @foreach ($features as $feature)
-                                    <li><i class="bi bi-check-circle-fill"></i> {{ $feature }}</li>
+                                        <li><i class="bi bi-check-circle-fill"></i> {{ $feature }}</li>
                                     @endforeach
                                 @else
                                     <li>{{ $service->features }}</li>
@@ -38,8 +38,8 @@
                             </a> --}}
                         </div>
                         <div class="service-visual">
-                            <img src="{{ asset('assets/site/img/house.webp') }}" class="img-fluid"
-                                alt="Property Search" loading="lazy">
+                            <img src="{{ Storage::url($service->image) }}" class="img-fluid" alt="{{ $service->title }}"
+                                loading="lazy">
                         </div>
                     </div>
                 </div><!-- End Service Item -->
@@ -48,7 +48,7 @@
         </div>
 
         <div class="text-center" data-aos="zoom-in" data-aos-delay="600">
-            <a href="{{route('services.page')}}" class="btn-view-all">
+            <a href="{{ route('services.page') }}" class="btn-view-all">
                 <span>View All Services</span>
                 <i class="bi bi-arrow-right"></i>
             </a>

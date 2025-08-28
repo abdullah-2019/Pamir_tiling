@@ -47,7 +47,7 @@
 
     @yield('css')
     @stack('styles')
-    
+
 
 </head>
 
@@ -82,12 +82,31 @@
 
             <nav id="navmenu" class="navmenu">
                 <ul>
-                    <li><a href="{{ route('home') }}" class="active">Home</a></li>
-                    <li><a href="{{ route('about.page') }}">About</a></li>
-                    <li><a href="{{ route('services.page') }}">Services</a></li>
-                    <li><a href="{{ route('projects.page') }}">Projects</a></li>
-                    <li><a href="{{ route('contact.page') }}">Contact</a></li>
+                    <li>
+                        <a href="{{ route('home') }}" class="{{ Route::is('home') ? 'active' : '' }}">Home</a>
+                    </li>
+
+                    <li>
+                        <a href="{{ route('about.page') }}"
+                            class="{{ Route::is('about.page') ? 'active' : '' }}">About</a>
+                    </li>
+
+                    <li>
+                        <a href="{{ route('services.page') }}"
+                            class="{{ Route::is('services.page') ? 'active' : '' }}">Services</a>
+                    </li>
+
+                    <li>
+                        <a href="{{ route('projects.page') }}"
+                            class="{{ Route::is('projects.page') || Route::is('project-detail') ? 'active' : '' }}">Projects</a>
+                    </li>
+
+                    <li>
+                        <a href="{{ route('contact.page') }}"
+                            class="{{ Route::is('contact.page') ? 'active' : '' }}">Contact</a>
+                    </li>
                 </ul>
+
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>
 
@@ -97,7 +116,7 @@
     <main class="main">
 
         @yield('content')
-        
+
     </main>
 
     @include('errors.toast')
@@ -139,7 +158,8 @@
                     <h4>Our Services</h4>
                     <ul>
                         @foreach ($services as $service)
-                            <li><a href="{{ route('service-detail', $service->slug) }}">{{ $service->title }}</a></li>
+                            <li><a href="{{ route('service-detail', $service->slug) }}">{{ $service->title }}</a>
+                            </li>
                         @endforeach
                     </ul>
                 </div>
@@ -205,7 +225,6 @@
             const toastEl = document.getElementById('toast');
             const toast = new bootstrap.Toast(toastEl);
         }
-
     </script>
 
     @yield('js')

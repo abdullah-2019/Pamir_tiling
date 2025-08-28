@@ -75,106 +75,107 @@
                     <div class="contact-form-wrapper">
                         <h2 class="text-center mb-4">Send a Message</h2>
 
-                        <form action="{{ route('contact.store') }}" method="POST" class="php-email-form" novalidate id="contact-form">
+                        <form action="{{ route('contact.store') }}" method="POST" class="php-email-form" novalidate
+                            id="contact-form">
                             @csrf
                             <div class="row g-3">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <input type="text" class="form-control @error('name') is-invalid @enderror" 
-                                               name="name" placeholder="Your Name" id="name" required
-                                               value="{{ old('name') }}">
+                                        <input type="text" class="form-control @error('name') is-invalid @enderror"
+                                            name="name" placeholder="Your Name" id="name" required
+                                            value="{{ old('name') }}">
                                         @error('name')
                                             <small class="text-danger">{{ $message }}</small>
                                         @enderror
                                     </div>
                                 </div>
-                                
+
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <input type="text" class="form-control @error('last_name') is-invalid @enderror" 
-                                               name="last_name" placeholder="Your Last Name" required id="last_name"
-                                               value="{{ old('last_name') }}">
+                                        <input type="text" class="form-control @error('last_name') is-invalid @enderror"
+                                            name="last_name" placeholder="Your Last Name" required id="last_name"
+                                            value="{{ old('last_name') }}">
                                         @error('last_name')
                                             <small class="text-danger">{{ $message }}</small>
                                         @enderror
                                     </div>
                                 </div>
-                        
+
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <input type="email" class="form-control @error('email') is-invalid @enderror" 
-                                               name="email" placeholder="Email Address" required id="email"
-                                               value="{{ old('email') }}">
+                                        <input type="email" class="form-control @error('email') is-invalid @enderror"
+                                            name="email" placeholder="Email Address" required id="email"
+                                            value="{{ old('email') }}">
                                         @error('email')
                                             <small class="text-danger">{{ $message }}</small>
                                         @enderror
                                     </div>
                                 </div>
-                                
+
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <input type="tel" class="form-control @error('phone') is-invalid @enderror" 
-                                               name="phone" placeholder="Phone Number" required id="phone"
-                                               value="{{ old('phone') }}">
+                                        <input type="tel" class="form-control @error('phone') is-invalid @enderror"
+                                            name="phone" placeholder="Phone Number" required id="phone"
+                                            value="{{ old('phone') }}">
                                         @error('phone')
                                             <small class="text-danger">{{ $message }}</small>
                                         @enderror
                                     </div>
                                 </div>
-                        
+
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <input type="text" class="form-control @error('subject') is-invalid @enderror" 
-                                               name="subject" placeholder="Subject" required id="subject"
-                                               value="{{ old('subject') }}">
+                                        <input type="text" class="form-control @error('subject') is-invalid @enderror"
+                                            name="subject" placeholder="Subject" required id="subject"
+                                            value="{{ old('subject') }}">
                                         @error('subject')
                                             <small class="text-danger">{{ $message }}</small>
                                         @enderror
                                     </div>
                                 </div>
-                        
+
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <textarea class="form-control @error('message') is-invalid @enderror" 
-                                                  name="message" placeholder="Your Message" rows="6" required id="message">{{ old('message') }}</textarea>
+                                        <textarea class="form-control @error('message') is-invalid @enderror" name="message" placeholder="Your Message"
+                                            rows="6" required id="message">{{ old('message') }}</textarea>
                                         @error('message')
                                             <small class="text-danger">{{ $message }}</small>
                                         @enderror
                                     </div>
                                 </div>
-                        
+
+                                <!-- Google reCAPTCHA -->
+                                <div class="form-group">
+                                    {!! NoCaptcha::renderJs() !!}
+                                    {!! NoCaptcha::display([
+                                        'data-theme' => 'light',
+                                        'data-size' => 'normal',
+                                        'data-callback' => 'onCaptchaSuccess',
+                                        'data-expired-callback' => 'onCaptchaExpired',
+                                        'data-error-callback' => 'onCaptchaError',
+                                    ]) !!}
+                                    <span id="captcha-error" class="text-danger" style="display:none;">
+                                        Please verify the reCAPTCHA.
+                                    </span>
+                                    @error('g-recaptcha-response')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
                                 <div class="col-12">
                                     <div class="loading">Loading</div>
                                     <div class="error-message"></div>
                                     <div class="sent-message">Your message has been sent. Thank you!</div>
                                 </div>
-                        
-                                <!-- Google reCAPTCHA -->
-                                <div class="col-12">
-                                    <div class="form-group">
-                                        {!! NoCaptcha::renderJs() !!}
-                                        {!! NoCaptcha::display([
-                                            'data-theme' => 'light',
-                                            'data-size' => 'normal',
-                                            'data-callback' => 'onCaptchaSuccess',
-                                            'data-expired-callback' => 'onCaptchaExpired',
-                                            'data-error-callback' => 'onCaptchaError',
-                                        ]) !!}
-                                        <span id="captcha-error" class="text-danger" style="display:none;">
-                                            Please verify the reCAPTCHA.
-                                        </span>
-                                        @error('g-recaptcha-response')
-                                            <div class="text-danger">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                </div>
-                        
+
+
+
                                 <div class="col-12 text-center">
                                     <button type="submit" class="btn-submit" id="submit-btn">SEND MESSAGE</button>
                                 </div>
                             </div>
                         </form>
-                        
+
                     </div>
                 </div>
             </div>

@@ -33,10 +33,10 @@
                         <div class="achievement-grid" data-aos="fade-up" data-aos-delay="400">
                             <div class="achievement-item">
                                 <div class="achievement-number">
-                                    <span data-purecounter-start="0" data-purecounter-end="1250"
+                                    <span data-purecounter-start="0" data-purecounter-end="{{$projectsCount}}"
                                         data-purecounter-duration="1" class="purecounter"></span>+
                                 </div>
-                                <span class="achievement-text">Active Listings</span>
+                                <span class="achievement-text">Projects</span>
                             </div>
                             <div class="achievement-item">
                                 <div class="achievement-number">

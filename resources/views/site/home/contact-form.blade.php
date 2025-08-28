@@ -5,7 +5,7 @@
         <!-- First Name -->
         <div class="search-field">
             <label for="name" class="field-label">First Name</label>
-            <input type="text" id="name" name="name" required maxlength="255" value="{{ old('name') }}" placeholder="First Name">
+            <input type="text" id="name" name="name"  maxlength="255" value="{{ old('name') }}" placeholder="First Name">
             <i class="bi bi-person field-icon"></i>
         </div>
 
