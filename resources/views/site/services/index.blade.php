@@ -25,9 +25,8 @@
                         <div class="service-block">
                             <div class="service-content">
                                 <div class="service-number">{{$loop->iteration}}</div>
-                                
                                 <div class="service-image">
-                                    <img src="{{asset('/assets/site/img/'.$service->image)}}" alt="{{$service->title}}"
+                                    <img src="{{ Storage::url($service->image) }}" alt="{{$service->title}}"
                                         class="img-fluid">
                                     <div class="image-overlay">
                                         <i class="bi bi-grid"></i>
@@ -53,10 +52,10 @@
                                         @endif
         
                                     </ul>
-                                    <a href="{{ route('service-detail', $service->slug) }}" class="service-link">
+                                    {{-- <a href="{{ route('service-detail', $service->slug) }}" class="service-link">
                                         <span>Read More</span>
                                         <i class="bi bi-arrow-up-right"></i>
-                                    </a>
+                                    </a> --}}
                                 </div>
                             </div>
                         </div>
@@ -76,20 +75,6 @@
                                 <a href="tel:+1234567890" class="btn-secondary">
                                     <i class="bi bi-telephone"></i> Call Now
                                 </a>
-                            </div>
-                        </div>
-                        <div class="cta-stats">
-                            <div class="stat-item">
-                                <div class="stat-number">500+</div>
-                                <div class="stat-label">Happy Clients</div>
-                            </div>
-                            <div class="stat-item">
-                                <div class="stat-number">15+</div>
-                                <div class="stat-label">Years Experience</div>
-                            </div>
-                            <div class="stat-item">
-                                <div class="stat-number">98%</div>
-                                <div class="stat-label">Success Rate</div>
                             </div>
                         </div>
                     </div>

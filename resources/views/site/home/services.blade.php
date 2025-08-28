@@ -32,10 +32,10 @@
                                 @endif
 
                             </ul>
-                            <a href="{{ route('service-detail', $service->slug) }}" class="service-link">
+                            {{-- <a href="{{ route('service-detail', $service->slug) }}" class="service-link">
                                 <span>Read More</span>
                                 <i class="bi bi-arrow-up-right"></i>
-                            </a>
+                            </a> --}}
                         </div>
                         <div class="service-visual">
                             <img src="{{ asset('assets/site/img/house.webp') }}" class="img-fluid"

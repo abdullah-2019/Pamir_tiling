@@ -23,7 +23,7 @@
                 <div class="col-lg-10">
 
                     <div class="hero-content text-center" data-aos="zoom-in" data-aos-delay="200">
-                        <h2>Premium Tiling Excellence Since 2010</h2>
+                        <h2>Premium Tiling Excellence Since {{$about->company_creation_date}}</h2>
                         <p class="hero-description">
                             {{ $about->our_history ?? '' }}
                         </p>
@@ -47,13 +47,13 @@
                             <div class="row g-4 align-items-center">
                                 <div class="col-lg-6">
                                     <div class="primary-image-wrap">
-                                        <img src="{{ asset('assets/site/img/projects/' . $selectedImages[0]) }}"
+                                        <img src="{{ asset($selectedImages[0]) }}"
                                             alt="Primary Image" class="img-fluid" loading="lazy">
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="secondary-image-wrap">
-                                        <img src="{{ asset('assets/site/img/projects/' . $selectedImages[1]) }}"
+                                        <img src="{{ asset($selectedImages[1]) }}"
                                             alt="Secondary Image" class="img-fluid" loading="lazy">
                                     </div>
                                 </div>
@@ -65,13 +65,13 @@
                             <div class="row g-4 align-items-center">
                                 <div class="col-lg-6">
                                     <div class="primary-image-wrap">
-                                        <img src="{{ asset('assets/site/img/projects/placeholder.webp') }}"
+                                        <img src="{{ asset('assets/site/img/placeholder.webp') }}"
                                             alt="Placeholder" class="img-fluid" loading="lazy">
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="secondary-image-wrap">
-                                        <img src="{{ asset('assets/site/img/projects/placeholder.webp') }}"
+                                        <img src="{{ asset('assets/site/img/placeholder.webp') }}"
                                             alt="Placeholder" class="img-fluid" loading="lazy">
                                     </div>
                                 </div>

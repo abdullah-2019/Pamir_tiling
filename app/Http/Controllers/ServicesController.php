@@ -21,6 +21,7 @@ class ServicesController extends Controller
      */
     public function index()
     {
+        cache()->flush();
         return view('admin-pages.services.index');
     }
 
@@ -85,12 +86,11 @@ class ServicesController extends Controller
         'title' => ['required', 'string', 'max:255', 'unique:services,title,' . $service->id],
         'slug' => ['required', 'string', 'max:255', 'lowercase', 'unique:services,slug,' . $service->id],
         'desc' => ['required', 'string'],
-
             // allow submitting zero features (empty array)
             'features'   => ['nullable', 'array'],
             'features.*' => ['nullable', 'string', 'max:255'],
 
-            'image' => ['nullable', 'image', 'mimes:png,jpg,jpeg,svg', 'max:2048'],
+            'image' => ['nullable', 'image', 'mimes:png,jpg,jpeg,svg,webp', 'max:2048'],
 
             // checkbox for removing current image
             'remove_image' => ['sometimes', 'boolean'],
@@ -148,7 +148,7 @@ class ServicesController extends Controller
         return redirect()
             ->route('services.index')
             ->with('success', 'Service updated successfully.');
-        }
+    }
 
     /**
      * Remove the specified resource from storage.
@@ -169,6 +169,7 @@ class ServicesController extends Controller
     }
 
     public function page() {
+        cache()->flush();
         $services = Services::all();
         return view('site.services.index', compact('services'));
     } 

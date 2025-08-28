@@ -73,6 +73,9 @@
                                             accept="image/*">
                                         <label class="input-group-text" for="image">Upload New Image</label>
                                     </div>
+                                    @error('image')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
                             </div>
                         </div>

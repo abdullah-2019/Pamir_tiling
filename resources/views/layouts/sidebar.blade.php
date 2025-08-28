@@ -1,8 +1,12 @@
 <aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark">
     <div class="sidebar-brand">
         <a href="{{ route('dashboard') }}" class="brand-link">
-            <img src="{{ asset('assets/site/img/' . $about->logo) }}" alt="Logo" class="brand-image opacity-75 shadow"
-                loading="lazy" />
+            @if ($about->logo && \Storage::disk('public')->exists($about->logo))
+                <img src="{{ asset('storage/' . $about->logo) }}" alt="logo" loading="lazy" class="brand-image opacity-75 shadow">
+            @else
+                {{-- fallback: no logo uploaded --}}
+                <img src="{{ asset('images/default-logo.png') }}" alt="logo" width="120" loading="lazy" class="brand-image opacity-75 shadow">
+            @endif
             <span class="brand-text fw-light">Pamir Tiling</span>
         </a>
     </div>

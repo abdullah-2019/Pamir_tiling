@@ -72,6 +72,7 @@ class AboutController extends Controller
     }
 
     public function page() {
+        cache()->flush();
         $about = About::all();
         $projects = Projects::inRandomOrder()->take(2)->get();
         $projectCount = Projects::count();
