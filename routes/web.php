@@ -9,7 +9,7 @@ use App\Http\Controllers\ProjectsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AboutAddressController;
 use App\Http\Controllers\OurTeamController;
-
+use App\Http\Controllers\Auth\RegisteredUserController;
 
 Route::get('/', [HomeController::class, 'siteHomePage'])->name('home');
 
@@ -72,5 +72,8 @@ Route::middleware('auth')->group(function () {
 Route::resource('/our-team', OurTeamController::class);
 Route::get('/our-team-data', [OurTeamController::class, 'data'])->name('our-team.data');
 
+// User.
+Route::get('/user', [RegisteredUserController::class, 'index'])->name('user.index');
+Route::get('/user-data', [RegisteredUserController::class, 'data'])->name('user.data');
 
 require __DIR__.'/auth.php';

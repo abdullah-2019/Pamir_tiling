@@ -11,9 +11,20 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use Yajra\DataTables\DataTables;
 
 class RegisteredUserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    function index()
+    {
+        return view('user.index');
+    }
+
     /**
      * Display the registration view.
      */
@@ -46,5 +57,20 @@ class RegisteredUserController extends Controller
         Auth::login($user);
 
         return redirect(route('dashboard', absolute: false));
+    }
+
+    public function data(Request $request)
+    {
+        $query = User::all();
+
+        return DataTables::of($query)
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                $edit = route('user.edit', $row->id);
+                $delete = route('user.destroy', $row->id);
+                return view('admin-pages.user.partials.actions', compact('edit','delete','row'))->render();
+            })
+            ->rawColumns(['actions'])
+            ->make(true);
     }
 }

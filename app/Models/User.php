@@ -44,7 +44,7 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
-            'status' => \App\Enums\UserStatus::class,
+           // 'status' => \App\Enums\UserStatus::class,
         ];
     }
 }

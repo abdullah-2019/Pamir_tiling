@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Auth;
 
+use App\Models\User;
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
@@ -43,6 +44,34 @@ class LoginRequest extends FormRequest
     {
         $this->ensureIsNotRateLimited();
 
+        // First, find the user by email to check status
+        $user = User::where('email', $this->email)->first();
+
+        // Check user status before attempting authentication
+        if ($user) {
+            if ($user->status === 'lock') {
+                RateLimiter::hit($this->throttleKey());
+                throw ValidationException::withMessages([
+                    'email' => 'Your account is locked. Please contact support.',
+                ]);
+            }
+
+            if ($user->status === 'in_active') {
+                RateLimiter::hit($this->throttleKey());
+                throw ValidationException::withMessages([
+                    'email' => 'Your account is disabled.',
+                ]);
+            }
+
+            if ($user->status === 'suspend') {
+                RateLimiter::hit($this->throttleKey());
+                throw ValidationException::withMessages([
+                    'email' => 'Your account has been suspended.',
+                ]);
+            }
+        }
+
+        // Now attempt authentication for active users only
         if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
             RateLimiter::hit($this->throttleKey());
 
@@ -83,5 +112,16 @@ class LoginRequest extends FormRequest
     public function throttleKey(): string
     {
         return Str::transliterate(Str::lower($this->string('email')).'|'.$this->ip());
+    }
+
+    /**
+     * Get custom messages for validator errors.
+     */
+    public function messages(): array
+    {
+        return [
+            'g-recaptcha-response.required' => 'Please complete the reCAPTCHA verification.',
+            'g-recaptcha-response.captcha' => 'reCAPTCHA verification failed. Please try again.',
+        ];
     }
 }
