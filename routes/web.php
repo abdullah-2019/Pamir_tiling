@@ -75,5 +75,12 @@ Route::get('/our-team-data', [OurTeamController::class, 'data'])->name('our-team
 // User.
 Route::get('/user', [RegisteredUserController::class, 'index'])->name('user.index');
 Route::get('/user-data', [RegisteredUserController::class, 'data'])->name('user.data');
+Route::get('/user-edit/{id}', [RegisteredUserController::class, 'edit'])->name('user.edit');
+Route::get('/user-destroy', [RegisteredUserController::class, 'data'])->name('user.destroy');
+Route::get('/user-create', [RegisteredUserController::class, 'create'])->name('user.create');
+Route::post('/user-store', [RegisteredUserController::class, 'store'])->name('user.store');
+Route::post('/user-update/{user}', [RegisteredUserController::class, 'update'])->name('user.update');
 
+
+require __DIR__.'/auth.php';
 require __DIR__.'/auth.php';

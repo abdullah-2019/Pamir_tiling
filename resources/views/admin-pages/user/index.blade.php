@@ -32,7 +32,7 @@
                 <div class="card-tools">
                     <button type="button" class="btn btn-tool btn-sm btn-primary" data-card-widget="collapse"
                         title="Collapse">
-                        <a href="{{ route('register') }}">New</a>
+                        <a href="{{ route('user.create') }}">New</a>
                     </button>
                 </div>
             </div>
@@ -45,7 +45,7 @@
                                 <th>Full Name</th>
                                 <th>Email</th>
                                 <th>Status</th>
-                                <th width="105" class="text-center">Actions</th>
+                                <th width="50" class="text-center">Actions</th>
                             </tr>
                         </thead>
 
@@ -69,7 +69,7 @@
                 ajax: '{{ route('user.data') }}',
                 order: [[0, 'desc']],
                 columns: [
-                    { data: 'full_name', name: 'full_name' },
+                    { data: 'name', name: 'name' },
                     { data: 'email', name: 'email' },
                     { data: 'status', name: 'status' },
                     { data: 'actions', name: 'actions', orderable: false, searchable: false }

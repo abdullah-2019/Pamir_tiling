@@ -147,11 +147,11 @@
                 
                 {{-- Users --}}
                 @php
-                    $projectsOpen = request()->routeIs('our-team.*') || request()->routeIs('project.*');
+                    $projectsOpen = request()->routeIs('user.*') || request()->routeIs('project.*');
                 @endphp
                 <li class="nav-item {{ $projectsOpen ? 'menu-open' : '' }}">
                     <a href="#" class="nav-link {{ $projectsOpen ? 'active' : '' }}">
-                        <i class="nav-icon bi bi-collection"></i>
+                        <i class="nav-icon bi bi-people"></i>
                         <p>
                             Users
                             <i class="nav-arrow bi bi-chevron-right"></i>
@@ -160,15 +160,15 @@
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="{{ route('user.index') }}"
-                                class="nav-link {{ request()->routeIs('our-team.index') ? 'active' : '' }}">
+                                class="nav-link {{ request()->routeIs('user.index') ? 'active' : '' }}">
                                 <i class="nav-icon bi bi-list-task"></i>
                                 <p>List</p>
                             </a>
                         </li>
                         @if (Route::has('our-team.create'))
                             <li class="nav-item">
-                                <a href="{{ route('our-team.create') }}"
-                                    class="nav-link {{ request()->routeIs('our-team.create') ? 'active' : '' }}">
+                                <a href="{{ route('user.create') }}"
+                                    class="nav-link {{ request()->routeIs('user.create') ? 'active' : '' }}">
                                     <i class="nav-icon bi-plus-circle"></i>
                                     <p>Create</p>
                                 </a>

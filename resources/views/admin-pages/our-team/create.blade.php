@@ -45,7 +45,7 @@
                             @enderror
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control {{ $errors->get('full_name') ? 'is-invalid' : '' }}"
+                            <input type="text" class="form-control {{ $errors->get('phone') ? 'is-invalid' : '' }}"
                                 id="phone" name="phone" value="{{old('phone')}}">
                             <label for="phone">Phone</label>
                             @error('phone')

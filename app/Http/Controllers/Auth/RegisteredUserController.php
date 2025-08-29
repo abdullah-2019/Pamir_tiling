@@ -22,7 +22,7 @@ class RegisteredUserController extends Controller
 
     function index()
     {
-        return view('user.index');
+        return view('admin-pages.user.index');
     }
 
     /**
@@ -30,7 +30,7 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
-        return view('auth.register');
+        return view('admin-pages.user.create');
     }
 
     /**
@@ -50,13 +50,14 @@ class RegisteredUserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'status' => 'active',
         ]);
 
         event(new Registered($user));
 
         Auth::login($user);
 
-        return redirect(route('dashboard', absolute: false));
+        return redirect(route('user.index', absolute: false));
     }
 
     public function data(Request $request)
@@ -65,12 +66,32 @@ class RegisteredUserController extends Controller
 
         return DataTables::of($query)
             ->addIndexColumn()
+            ->editColumn('status', function ($row) {
+                return view('admin-pages.user.partials.status', compact('row'))->render();
+            })
             ->addColumn('actions', function ($row) {
                 $edit = route('user.edit', $row->id);
-                $delete = route('user.destroy', $row->id);
-                return view('admin-pages.user.partials.actions', compact('edit','delete','row'))->render();
+                return view('admin-pages.user.partials.actions', compact('edit','row'))->render();
             })
-            ->rawColumns(['actions'])
+            ->rawColumns(['status', 'actions']) // Make sure status is in rawColumns
             ->make(true);
+    }
+
+    function edit($user)
+    {
+        $user = User::where('id', $user)->first();
+        return view('admin-pages.user.edit', compact('user'));
+    }
+
+    function update(Request $request, $user) {
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:users,email,'.$user],
+            'status' => ['required', 'in:active,suspend,lock,in_active'],
+        ]);
+        
+        User::where('id', $user)->update($validated);
+        
+        return redirect()->route('user.index')->with('success', 'User updated successfully');
     }
 }
