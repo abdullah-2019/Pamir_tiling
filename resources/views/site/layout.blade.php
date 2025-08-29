@@ -119,8 +119,6 @@
 
     </main>
 
-    @include('errors.toast')
-
     <footer id="footer" class="footer accent-background">
 
         <div class="container footer-top">
@@ -217,15 +215,28 @@
     <script src="{{ asset('/assets/site/js/main.js') }}"></script>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            showToast();
-        });
+        document.addEventListener('DOMContentLoaded', () => {
+            @if (session('success'))
+                alert("{{ session('success') }}");
+            @endif
 
-        function showToast() {
-            const toastEl = document.getElementById('toast');
-            const toast = new bootstrap.Toast(toastEl);
-        }
+            @if (session('error'))
+                alert("{{ session('error') }}");
+            @endif
+
+            @if ($errors->any())
+                @foreach ($errors->all() as $error)
+                    alert("{!! $error !!}");
+                @endforeach
+            @endif
+
+            @if ($errors->has('g-recaptcha-response'))
+                alert(`{!! $errors->first('g-recaptcha-response') !!}`);
+            @endif
+
+        })
     </script>
+
 
     @yield('js')
 
