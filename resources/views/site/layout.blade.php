@@ -156,7 +156,7 @@
                     <h4>Our Services</h4>
                     <ul>
                         @foreach ($services as $service)
-                            <li><a href="{{ route('service-detail', $service->slug) }}">{{ $service->title }}</a>
+                            <li><a href="{{ route('services.page') }}">{{ $service->title }}</a>
                             </li>
                         @endforeach
                     </ul>
